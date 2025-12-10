@@ -125,7 +125,7 @@ void entity_Chest_idle(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     rotation = clamp_angle(180.0f - entity->rot.y);
-    angle = fabsf(rotation - clamp_angle(atan2(entity->pos.x, entity->pos.z, playerStatus->pos.x, playerStatus->pos.z)));
+    angle = fabsf(rotation - clamp_angle(papermario_atan2(entity->pos.x, entity->pos.z, playerStatus->pos.x, playerStatus->pos.z)));
     if ((!(playerStatus->animFlags & PA_FLAG_USING_WATT)) &&
         (!(entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR)) &&
         ((angle <= 40.0f) || (angle >= 320.0f))) {
@@ -309,7 +309,7 @@ void entity_GiantChest_open(Entity* entity) {
                 chest->itemEntityPos.y -= dy;
             }
             giveItemLerpAlpha = sin_rad(DEG_TO_RAD(chest->giveItemRadiusInterpPhase));
-            theta = intermediateTheta = clamp_angle(atan2(entity->pos.x, entity->pos.z, playerStatus->pos.x, playerStatus->pos.z));
+            theta = intermediateTheta = clamp_angle(papermario_atan2(entity->pos.x, entity->pos.z, playerStatus->pos.x, playerStatus->pos.z));
 
             if (gGameStatusPtr->areaID == AREA_KZN) {
                 radius = 3.0f;

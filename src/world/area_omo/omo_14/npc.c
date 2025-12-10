@@ -19,11 +19,11 @@ API_CALLABLE(N(SurroundPlayer)) {
                 npc->yaw = npc->pos.z > 0.0f ? 315.0f : 225.0f;
             }
         } else {
-            npc->yaw = atan2(npc->pos.x, npc->pos.z, goalPosX, goalPosZ);
+            npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, goalPosX, goalPosZ);
         }
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
     } else {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+        npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
     }
 
     if (script->varTableF[11] == playerStatus->pos.x && script->varTableF[13] == playerStatus->pos.z) {
@@ -53,7 +53,7 @@ API_CALLABLE(N(SimpleMoveNPC)) {
                 npc->yaw = npc->pos.z > 0.0f ? 315.0f : 225.0f;
             }
         } else {
-            npc->yaw = atan2(npc->pos.x, npc->pos.z, x, z);
+            npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, x, z);
         }
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
     }

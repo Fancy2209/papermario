@@ -1061,7 +1061,7 @@ API_CALLABLE(JumpToGoal) {
         goalX = actorState->goalPos.x;
         goalY = actorState->goalPos.y;
         goalZ = actorState->goalPos.z;
-        actorState->angle = atan2(posX, posZ, goalX, goalZ);
+        actorState->angle = papermario_atan2(posX, posZ, goalX, goalZ);
         actorState->dist = dist2D(posX, posZ, goalX, goalZ);
 
         // make relative
@@ -1166,7 +1166,7 @@ API_CALLABLE(IdleJumpToGoal) {
         goalX = movement->goalPos.x;
         goalY = movement->goalPos.y;
         goalZ = movement->goalPos.z;
-        movement->angle = atan2(posX, posZ, goalX, goalZ);
+        movement->angle = papermario_atan2(posX, posZ, goalX, goalZ);
         movement->dist = dist2D(posX, posZ, goalX, goalZ);
 
         // make relative
@@ -1251,7 +1251,7 @@ API_CALLABLE(JumpToGoalSimple2) {
         goalX = state->goalPos.x;
         goalY = state->goalPos.y;
         goalZ = state->goalPos.z;
-        state->angle = atan2(posX, posZ, goalX, goalZ);
+        state->angle = papermario_atan2(posX, posZ, goalX, goalZ);
         state->dist = dist2D(posX, posZ, goalX, goalZ);
 
         // make relative (note: negated)
@@ -1338,7 +1338,7 @@ API_CALLABLE(JumpWithBounce) {
         goalX = actorState->goalPos.x;
         goalZ = actorState->goalPos.z;
         goalY = actorState->goalPos.y;
-        actorState->angle = atan2(posX, posZ, goalX, goalZ);
+        actorState->angle = papermario_atan2(posX, posZ, goalX, goalZ);
         actorState->dist = dist2D(posX, posZ, goalX, goalZ);
 
         // make relative
@@ -1481,7 +1481,7 @@ API_CALLABLE(FallToGoal) {
         goalY = actor->state.goalPos.y;
         goalZ = actor->state.goalPos.z;
 
-        actor->state.angle = atan2(posX, posZ, goalX, goalZ);
+        actor->state.angle = papermario_atan2(posX, posZ, goalX, goalZ);
         actor->state.dist = dist2D(posX, posZ, goalX, goalZ);
 
         // make relative
@@ -1562,7 +1562,7 @@ API_CALLABLE(RunToGoal) {
         actorState->unk_18.y = goalY;
         actorState->unk_18.z = goalZ;
 
-        actorState->angle = atan2(posX, posZ, goalX, goalZ);
+        actorState->angle = papermario_atan2(posX, posZ, goalX, goalZ);
         actorState->dist = dist2D(posX, posZ, goalX, goalZ);
 
         if (actorState->moveTime == 0) {
@@ -1687,7 +1687,7 @@ API_CALLABLE(IdleRunToGoal) {
         movement->unk_18.y = goalY;
         movement->unk_18.z = goalZ;
 
-        movement->angle = atan2(posX, posZ, goalX, goalZ);
+        movement->angle = papermario_atan2(posX, posZ, goalX, goalZ);
         movement->dist = dist2D(posX, posZ, goalX, goalZ);
 
         if (movement->flyTime == 0) {
@@ -1782,7 +1782,7 @@ API_CALLABLE(JumpPartTo) {
         posY = movement->absolutePos.y;
         posZ = movement->absolutePos.z;
 
-        movement->angle = atan2(posX, posZ, goalX, goalZ);
+        movement->angle = papermario_atan2(posX, posZ, goalX, goalZ);
         movement->dist = dist2D(posX, posZ, goalX, goalZ);
 
         // make relative
@@ -1874,7 +1874,7 @@ API_CALLABLE(FallPartTo) {
         posY = movement->absolutePos.y;
         posZ = movement->absolutePos.z;
 
-        movement->angle = atan2(posX, posZ, goalX, goalZ);
+        movement->angle = papermario_atan2(posX, posZ, goalX, goalZ);
         movement->dist = dist2D(posX, posZ, goalX, goalZ);
 
         // make relative
@@ -2011,7 +2011,7 @@ API_CALLABLE(RunPartTo) {
         posY = movement->absolutePos.y;
         posZ = movement->absolutePos.z;
 
-        movement->angle = atan2(posX, posZ, goalX, goalZ);
+        movement->angle = papermario_atan2(posX, posZ, goalX, goalZ);
         movement->dist = dist2D(posX, posZ, goalX, goalZ);
 
         if (movement->moveTime == 0) {

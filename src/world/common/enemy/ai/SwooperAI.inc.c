@@ -63,7 +63,7 @@ API_CALLABLE(N(SwooperAI_Main)) {
             }
         case 10:
             npc->curAnim = enemy->animList[3];
-            npc->planarFlyDist = atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+            npc->planarFlyDist = papermario_atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
             npc->jumpScale = 1.3f;
             npc->jumpVel = 0.0f;
             npc->moveSpeed = aiSettings->moveSpeed;
@@ -87,7 +87,7 @@ API_CALLABLE(N(SwooperAI_Main)) {
                 if (npc_test_move_simple_with_slipping(npc->collisionChannel, &x, &y, &z, npc->moveSpeed, npc->yaw, npc->collisionHeight, npc->collisionDiameter)) {
                     npc->moveSpeed = 0.0f;
                 }
-                npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+                npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
                 npc_move_heading(npc, npc->moveSpeed, npc->yaw);
             }
 
@@ -143,7 +143,7 @@ API_CALLABLE(N(SwooperAI_Main)) {
                 } else if (npc->jumpVel < -2.5) {
                     npc->duration++;
                     if (npc->duration >= aiSettings->chaseUpdateInterval) {
-                        f32 yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+                        f32 yaw = papermario_atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
                         f32 angleDiff = get_clamped_angle_diff(npc->yaw, yaw);
 
                         if (aiSettings->chaseTurnRate < fabsf(angleDiff)) {

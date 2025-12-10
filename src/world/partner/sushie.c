@@ -65,7 +65,7 @@ void N(get_movement_from_input)(f32* outAngle, f32* outSpeed) {
 
     N(InputStickX) = stickX;
     N(InputStickY) = stickY;
-    moveAngle = clamp_angle(atan2(0.0f, 0.0f, stickX, -stickY) + gCameras[CAM_DEFAULT].curYaw);
+    moveAngle = clamp_angle(papermario_atan2(0.0f, 0.0f, stickX, -stickY) + gCameras[CAM_DEFAULT].curYaw);
     moveSpeed = 0.0f;
 
     if (dist2D(0.0f, 0.0f, N(InputStickX), -N(InputStickY)) >= 1.0) {
@@ -154,7 +154,7 @@ void N(update_riding_physics)(Npc* sushie) {
             }
         }
 
-        moveAngle = clamp_angle(atan2(0.0f, 0.0f, N(InertialStickX), -N(InertialStickY)) + gCameras[CAM_DEFAULT].curYaw);
+        moveAngle = clamp_angle(papermario_atan2(0.0f, 0.0f, N(InertialStickX), -N(InertialStickY)) + gCameras[CAM_DEFAULT].curYaw);
         if (N(InertialMoveSpeed) <= moveSpeed) {
             N(InertialMoveSpeed) += (moveSpeed - N(InertialMoveSpeed)) / moveSpeedDamping;
             if (N(InertialMoveSpeed) > moveSpeed) {
@@ -345,7 +345,7 @@ HitID N(test_ray_to_wall_center)(s32 unused, f32* x, f32* y, f32* z, f32 length,
         &hitX, &hitY, &hitZ, &totalLength, &hitNx, &hitNy, &hitNz);
 
     if (hitID >= 0) {
-        *yaw = atan2(0.0f, 0.0f, hitNx, hitNz);
+        *yaw = papermario_atan2(0.0f, 0.0f, hitNx, hitNz);
     }
 
     return hitID;
@@ -436,7 +436,7 @@ API_CALLABLE(N(UseAbility)) {
             }
             // check for obstructions between player and center of current wall
             get_collider_center(collisionStatus->curWall, &x, &y, &z);
-            angle = atan2(x, z, playerStatus->pos.x, playerStatus->pos.z);
+            angle = papermario_atan2(x, z, playerStatus->pos.x, playerStatus->pos.z);
             x = playerStatus->pos.x;
             y = playerStatus->pos.y;
             z = playerStatus->pos.z;
@@ -642,7 +642,7 @@ API_CALLABLE(N(UseAbility)) {
                 if (collider) {
                     get_collider_center(sushie->curWall, &x, &y, &z);
                     dist = dist2D(sushie->pos.x, sushie->pos.z, x, z);
-                    sin_cos_rad(DEG_TO_RAD(atan2(sushie->pos.x, sushie->pos.z, x, z)), &sinAngle, &cosAngle);
+                    sin_cos_rad(DEG_TO_RAD(papermario_atan2(sushie->pos.x, sushie->pos.z, x, z)), &sinAngle, &cosAngle);
                     x = sushie->pos.x + ((sinAngle * dist) * 0.6);
                     z = sushie->pos.z - ((cosAngle * dist) * 0.6);
                     dist = 100.0f;
@@ -650,7 +650,7 @@ API_CALLABLE(N(UseAbility)) {
                     sushie->moveToPos.y = y;
                     sushie->moveToPos.x = x;
                     sushie->moveToPos.z = z;
-                    playerStatus->targetYaw = atan2(playerStatus->pos.x, playerStatus->pos.z, x, z);
+                    playerStatus->targetYaw = papermario_atan2(playerStatus->pos.x, playerStatus->pos.z, x, z);
                     sushie->yaw = playerStatus->targetYaw;
                     dist = dist2D(playerStatus->pos.x, playerStatus->pos.z, sushie->moveToPos.x, sushie->moveToPos.z);
                     sushie->jumpVel = 5.0f;
@@ -801,7 +801,7 @@ API_CALLABLE(N(Update)) {
             N(TweesterPhysicsPtr)->prevFlags = sushie->flags;
             N(TweesterPhysicsPtr)->radius = fabsf(dist2D(sushie->pos.x, sushie->pos.z,
                                                      entity->pos.x, entity->pos.z));
-            N(TweesterPhysicsPtr)->angle = atan2(entity->pos.x, entity->pos.z, sushie->pos.x, sushie->pos.z);
+            N(TweesterPhysicsPtr)->angle = papermario_atan2(entity->pos.x, entity->pos.z, sushie->pos.x, sushie->pos.z);
             N(TweesterPhysicsPtr)->angularVel = 6.0f;
             N(TweesterPhysicsPtr)->liftoffVelPhase = 50.0f;
             N(TweesterPhysicsPtr)->countdown = 120;
@@ -933,7 +933,7 @@ API_CALLABLE(N(EnterMap)) {
             N(test_for_water_level)(partnerNPC->collisionChannel, partnerNPC->pos.x, partnerNPC->pos.y, partnerNPC->pos.z,
                                 partnerNPC->yaw, partnerNPC->collisionDiameter * 0.5f);
             partnerNPC->pos.y = N(WaterSurfaceY) - (partnerNPC->collisionHeight * 0.5f);
-            partnerNPC->yaw = atan2(partnerNPC->pos.x, partnerNPC->pos.z, script->varTable[1], script->varTable[3]);
+            partnerNPC->yaw = papermario_atan2(partnerNPC->pos.x, partnerNPC->pos.z, script->varTable[1], script->varTable[3]);
             partnerNPC->curAnim = ANIM_WorldSushie_Ride;
             partnerNPC->jumpScale = 0.0f;
             partnerNPC->moveSpeed = 3.0f;

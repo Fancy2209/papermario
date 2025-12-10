@@ -126,7 +126,7 @@ API_CALLABLE(N(Update)) {
             N(TweesterPhysicsPtr)->prevFlags = kooper->flags;
             N(TweesterPhysicsPtr)->radius = fabsf(dist2D(kooper->pos.x, kooper->pos.z,
                                                      entity->pos.x, entity->pos.z));
-            N(TweesterPhysicsPtr)->angle = atan2(entity->pos.x, entity->pos.z, kooper->pos.x, kooper->pos.z);
+            N(TweesterPhysicsPtr)->angle = papermario_atan2(entity->pos.x, entity->pos.z, kooper->pos.x, kooper->pos.z);
             N(TweesterPhysicsPtr)->angularVel = 6.0f;
             N(TweesterPhysicsPtr)->liftoffVelPhase = 50.0f;
             N(TweesterPhysicsPtr)->countdown = 120;
@@ -274,7 +274,7 @@ API_CALLABLE(N(UseAbility)) {
             N(PlayerWasFacingLeft) = partner_force_player_flip_done();
             enable_npc_blur(kooper);
             kooper->duration = 4;
-            kooper->yaw = atan2(kooper->pos.x, kooper->pos.z,
+            kooper->yaw = papermario_atan2(kooper->pos.x, kooper->pos.z,
                                 playerStatus->pos.x, playerStatus->pos.z);
             script->USE_STATE++;
             break;
@@ -556,7 +556,7 @@ API_CALLABLE(N(UseAbility)) {
         ) {
             script->USE_STATE = SHELL_TOSS_STATE_FINISH;
         } else {
-            angleToStartPos = atan2(N(ShellTossPosX), N(ShellTossPosZ), kooper->pos.x, kooper->pos.z);
+            angleToStartPos = papermario_atan2(N(ShellTossPosX), N(ShellTossPosZ), kooper->pos.x, kooper->pos.z);
             kooper->yaw = angleToStartPos + get_clamped_angle_diff(kooper->yaw, angleToStartPos) * 0.125f;
             npc_move_heading(kooper, -kooper->moveSpeed, kooper->yaw);
             kooper->planarFlyDist -= kooper->moveSpeed;
@@ -694,7 +694,7 @@ s32 N(test_first_strike)(Npc* kooper, Npc* enemy) {
         kooperCollHeight = kooper->collisionHeight;
         kooperCollRadius = kooper->collisionDiameter * 0.8;
 
-        angleToEnemy = atan2(enemyX, enemyZ, kooperX, kooperZ);
+        angleToEnemy = papermario_atan2(enemyX, enemyZ, kooperX, kooperZ);
         distToEnemy = dist2D(enemyX, enemyZ, kooperX, kooperZ);
 
         xTemp = kooper->pos.x;

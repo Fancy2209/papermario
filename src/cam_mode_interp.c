@@ -107,12 +107,12 @@ void update_camera_unused_confined(Camera* camera) {
     camera->lookAt_eye.x = camera->lookAt_obj.x + deltaX2;
     camera->lookAt_eye.y = camera->lookAt_obj.y + deltaY2;
     camera->lookAt_eye.z = camera->lookAt_obj.z + deltaZ2;
-    camera->curYaw = atan2(camera->lookAt_eye.x, camera->lookAt_eye.z, camera->lookAt_obj.x, camera->lookAt_obj.z);
+    camera->curYaw = papermario_atan2(camera->lookAt_eye.x, camera->lookAt_eye.z, camera->lookAt_obj.x, camera->lookAt_obj.z);
     deltaX = camera->lookAt_obj.x - camera->lookAt_eye.x;
     deltaY = camera->lookAt_obj.y - camera->lookAt_eye.y;
     deltaZ = camera->lookAt_obj.z - camera->lookAt_eye.z;
-    camera->lookAt_yaw = -atan2(0.0f, 0.0f, deltaX, deltaZ);
-    camera->lookAt_pitch = atan2(0.0f, 0.0f, deltaY, -sqrtf(SQ(deltaX) + SQ(deltaZ)));
+    camera->lookAt_yaw = -papermario_atan2(0.0f, 0.0f, deltaX, deltaZ);
+    camera->lookAt_pitch = papermario_atan2(0.0f, 0.0f, deltaY, -sqrtf(SQ(deltaX) + SQ(deltaZ)));
 }
 
 // implements CAM_UPDATE_INTERP_POS
@@ -278,12 +278,12 @@ void update_camera_interp_pos(Camera *camera) {
     camera->lookAt_eye.y += deltaY2;
     camera->lookAt_eye.z += deltaZ2;
 
-    camera->curYaw = atan2(camera->lookAt_eye.x, camera->lookAt_eye.z, camera->lookAt_obj.x, camera->lookAt_obj.z);
+    camera->curYaw = papermario_atan2(camera->lookAt_eye.x, camera->lookAt_eye.z, camera->lookAt_obj.x, camera->lookAt_obj.z);
 
     deltaX = camera->lookAt_obj.x - camera->lookAt_eye.x;
     deltaY = camera->lookAt_obj.y - camera->lookAt_eye.y;
     deltaZ = camera->lookAt_obj.z - camera->lookAt_eye.z;
 
-    camera->lookAt_yaw = -atan2(0.0f, 0.0f, deltaX, deltaZ);
-    camera->lookAt_pitch = atan2(0.0f, 0.0f, deltaY, -sqrtf(SQ(deltaX) + SQ(deltaZ)));
+    camera->lookAt_yaw = -papermario_atan2(0.0f, 0.0f, deltaX, deltaZ);
+    camera->lookAt_pitch = papermario_atan2(0.0f, 0.0f, deltaY, -sqrtf(SQ(deltaX) + SQ(deltaZ)));
 }

@@ -66,7 +66,7 @@ def write_ninja_rules(
     BFDNAME = "elf32-tradbigmips"
 
     CPPFLAGS_COMMON = (
-        "-Iver/$version/include -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM "
+        "-Iver/$version/include -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -DPLATFORM_N64 -D_LANGUAGE_C -D_FINALROM "
         "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32"
     )
 

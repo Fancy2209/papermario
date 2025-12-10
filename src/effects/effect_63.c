@@ -231,7 +231,7 @@ void effect_63_appendGfx(void* effect) {
             part->unk_4C += part->unk_54;
             part->unk_50 += part->unk_58;
 
-            angle = -atan2(0.0f, 0.0f, part->unk_60, part->unk_64) + part->unk_74;
+            angle = -papermario_atan2(0.0f, 0.0f, part->unk_60, part->unk_64) + part->unk_74;
             part->unk_54 = sin_deg(angle);
             part->unk_58 = cos_deg(angle);
 

@@ -228,9 +228,9 @@ HitID player_raycast_down(f32* x, f32* y, f32* z, f32* length) {
         gGameStatusPtr->playerGroundTraceNormal.z = hitNz;
         PlayerNormalYaw = get_player_normal_yaw();
         PlayerNormalPitch = get_player_normal_pitch();
-        gGameStatusPtr->playerGroundTraceAngles.x = atan2(0.0f, 0.0f, hitNz * 100.0, hitNy * 100.0);
+        gGameStatusPtr->playerGroundTraceAngles.x = papermario_atan2(0.0f, 0.0f, hitNz * 100.0, hitNy * 100.0);
         gGameStatusPtr->playerGroundTraceAngles.y = 0.0f;
-        gGameStatusPtr->playerGroundTraceAngles.z = atan2(0.0f, 0.0f, hitNx * 100.0, hitNy * 100.0);
+        gGameStatusPtr->playerGroundTraceAngles.z = papermario_atan2(0.0f, 0.0f, hitNx * 100.0, hitNy * 100.0);
     } else {
         gGameStatusPtr->playerGroundTraceAngles.x = 0.0f;
         gGameStatusPtr->playerGroundTraceAngles.y = 0.0f;
@@ -464,8 +464,8 @@ HitID player_raycast_general(s32 mode, f32 startX, f32 startY, f32 startZ, f32 d
     }
 
     if (ret > NO_COLLIDER) {
-        nAngleZ = 180.0f - atan2(0, 0, *hitNz * 100.0, *hitNy * 100.0);
-        nAngleX = 180.0f - atan2(0, 0, *hitNx * 100.0, *hitNy * 100.0);
+        nAngleZ = 180.0f - papermario_atan2(0, 0, *hitNz * 100.0, *hitNy * 100.0);
+        nAngleX = 180.0f - papermario_atan2(0, 0, *hitNx * 100.0, *hitNy * 100.0);
 
         if (!((nAngleZ == 90.0f && nAngleX == 90.0f) || fabs(nAngleZ) >= 30.0 || fabs(nAngleX) >= 30.0)) {
             ret = NO_COLLIDER;
@@ -1709,7 +1709,7 @@ void update_player_shadow(void) {
 
     if (hitRx != 0.0f || hitRz != 0.0f) {
         s32 dist = dist2D(x, z, playerStatus->pos.x, playerStatus->pos.z);
-        f32 tan = atan2(playerStatus->pos.x, playerStatus->pos.z, x, z);
+        f32 tan = papermario_atan2(playerStatus->pos.x, playerStatus->pos.z, x, z);
         s32 angleTemp = clamp_angle((-90.0f - tan) + get_player_normal_yaw());
 
         if (gGameStatusPtr->playerGroundTraceNormal.y != 0.0f) {

@@ -80,7 +80,7 @@ void N(MagikoopaAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
 
     enemy->varTable[0] = 1;
     npc->curAnim = enemy->animList[8];
-    npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
+    npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
     npc->flags &= ~NPC_FLAG_INVISIBLE;
     npc->scale.x = 0.1f;
     npc->scale.y = 0.1f;

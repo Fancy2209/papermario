@@ -101,7 +101,7 @@ API_CALLABLE(N(UpdateAntiGuyPosition)) {
     f32 x, y, z;
 
     dist2D(110.0f, -45.0f, playerStatus->pos.x, playerStatus->pos.z);
-    theta = clamp_angle(atan2(110.0f, -45.0f, playerStatus->pos.x, playerStatus->pos.z));
+    theta = clamp_angle(papermario_atan2(110.0f, -45.0f, playerStatus->pos.x, playerStatus->pos.z));
     x = 110.0f + (sin_deg(theta) * 30.0f);
     if (script->varTable[11] != 0) {
         y = playerStatus->pos.y * 0.7f;
@@ -128,7 +128,7 @@ API_CALLABLE(N(UpdateAntiGuyPosition)) {
     } else if (npc->curAnim != ANIM_ShyGuy_Black_Anim01) {
         npc->curAnim = ANIM_ShyGuy_Black_Anim01;
     }
-    npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+    npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
     return ApiStatus_DONE2;
 }
 

@@ -144,7 +144,7 @@ API_CALLABLE(N(Update)) {
                 N(TweesterPhysicsPtr)->state++;
                 N(TweesterPhysicsPtr)->prevFlags = watt->flags;
                 N(TweesterPhysicsPtr)->radius = fabsf(dist2D(watt->pos.x, watt->pos.z, entity->pos.x, entity->pos.z));
-                N(TweesterPhysicsPtr)->angle = atan2(entity->pos.x, entity->pos.z, watt->pos.x, watt->pos.z);
+                N(TweesterPhysicsPtr)->angle = papermario_atan2(entity->pos.x, entity->pos.z, watt->pos.x, watt->pos.z);
                 N(TweesterPhysicsPtr)->angularVel = 6.0f;
                 N(TweesterPhysicsPtr)->liftoffVelPhase = 50.0f;
                 N(TweesterPhysicsPtr)->countdown = 120;
@@ -320,7 +320,7 @@ API_CALLABLE(N(UseAbility)) {
                 npc->curAnim = ANIM_WorldWatt_Walk;
                 add_vec2D_polar(&npc->moveToPos.x, &npc->moveToPos.z, 15.0f, playerStatus->targetYaw);
                 npc->duration = 8;
-                npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+                npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
                 N(AbilityState)++; // SHINING_STATE_GATHER
             }
             break;
@@ -505,7 +505,7 @@ API_CALLABLE(N(EnterMap)) {
             }
 
             script->functionTemp[1] = script->varTable[4];
-            playerStatus->targetYaw = atan2(playerStatus->pos.x, playerStatus->pos.z,
+            playerStatus->targetYaw = papermario_atan2(playerStatus->pos.x, playerStatus->pos.z,
                     script->varTable[1], script->varTable[3]);
             playerStatus->heading = playerStatus->targetYaw;
             move_player(script->functionTemp[1], playerStatus->heading, script->varTableF[5]);

@@ -26,7 +26,7 @@ API_CALLABLE(N(ItemEntityJumpToPos)) {
         jumpState->jumpAccel = evt_get_float_variable(script, *args++);
         item = get_item_entity(jumpState->itemEntityIndex);
         moveDist = dist2D(item->pos.x, item->pos.z, jumpState->pos.x, jumpState->pos.z);
-        jumpState->moveAngle = atan2(item->pos.x, item->pos.z, jumpState->pos.x, jumpState->pos.z);
+        jumpState->moveAngle = papermario_atan2(item->pos.x, item->pos.z, jumpState->pos.x, jumpState->pos.z);
 
         temp_f2 = item->pos.y;
         jumpState->jumpVel = (jumpState->jumpAccel * jumpState->moveTime * 0.5f)

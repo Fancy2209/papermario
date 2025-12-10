@@ -62,7 +62,7 @@ API_CALLABLE(N(Pipe_AwaitDownInput)) {
     stickY = gGameStatusPtr->stickY[0];
 
     if (stickX != 0 || stickY != 0) {
-        if (atan2(0.0f, 0.0f, stickX, stickY) < 60.0f) {
+        if (papermario_atan2(0.0f, 0.0f, stickX, stickY) < 60.0f) {
             script->varTable[0] = true;
             return ApiStatus_DONE2;
         }

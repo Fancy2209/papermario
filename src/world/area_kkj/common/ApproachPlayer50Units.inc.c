@@ -25,7 +25,7 @@ API_CALLABLE(N(ApproachPlayer50Units)) {
         phi_s4 = true;
     }
 
-    angle = clamp_angle(atan2(playerStatus->pos.x, playerStatus->pos.z, npc->pos.x, npc->pos.z));
+    angle = clamp_angle(papermario_atan2(playerStatus->pos.x, playerStatus->pos.z, npc->pos.x, npc->pos.z));
     x = playerStatus->pos.x + (sin_deg(angle) * 50.0f);
     z = playerStatus->pos.z - (cos_deg(angle) * 50.0f);
     evt_set_variable(script, outVar1, phi_s4);

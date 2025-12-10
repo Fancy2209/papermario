@@ -28,7 +28,7 @@ void action_update_knockback(void) {
 
         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
 
-        ReturnAngle = atan2(playerStatus->pos.x, playerStatus->pos.z, playerStatus->lastGoodPos.x,
+        ReturnAngle = papermario_atan2(playerStatus->pos.x, playerStatus->pos.z, playerStatus->lastGoodPos.x,
                            playerStatus->lastGoodPos.z);
         playerStatus->curSpeed = get_xz_dist_to_player(playerStatus->lastGoodPos.x, playerStatus->lastGoodPos.z) / 18.0f;
     }

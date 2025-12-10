@@ -118,7 +118,7 @@ API_CALLABLE(func_8005DB00) {
                     if (sqrtf(SQ((playerStatus->pos.x - npc->pos.x)) +
                             SQ((playerStatus->pos.y - npc->pos.y)) +
                             SQ((playerStatus->pos.z - npc->pos.z))) <= npc->planarFlyDist) {
-                        targetDir = atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+                        targetDir = papermario_atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
                         npcYaw = script->functionTemp[1] == -1 ? npc->yaw : script->functionTemp[1];
 
                         if (fabsf(get_clamped_angle_diff(npcYaw, targetDir)) < script->functionTemp[2]) {
@@ -128,7 +128,7 @@ API_CALLABLE(func_8005DB00) {
                     }
                 } else {
                     if (dist2D(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z) <= npc->planarFlyDist) {
-                        targetDir = atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+                        targetDir = papermario_atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
                         npcYaw = script->functionTemp[1] == -1 ? npc->yaw : script->functionTemp[1];
 
                         if (fabsf(get_clamped_angle_diff(npcYaw, targetDir)) < script->functionTemp[2]) {

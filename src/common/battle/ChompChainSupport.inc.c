@@ -150,7 +150,7 @@ API_CALLABLE(N(ChompChainUpdate)) {
 
         // get distance from previous part of the chain
         dist = dist2D(prevX, prevY, chain->curPos.x, chain->curPos.y);
-        angle = atan2(prevX, prevY, chain->curPos.x, chain->curPos.y);
+        angle = papermario_atan2(prevX, prevY, chain->curPos.x, chain->curPos.y);
 
         if (dist >= chain->linkLengthZ) {
             N(ChompChainGetPolarX)(&sp18, dist - chain->linkLengthZ, angle);

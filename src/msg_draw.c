@@ -1984,7 +1984,7 @@ void msg_draw_speech_arrow(MessagePrintState* printer) {
         if (printer->openStartPos.x < targetX) {
             for (windowXpart = 0.7f; windowXpart >= 0.67; windowXpart -= 0.005) {
                 targetX = windowX + printer->windowSize.x * windowXpart;
-                angle = atan2(printer->openStartPos.x, printer->openStartPos.y, targetX, targetY);
+                angle = papermario_atan2(printer->openStartPos.x, printer->openStartPos.y, targetX, targetY);
                 if (abs(angle) < 45) {
                     break;
                 }
@@ -1995,7 +1995,7 @@ void msg_draw_speech_arrow(MessagePrintState* printer) {
         if (printer->openStartPos.x > targetX) {
             for (windowXpart = 0.3f; windowXpart <= 0.38; windowXpart += 0.005) {
                 targetX = windowX + printer->windowSize.x * windowXpart;
-                angle = atan2(printer->openStartPos.x, printer->openStartPos.y, targetX, targetY);
+                angle = papermario_atan2(printer->openStartPos.x, printer->openStartPos.y, targetX, targetY);
                 if (abs(angle) < 45) {
                     break;
                 }
@@ -2023,7 +2023,7 @@ void msg_draw_speech_arrow(MessagePrintState* printer) {
         quad = gMsgArrowQuad2;
     }
 
-    angle = atan2(targetX, targetY, printer->initOpenPos.x, printer->initOpenPos.y);
+    angle = papermario_atan2(targetX, targetY, printer->initOpenPos.x, printer->initOpenPos.y);
     angle -= 180;
     if (abs(angle) >= 75) {
         return;

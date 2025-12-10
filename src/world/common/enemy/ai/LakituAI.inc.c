@@ -78,7 +78,7 @@ void N(LakituAI_Wander)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
     if (is_point_outside_territory(enemy->territory->wander.wanderShape, enemy->territory->wander.centerPos.x,
                                enemy->territory->wander.centerPos.z, npc->pos.x, npc->pos.z, enemy->territory->wander.wanderSize.x,
                                enemy->territory->wander.wanderSize.z) != 0) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
+        npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
     }
 
     if (npc->turnAroundYawAdjustment == 0) {
@@ -215,7 +215,7 @@ API_CALLABLE(N(LakituAI_Main)) {
     }
 
     if (script->AI_TEMP_STATE == AI_STATE_CHASE_INIT) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
+        npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
         enemy->varTable[4] = N(LakituAI_GetAvailableSpiny)();
         if (enemy->varTable[4] >= 0) {
             spinyEnemy = get_enemy(enemy->varTable[4]);
@@ -281,7 +281,7 @@ API_CALLABLE(N(LakituAI_Main)) {
         f32 playerDist;
         f32 lerpDist;
 
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
+        npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
         playerDist = dist2D(gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z, npc->pos.x, npc->pos.z);
         if (!is_point_outside_territory(territoryPtr->shape,
                 territoryPtr->pointX, territoryPtr->pointZ,

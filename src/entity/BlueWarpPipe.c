@@ -67,7 +67,7 @@ void entity_BlueWarpPipe_idle(Entity* entity) {
             s32 stickAxisZ = playerStatus->stickAxis[1];
 
             if ((stickAxisX != 0) || (stickAxisZ != 0)) {
-                if (atan2(0.0f, 0.0f, stickAxisX, stickAxisZ) < 60.0f) {
+                if (papermario_atan2(0.0f, 0.0f, stickAxisX, stickAxisZ) < 60.0f) {
                     exec_entity_commandlist(entity);
                 }
             }
@@ -94,7 +94,7 @@ void entity_BlueWarpPipe_set_player_move_to_center(Entity* entity) {
 
     entryX = (*mapSettings->entryList)[pipeData->entryID].x;
     entryZ = (*mapSettings->entryList)[pipeData->entryID].z;
-    angle = atan2(playerStatus->pos.x, playerStatus->pos.z, entryX, entryZ);
+    angle = papermario_atan2(playerStatus->pos.x, playerStatus->pos.z, entryX, entryZ);
     disable_player_input();
     disable_player_static_collisions();
     move_player(pipeData->timer, angle, playerStatus->runSpeed);

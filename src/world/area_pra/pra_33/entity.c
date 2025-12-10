@@ -14,7 +14,7 @@ API_CALLABLE(N(CheckPlayerOnDais)) {
 
 API_CALLABLE(N(GetDaisRelativePlayerPos)) {
     script->varTable[6] = dist2D(200.0f, 0.0f, gPlayerStatus.pos.x, gPlayerStatus.pos.z);
-    script->varTable[7] = atan2(200.0f, 0.0f, gPlayerStatus.pos.x, gPlayerStatus.pos.z);
+    script->varTable[7] = papermario_atan2(200.0f, 0.0f, gPlayerStatus.pos.x, gPlayerStatus.pos.z);
     script->varTable[7] = clamp_angle(script->varTable[7]);
     return ApiStatus_DONE2;
 }

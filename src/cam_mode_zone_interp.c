@@ -206,7 +206,7 @@ void update_camera_from_controller(
             case CAM_CONTROL_FIXED_ORIENTATION:
                 dx = controller->points.two.Bx - controller->points.two.Ax;
                 dz = controller->points.two.Bz - controller->points.two.Az;
-                configuration->boomYaw = atan2(0.0f, 0.0f, dx, dz);
+                configuration->boomYaw = papermario_atan2(0.0f, 0.0f, dx, dz);
                 boomLength = controller->boomLength;
                 if (boomLength < 0.0f) {
                     boomLength = -boomLength;
@@ -253,7 +253,7 @@ void update_camera_from_controller(
             case CAM_CONTROL_CONSTAIN_BETWEEN_POINTS:
                 dx = controller->points.two.Bx - controller->points.two.Ax;
                 dz = controller->points.two.Bz - controller->points.two.Az;
-                configuration->boomYaw = atan2(0.0f, 0.0f, dz, -dx);
+                configuration->boomYaw = papermario_atan2(0.0f, 0.0f, dz, -dx);
                 boomLength = controller->boomLength;
                 if (boomLength < 0.0f) {
                     boomLength = -boomLength;
@@ -343,7 +343,7 @@ void update_camera_from_controller(
                     dz = controller->points.two.Az - z;
                     configuration->boomLength = controller->boomLength;
                 }
-                configuration->boomYaw = atan2(0.0f, 0.0f, dx, dz);
+                configuration->boomYaw = papermario_atan2(0.0f, 0.0f, dx, dz);
                 configuration->boomPitch = controller->boomPitch;
                 configuration->viewPitch = controller->viewPitch;
                 if (controller->flag != 0) {
@@ -438,7 +438,7 @@ void update_camera_from_controller(
                     if (changingMap) {
                         dx = controller->points.two.Bx - controller->points.two.Ax;
                         dz = controller->points.two.Bz - controller->points.two.Az;
-                        configuration->boomYaw = atan2(0.0f, 0.0f, dx, dz);
+                        configuration->boomYaw = papermario_atan2(0.0f, 0.0f, dx, dz);
                         boomLength = controller->boomLength;
                         if (boomLength < 0.0f) {
                             boomLength = -boomLength;
@@ -451,7 +451,7 @@ void update_camera_from_controller(
                     if (changingMap) {
                         dx = controller->points.two.Bx - controller->points.two.Ax;
                         dz = controller->points.two.Bz - controller->points.two.Az;
-                        configuration->boomYaw = atan2(0.0f, 0.0f, dx, dz);
+                        configuration->boomYaw = papermario_atan2(0.0f, 0.0f, dx, dz);
                         boomLength = controller->boomLength;
                         if (boomLength < 0.0f) {
                             boomLength = -boomLength;
@@ -493,7 +493,7 @@ void update_camera_from_controller(
                         dz = controller->points.three.Az - temp_f4_14;
                         configuration->boomLength = controller->boomLength;
                     }
-                    configuration->boomYaw = atan2(0.0f, 0.0f, dx, dz);
+                    configuration->boomYaw = papermario_atan2(0.0f, 0.0f, dx, dz);
                     configuration->boomPitch = controller->boomPitch;
                     configuration->viewPitch = controller->viewPitch;
                 } else {
@@ -507,7 +507,7 @@ void update_camera_from_controller(
                             dz = controller->points.three.Az - controller->points.three.Bz;
                             configuration->boomLength = controller->boomLength;
                         }
-                        configuration->boomYaw = atan2(0.0f, 0.0f, dx, dz);
+                        configuration->boomYaw = papermario_atan2(0.0f, 0.0f, dx, dz);
                         configuration->boomPitch = controller->boomPitch;
                         configuration->viewPitch = controller->viewPitch;
                         configuration->targetPos.x = controller->points.three.Bx;
@@ -530,7 +530,7 @@ void update_camera_from_controller(
                 dx = controller->points.two.Bx - controller->points.two.Ax;
                 dz = controller->points.two.Bz - controller->points.two.Az;
 
-                configuration->boomYaw = atan2(0.0f, 0.0f, dx, dz);
+                configuration->boomYaw = papermario_atan2(0.0f, 0.0f, dx, dz);
                 } while (0);
                 boomLength = controller->boomLength;
                 if (boomLength < 0.0f) {

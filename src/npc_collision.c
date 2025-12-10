@@ -65,9 +65,9 @@ HitID npc_raycast_down(s32 ignoreFlags, f32* startX, f32* startY, f32* startZ, f
     gGameStatusPtr->playerGroundTraceNormal.x = cHitNx;
     gGameStatusPtr->playerGroundTraceNormal.y = cHitNy;
     gGameStatusPtr->playerGroundTraceNormal.z = cHitNz;
-    gGameStatusPtr->playerGroundTraceAngles.x = -atan2(0.0f, 0.0f, cHitNz * 100.0f, cHitNy * 100.0f);
+    gGameStatusPtr->playerGroundTraceAngles.x = -papermario_atan2(0.0f, 0.0f, cHitNz * 100.0f, cHitNy * 100.0f);
     gGameStatusPtr->playerGroundTraceAngles.y = 0.0f;
-    gGameStatusPtr->playerGroundTraceAngles.z = -atan2(0.0f, 0.0f, cHitNx * 100.0f, cHitNy * 100.0f);
+    gGameStatusPtr->playerGroundTraceAngles.z = -papermario_atan2(0.0f, 0.0f, cHitNx * 100.0f, cHitNy * 100.0f);
 
     return colliderID;
 }
@@ -510,7 +510,7 @@ HitID npc_test_move_with_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, f32 l
     phi_s5 = false;
 
     if (raycastHitID > NO_COLLIDER && hitDepth <= temp_f22) {
-        temp_f0 = atan2(0.0f, 0.0f, sqrtf(SQ(bX) + SQ(bZ)), -hitNy);
+        temp_f0 = papermario_atan2(0.0f, 0.0f, sqrtf(SQ(bX) + SQ(bZ)), -hitNy);
         if (temp_f0 > 60.0f && temp_f0 < 90.0f) {
             phi_s5 = true;
         }

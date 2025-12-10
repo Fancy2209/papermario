@@ -197,7 +197,7 @@ void squirt_appendGfx(void* effect) {
 
         if (i == 0 || zero == i || (i != 11 && data->unk_178[i] == 0)) {
             theta = data->unk_118[inc];
-            theta = -atan2(theta, -data->unk_E8[i + 1], data->unk_118[i], -data->unk_E8[i]);
+            theta = -papermario_atan2(theta, -data->unk_E8[i + 1], data->unk_118[i], -data->unk_E8[i]);
         }
 
         if (data->unk_00 == 0) {

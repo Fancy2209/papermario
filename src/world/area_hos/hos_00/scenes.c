@@ -77,9 +77,9 @@ API_CALLABLE(N(HavePartyFaceTwink)) {
     Npc* partner = get_npc_unsafe(NPC_PARTNER);
     Npc* npc = get_npc_unsafe(NPC_Twink);
 
-    partner->yaw = atan2(partner->pos.x, partner->pos.z, npc->pos.x, npc->pos.z);
-    gPlayerStatus.targetYaw = atan2(gPlayerStatus.pos.x, gPlayerStatus.pos.z, npc->pos.x, npc->pos.z);
-    npc->yaw = atan2(N(LastTwinkPosX), N(LastTwinkPosZ), npc->pos.x, npc->pos.z);
+    partner->yaw = papermario_atan2(partner->pos.x, partner->pos.z, npc->pos.x, npc->pos.z);
+    gPlayerStatus.targetYaw = papermario_atan2(gPlayerStatus.pos.x, gPlayerStatus.pos.z, npc->pos.x, npc->pos.z);
+    npc->yaw = papermario_atan2(N(LastTwinkPosX), N(LastTwinkPosZ), npc->pos.x, npc->pos.z);
     N(LastTwinkPosX) = npc->pos.x;
     N(LastTwinkPosZ) = npc->pos.z;
     return ApiStatus_DONE2;
@@ -97,7 +97,7 @@ API_CALLABLE(N(UpdateMagikoopaAngles)) {
         script->varTable[1] = npc->pos.y + 10.0f;
         script->varTable[2] = npc->pos.z;
     }
-    npc->yaw = atan2(script->varTable[6], script->varTable[8], npc->pos.x, npc->pos.z);
+    npc->yaw = papermario_atan2(script->varTable[6], script->varTable[8], npc->pos.x, npc->pos.z);
     return ApiStatus_DONE2;
 }
 

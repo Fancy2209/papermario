@@ -212,7 +212,7 @@ API_CALLABLE(N(CalculateAngle)) {
     f32 startZ = evt_get_variable(script, *args++);
     f32 endX = evt_get_variable(script, *args++);
     f32 endZ = evt_get_variable(script, *args++);
-    f32 angle = atan2(startX, startZ, endX, endZ);
+    f32 angle = papermario_atan2(startX, startZ, endX, endZ);
 
     evt_set_variable(script, outVar, angle);
     return ApiStatus_DONE2;

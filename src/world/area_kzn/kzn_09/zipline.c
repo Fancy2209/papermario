@@ -41,7 +41,7 @@ API_CALLABLE(N(Zipline_UpdatePlayerPos)) {
         gPlayerStatus.pos.x = script->varTable[2] + script->varTable[5];
         gPlayerStatus.pos.y = script->varTable[3] + script->varTable[6];
         gPlayerStatus.pos.z = script->varTable[4] + script->varTable[7];
-        gPlayerStatus.targetYaw = atan2(array[0], array[2], array[3], array[5]);
+        gPlayerStatus.targetYaw = papermario_atan2(array[0], array[2], array[3], array[5]);
         partner->pos.x = gPlayerStatus.pos.x;
         partner->pos.y = gPlayerStatus.pos.y - 10.0f;
         partner->pos.z = gPlayerStatus.pos.z - 5.0f;

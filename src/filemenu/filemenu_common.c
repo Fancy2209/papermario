@@ -959,7 +959,7 @@ void filemenu_draw_contents_copy_arrow(MenuPanel* menu, s32 baseX, s32 baseY, s3
             break;
     }
 
-    rotAngle = -atan2(startX, startZ, endX, endZ) - 90.0f;
+    rotAngle = -papermario_atan2(startX, startZ, endX, endZ) - 90.0f;
 
     gSPViewport(gMainGfxPos++, &D_80249D60);
 

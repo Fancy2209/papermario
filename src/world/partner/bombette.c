@@ -121,7 +121,7 @@ API_CALLABLE(N(Update)) {
             N(TweesterPhysicsPtr)->prevFlags = bombette->flags;
             N(TweesterPhysicsPtr)->radius = fabsf(dist2D(bombette->pos.x, bombette->pos.z,
                                                      entity->pos.x, entity->pos.z));
-            N(TweesterPhysicsPtr)->angle = atan2(entity->pos.x, entity->pos.z,
+            N(TweesterPhysicsPtr)->angle = papermario_atan2(entity->pos.x, entity->pos.z,
                                               bombette->pos.x, bombette->pos.z);
             N(TweesterPhysicsPtr)->angularVel = 6.0f;
             N(TweesterPhysicsPtr)->liftoffVelPhase = 50.0f;
@@ -256,7 +256,7 @@ API_CALLABLE(N(UseAbility)) {
             N(PlayerWasFacingLeft) = partner_force_player_flip_done();
             enable_npc_blur(npc);
             npc->duration = 4;
-            npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+            npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
             suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
             script->USE_STATE = BLAST_STATE_GATHER;
         case BLAST_STATE_GATHER:
@@ -453,7 +453,7 @@ API_CALLABLE(N(UseAbility)) {
             collisionStatus->bombetteExplosionPos.y = npc->pos.y;
             collisionStatus->bombetteExplosionPos.z = npc->pos.z;
             npc->curAnim = ANIM_WorldBombette_Aftermath;
-            angleToPlayer = atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+            angleToPlayer = papermario_atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
             if (!(get_clamped_angle_diff(camera->curYaw, angleToPlayer) < 0.0f)) {
                 script->functionTemp[2] = 1;
             } else {
@@ -626,7 +626,7 @@ s32 N(test_first_strike)(Npc* bombette, Npc* enemy) {
         enemyHit = true;
     }
 
-    angle = atan2(enemyX, enemyZ, bombetteX, bombetteZ);
+    angle = papermario_atan2(enemyX, enemyZ, bombetteX, bombetteZ);
     distance = dist2D(enemyX, enemyZ, bombetteX, bombetteZ);
 
     // check whether the enemy is protected from the explosion

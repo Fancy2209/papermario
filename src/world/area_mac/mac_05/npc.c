@@ -1228,7 +1228,7 @@ API_CALLABLE(N(func_80243254_8553C4)) {
         return ApiStatus_DONE2;
     }
 
-    theta = clamp_angle(atan2(playerStatus->pos.x, playerStatus->pos.z, npc->pos.x, npc->pos.z));
+    theta = clamp_angle(papermario_atan2(playerStatus->pos.x, playerStatus->pos.z, npc->pos.x, npc->pos.z));
     x = playerStatus->pos.x + (sin_deg(theta) * 40.0f);
     z = playerStatus->pos.z - (cos_deg(theta) * 40.0f);
     evt_set_variable(script, outVar0, x);

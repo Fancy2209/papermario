@@ -1237,7 +1237,7 @@ void partner_walking_follow_player(Npc* partner) {
             }
             while (true) {
                 distance = dist2D(x, z, moveHistoryX, moveHistoryZ);
-                yaw = atan2(x, z, moveHistoryX, moveHistoryZ);
+                yaw = papermario_atan2(x, z, moveHistoryX, moveHistoryZ);
                 if (partner->moveSpeed < distance) {
                     distance = dist2D(x, z, playerStatus->pos.x, playerStatus->pos.z);
                     if (distance >= 50.0) {
@@ -1256,7 +1256,7 @@ void partner_walking_follow_player(Npc* partner) {
                         break;
                     } else {
                         partner->moveSpeed = 0.0f;
-                        partner->yaw = atan2(partner->pos.x, partner->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+                        partner->yaw = papermario_atan2(partner->pos.x, partner->pos.z, playerStatus->pos.x, playerStatus->pos.z);
                     }
                 }
                 if (D_8010CFBC == gPlayerMoveHistoryIndex) {
@@ -1275,7 +1275,7 @@ void partner_walking_follow_player(Npc* partner) {
                     moveHistoryX = currentSnapshot->pos.x;
                     moveHistoryZ = currentSnapshot->pos.z;
 
-                    if (fabsf(get_clamped_angle_diff(partner->yaw, atan2(partner->pos.x, partner->pos.z, moveHistoryX, moveHistoryZ))) > 90.0f) {
+                    if (fabsf(get_clamped_angle_diff(partner->yaw, papermario_atan2(partner->pos.x, partner->pos.z, moveHistoryX, moveHistoryZ))) > 90.0f) {
                         wPartnerFollowState = 5;
                         break;
                     }
@@ -1306,7 +1306,7 @@ void partner_walking_follow_player(Npc* partner) {
                     currentSnapshot = &gPlayerMoveHistory[D_8010CFBC];
                     moveHistoryX = currentSnapshot->pos.x;
                     moveHistoryZ = currentSnapshot->pos.z;
-                    if (fabsf(get_clamped_angle_diff(partner->yaw, atan2(partner->pos.x, partner->pos.z, moveHistoryX, moveHistoryZ))) > 90.0f) {
+                    if (fabsf(get_clamped_angle_diff(partner->yaw, papermario_atan2(partner->pos.x, partner->pos.z, moveHistoryX, moveHistoryZ))) > 90.0f) {
                         wPartnerFollowState = 5;
                         return;
                     }
@@ -1323,7 +1323,7 @@ void partner_walking_follow_player(Npc* partner) {
                     moveHistoryX = partner->pos.x;
                     moveHistoryY = playerStatus->pos.y;
                     moveHistoryZ = partner->pos.z;
-                    add_vec2D_polar(&moveHistoryX, &moveHistoryZ, 6.0f, atan2(partner->pos.x, partner->pos.z, playerStatus->pos.x, playerStatus->pos.z));
+                    add_vec2D_polar(&moveHistoryX, &moveHistoryZ, 6.0f, papermario_atan2(partner->pos.x, partner->pos.z, playerStatus->pos.x, playerStatus->pos.z));
                 } else {
                     break;
                 }
@@ -1344,7 +1344,7 @@ void partner_walking_follow_player(Npc* partner) {
             partner->jumpScale = 3.0f;
             partner->moveSpeed = 6.0f;
             partner->planarFlyDist = dist2D(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
-            partner->yaw = atan2(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
+            partner->yaw = papermario_atan2(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
             if (partner->planarFlyDist > 50.0) {
                 partner->planarFlyDist = 50.0f;
             }
@@ -1352,7 +1352,7 @@ void partner_walking_follow_player(Npc* partner) {
             y = partner->moveToPos.y - partner->pos.y;
             if (distance < wPartnerTetherDistance && !(surfaceType == SURFACE_TYPE_SPIKES || surfaceType == SURFACE_TYPE_LAVA)) {
                 partner->jumpVel = 0.0f;
-                partner->yaw = atan2(partner->pos.x, partner->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+                partner->yaw = papermario_atan2(partner->pos.x, partner->pos.z, playerStatus->pos.x, playerStatus->pos.z);
                 wPartnerFollowState = 0;
                 return;
             }
@@ -1390,7 +1390,7 @@ void partner_walking_follow_player(Npc* partner) {
                 partner->curAnim = gPartnerAnimations[wCurrentPartnerId].fly;
                 partner->flags &= ~NPC_FLAG_JUMPING;
                 partner->jumpVel = 0.0f;
-                partner->yaw = atan2(partner->pos.x, partner->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+                partner->yaw = papermario_atan2(partner->pos.x, partner->pos.z, playerStatus->pos.x, playerStatus->pos.z);
                 partner->pos.x = playerStatus->pos.x;
                 partner->pos.y = playerStatus->pos.y;
                 partner->pos.z = playerStatus->pos.z;
@@ -1408,7 +1408,7 @@ void partner_walking_follow_player(Npc* partner) {
                         partner->flags &= ~NPC_FLAG_JUMPING;
                         partner->jumpVel = 0.0f;
                         partner->pos.y = y;
-                        partner->yaw = atan2(x, z, playerStatus->pos.x, playerStatus->pos.z);
+                        partner->yaw = papermario_atan2(x, z, playerStatus->pos.x, playerStatus->pos.z);
                         spawn_surface_effects(partner, SURFACE_INTERACT_LAND);
                         wPartnerFollowState = 0;
                         distance = dist2D(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
@@ -1452,7 +1452,7 @@ void partner_walking_follow_player(Npc* partner) {
                     partner->moveToPos.y = playerStatus->pos.y;
                     partner->moveToPos.z = playerStatus->pos.z;
                     add_vec2D_polar(&partner->moveToPos.x, &partner->moveToPos.z, wPartnerTetherDistance - 10.0f, temp_a3);
-                    yaw = atan2(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
+                    yaw = papermario_atan2(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
                     distance = dist2D(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
                     partner->moveSpeed = 2.0f;
                     if (distance > 2.0f) {
@@ -1474,7 +1474,7 @@ void partner_walking_follow_player(Npc* partner) {
                             }
                         }
                     } else {
-                        yaw = atan2(partner->pos.x, partner->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+                        yaw = papermario_atan2(partner->pos.x, partner->pos.z, playerStatus->pos.x, playerStatus->pos.z);
                         partner->yaw = yaw;
                         partner->moveSpeed = 0.0f;
                         partner->jumpScale = 0.0f;
@@ -1520,8 +1520,8 @@ void partner_walking_follow_player(Npc* partner) {
                     if (currentSnapshot->isJumping) {
                         break;
                     }
-                    yaw = atan2(partner->pos.x, partner->pos.z, moveHistoryX, moveHistoryZ);
-                    if (fabsf(get_clamped_angle_diff(yaw, atan2(partner->pos.x, partner->pos.z, playerStatus->pos.x, playerStatus->pos.z))) < 90.0f) {
+                    yaw = papermario_atan2(partner->pos.x, partner->pos.z, moveHistoryX, moveHistoryZ);
+                    if (fabsf(get_clamped_angle_diff(yaw, papermario_atan2(partner->pos.x, partner->pos.z, playerStatus->pos.x, playerStatus->pos.z))) < 90.0f) {
                         break;
                     }
                     if (D_8010CFBC == gPlayerMoveHistoryIndex) {
@@ -1543,8 +1543,8 @@ void partner_walking_follow_player(Npc* partner) {
                     if (!currentSnapshot->isJumping) {
                         break;
                     }
-                    yaw = atan2(partner->pos.x, partner->pos.z, moveHistoryX, moveHistoryZ);
-                    if (fabsf(get_clamped_angle_diff(yaw, atan2(partner->pos.x, partner->pos.z, playerStatus->pos.x, playerStatus->pos.z))) < 90.0f) {
+                    yaw = papermario_atan2(partner->pos.x, partner->pos.z, moveHistoryX, moveHistoryZ);
+                    if (fabsf(get_clamped_angle_diff(yaw, papermario_atan2(partner->pos.x, partner->pos.z, playerStatus->pos.x, playerStatus->pos.z))) < 90.0f) {
                         break;
                     }
                     if (D_8010CFBC == gPlayerMoveHistoryIndex) {
@@ -1574,7 +1574,7 @@ void partner_walking_follow_player(Npc* partner) {
                     wPartnerMoveSpeed = distance / wPartnerMoveTime;
                     partner->moveSpeed = wPartnerMoveSpeed;
                     partner->curAnim = gPartnerAnimations[wCurrentPartnerId].anims[wPartnerMoveSpeed >= 4.0 ? PARTNER_ANIM_INDEX_RUN : PARTNER_ANIM_INDEX_WALK];
-                    yaw = atan2(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
+                    yaw = papermario_atan2(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
                     partner->yaw = D_800F8034 = yaw;
                     D_8010CFCE++;
                     // fallthrough
@@ -1648,7 +1648,7 @@ void partner_walking_follow_player(Npc* partner) {
                 partner->curAnim = gPartnerAnimations[wCurrentPartnerId].idle;
                 partner->flags &= ~NPC_FLAG_JUMPING;
                 partner->jumpVel = 0.0f;
-                partner->yaw = atan2(partner->pos.x, partner->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+                partner->yaw = papermario_atan2(partner->pos.x, partner->pos.z, playerStatus->pos.x, playerStatus->pos.z);
                 partner->pos.x = playerStatus->pos.x;
                 partner->pos.y = playerStatus->pos.y;
                 partner->pos.z = playerStatus->pos.z;
@@ -1664,7 +1664,7 @@ void partner_walking_follow_player(Npc* partner) {
                 partner->flags &= ~NPC_FLAG_JUMPING;
                 partner->jumpVel = 0.0f;
                 partner->pos.y = y;
-                partner->yaw = atan2(x, z, playerStatus->pos.x, playerStatus->pos.z);
+                partner->yaw = papermario_atan2(x, z, playerStatus->pos.x, playerStatus->pos.z);
                 spawn_surface_effects(partner, SURFACE_INTERACT_LAND);
                 wPartnerFollowState = 50;
             }
@@ -1873,7 +1873,7 @@ void partner_flying_follow_player(Npc* partner) {
             }
 
             while (true) {
-                yaw = atan2(x, z, moveHistoryX, moveHistoryZ);
+                yaw = papermario_atan2(x, z, moveHistoryX, moveHistoryZ);
                 distance = dist2D(x, z, moveHistoryX, moveHistoryZ);
                 if (partner->moveSpeed < distance) {
                     if (partner->pos.y >= playerStatus->pos.y) {
@@ -1942,7 +1942,7 @@ void partner_flying_follow_player(Npc* partner) {
                     partner->moveSpeed = 6.0f;
                 }
                 partner->planarFlyDist = dist2D(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
-                partner->yaw = atan2(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
+                partner->yaw = papermario_atan2(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
                 if (partner->planarFlyDist > 50.0) {
                     partner->planarFlyDist = 50.0f;
                 }
@@ -1954,7 +1954,7 @@ void partner_flying_follow_player(Npc* partner) {
                 if (wPartnerFollowState == 1) {
                     if (distance < wPartnerTetherDistance) {
                         partner->jumpVel = 0.0f;
-                        partner->yaw = atan2(partner->pos.x, partner->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+                        partner->yaw = papermario_atan2(partner->pos.x, partner->pos.z, playerStatus->pos.x, playerStatus->pos.z);
                         wPartnerFollowState = 5;
                         return;
                     }
@@ -1990,7 +1990,7 @@ void partner_flying_follow_player(Npc* partner) {
                     partner->curAnim = gPartnerAnimations[wCurrentPartnerId].fly;
                     partner->jumpVel = 0.0f;
                     partner->pos.y = partner->moveToPos.y;
-                    partner->yaw = atan2(partner->pos.x, partner->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+                    partner->yaw = papermario_atan2(partner->pos.x, partner->pos.z, playerStatus->pos.x, playerStatus->pos.z);
                     wPartnerFollowState = 0;
                     distance = dist2D(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
                     if (distance < wPartnerTetherDistance) {
@@ -2023,7 +2023,7 @@ void partner_flying_follow_player(Npc* partner) {
                     partner->moveToPos.y = playerStatus->pos.y;
                     partner->moveToPos.z = playerStatus->pos.z;
                     add_vec2D_polar(&partner->moveToPos.x, &partner->moveToPos.z, wPartnerTetherDistance - 10.0f, temp_a3);
-                    yaw = atan2(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
+                    yaw = papermario_atan2(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
                     distance = dist2D(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
                     partner->moveSpeed = 2.0f;
                     if (distance > 2.0f) {
@@ -2045,7 +2045,7 @@ void partner_flying_follow_player(Npc* partner) {
                             }
                         }
                     } else {
-                        yaw = atan2(partner->pos.x, partner->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+                        yaw = papermario_atan2(partner->pos.x, partner->pos.z, playerStatus->pos.x, playerStatus->pos.z);
                         partner->yaw = yaw;
                         partner->moveSpeed = 0.0f;
                         partner->jumpScale = 0.0f;
@@ -2064,8 +2064,8 @@ void partner_flying_follow_player(Npc* partner) {
             if (!(distance <= wPartnerTetherDistance)) {
                 while (true) {
                     if (!currentSnapshot->isJumping) {
-                        yaw = atan2(partner->pos.x, partner->pos.z, moveHistoryX, moveHistoryZ);
-                        if (!(fabsf(get_clamped_angle_diff(yaw, atan2(partner->pos.x, partner->pos.z, playerStatus->pos.x, playerStatus->pos.z))) < 90.0f)) {
+                        yaw = papermario_atan2(partner->pos.x, partner->pos.z, moveHistoryX, moveHistoryZ);
+                        if (!(fabsf(get_clamped_angle_diff(yaw, papermario_atan2(partner->pos.x, partner->pos.z, playerStatus->pos.x, playerStatus->pos.z))) < 90.0f)) {
                             if (D_8010CFBC != gPlayerMoveHistoryIndex) {
                                 D_8010CFBC++;
                                 if (D_8010CFBC >= 40) {
@@ -2095,7 +2095,7 @@ void partner_flying_follow_player(Npc* partner) {
                         distance = dist2D(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
                         partner->moveSpeed = wPartnerMoveSpeed = distance / wPartnerMoveTime;
                         partner->curAnim = gPartnerAnimations[wCurrentPartnerId].anims[(partner->moveSpeed < 4.0) ? PARTNER_ANIM_INDEX_WALK : PARTNER_ANIM_INDEX_RUN];
-                        yaw = atan2(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
+                        yaw = papermario_atan2(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
                         partner->yaw = D_800F8034 = yaw;
                         D_8010CFCE++;
                         // fallthrough
@@ -2184,7 +2184,7 @@ s32 partner_put_away(Npc* partner) {
             partner->jumpScale = 1.6f;
             partner->moveToPos.z = tempPosZ;
             partner->planarFlyDist = dist2D(tempMoveToX, tempMoveToZ, tempPosX, tempPosZ);
-            partner->yaw = atan2(tempMoveToX, tempMoveToZ, tempPosX, tempPosZ);
+            partner->yaw = papermario_atan2(tempMoveToX, tempMoveToZ, tempPosX, tempPosZ);
             partner->duration = 15;
             partner->moveSpeed = partner->planarFlyDist / partner->duration;
             tempMoveToY = tempPosY - tempMoveToY;
@@ -2285,7 +2285,7 @@ s32 partner_get_out(Npc* partner) {
             partner->moveSpeed = 4.0f;
             partner->jumpScale = 1.2f;
             partner->planarFlyDist = dist2D(x, z, moveToX, moveToZ);
-            partner->yaw = atan2(x, z, moveToX, moveToZ);
+            partner->yaw = papermario_atan2(x, z, moveToX, moveToZ);
             partner->duration = partner->planarFlyDist / partner->moveSpeed;
             if (partner->duration < 10) {
                 partner->duration = 10;
@@ -2487,7 +2487,7 @@ void partner_do_player_collision(Npc* partner) {
         playerScreenY <= partner->collisionHeight + playerStatus->colliderHeight && playerScreenZ <= 4.0)
     {
         npc_move_heading(partner, 1.0f,
-                         atan2(playerStatus->pos.x, playerStatus->pos.z, partner->pos.x, partner->pos.z));
+                         papermario_atan2(playerStatus->pos.x, playerStatus->pos.z, partner->pos.x, partner->pos.z));
         add_vec2D_polar(&partner->pos.x, &partner->pos.z, 2.0f, gCameras[gCurrentCameraID].curYaw);
     }
 }
@@ -2503,7 +2503,7 @@ void partner_move_to_goal(Npc* partner, s32 isFlying) {
             partner->moveToPos.y = playerStatus->pos.y;
             partner->moveToPos.x = wPartnerMoveGoalX;
             partner->moveToPos.z = wPartnerMoveGoalZ;
-            D_800F8034 = atan2(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
+            D_800F8034 = papermario_atan2(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
             partner->yaw = D_800F8034;
             add_vec2D_polar(&partner->moveToPos.x, &partner->moveToPos.z, 5.0f, D_800F8034);
             wPartnerMoveTime = 18;

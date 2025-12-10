@@ -15,7 +15,7 @@
 #define set_aux_pan_u dead_set_aux_pan_u
 #define set_aux_pan_v dead_set_aux_pan_v
 #define get_npc_unsafe dead_get_npc_unsafe
-#define atan2 dead_atan2
+#define papermario_atan2 dead_atan2
 #define clamp_angle dead_clamp_angle
 #define rand_int dead_rand_int
 #define gItemTable dead_gItemTable

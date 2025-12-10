@@ -136,7 +136,7 @@ void butterflies_update(EffectInstance* effect) {
         temp_s0->unk_3C = var_f24;
         temp_s0->unk_40 = var_f22;
         temp_s0->unk_44 = var_f20;
-        temp_s0->unk_28 = atan2(0.0f, 0.0f, -temp_s0->unk_3C, temp_s0->unk_44);
+        temp_s0->unk_28 = papermario_atan2(0.0f, 0.0f, -temp_s0->unk_3C, temp_s0->unk_44);
     }
     temp_s0->unk_2C += 3;
     if (temp_s0->unk_2C >= 30) {

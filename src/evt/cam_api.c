@@ -82,14 +82,14 @@ API_CALLABLE(GrabCamera) {
 
     gCameras[id].updateMode = CAM_UPDATE_INTERP_POS;
     gCameras[id].needsInit = false;
-    gCameras[id].params.interp.pitch = -round(gCameras[id].lookAt_pitch);
+    gCameras[id].params.interp.pitch = -papermario_round(gCameras[id].lookAt_pitch);
     gCameras[id].params.interp.yaw = -gCameras[id].lookAt_yaw;
 
     dx = gCameras[id].lookAt_obj.x - gCameras[id].lookAt_eye.x;
     dy = gCameras[id].lookAt_obj.y - gCameras[id].lookAt_eye.y;
     dz = gCameras[id].lookAt_obj.z - gCameras[id].lookAt_eye.z;
 
-    gCameras[id].params.interp.dist = round(sqrtf(SQ(dx) + SQ(dy) + SQ(dz)));
+    gCameras[id].params.interp.dist = papermario_round(sqrtf(SQ(dx) + SQ(dy) + SQ(dz)));
     gCameras[id].params.interp.offsetY = 0;
 
     gCameras[id].lookAt_obj_target.x = gCameras[id].lookAt_obj.x;

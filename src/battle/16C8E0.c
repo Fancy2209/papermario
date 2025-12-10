@@ -145,7 +145,7 @@ void get_stick_input_radial(f32* angle, f32* magnitude) {
         mag = maxMagnitude;
     }
 
-    *angle = atan2(0.0f, 0.0f, stickX, -stickY);
+    *angle = papermario_atan2(0.0f, 0.0f, stickX, -stickY);
     *magnitude = mag;
 }
 

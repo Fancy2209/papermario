@@ -45,7 +45,7 @@ API_CALLABLE(N(SetSquirtAngle)) {
     partner->state.curPos.y = partner->curPos.y + 16.0f;
     partner->state.curPos.z = partner->curPos.z;
 
-    partner->state.angle = atan2(
+    partner->state.angle = papermario_atan2(
         partner->state.curPos.x, partner->state.curPos.y,
         partner->state.goalPos.x, partner->state.goalPos.y
     );
@@ -143,7 +143,7 @@ API_CALLABLE(N(GetSquirtTargetPos)) {
     f32 posX = script->varTable[0];
     f32 posY = script->varTable[1];
 
-    add_vec2D_polar(&posX, &posY, 300.0f, atan2(posX, posY, script->varTable[3], script->varTable[4]));
+    add_vec2D_polar(&posX, &posY, 300.0f, papermario_atan2(posX, posY, script->varTable[3], script->varTable[4]));
 
     script->varTable[3] = posX;
     script->varTable[4] = posY;

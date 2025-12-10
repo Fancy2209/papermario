@@ -100,7 +100,7 @@ void action_update_use_spinning_flower(void) {
             if (SpinningFlower_EntityIndex >= 0) {
                 entityByIndex = get_entity_by_index(SpinningFlower_EntityIndex);
                 distToCenter = dist2D(entityByIndex->pos.x, entityByIndex->pos.z, playerStatus->pos.x, playerStatus->pos.z);
-                SpinningFlower_AngleToCenter = atan2(entityByIndex->pos.x, entityByIndex->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+                SpinningFlower_AngleToCenter = papermario_atan2(entityByIndex->pos.x, entityByIndex->pos.z, playerStatus->pos.x, playerStatus->pos.z);
                 if (distToCenter > 4.0f) {
                     distToCenter--;
                 }
@@ -178,7 +178,7 @@ void action_update_use_spinning_flower(void) {
             if (SpinningFlower_EntityIndex >= 0) {
                 entityByIndex = get_entity_by_index(SpinningFlower_EntityIndex);
                 distToCenter = dist2D(entityByIndex->pos.x, entityByIndex->pos.z, playerStatus->pos.x, playerStatus->pos.z);
-                SpinningFlower_AngleToCenter = atan2(entityByIndex->pos.x, entityByIndex->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+                SpinningFlower_AngleToCenter = papermario_atan2(entityByIndex->pos.x, entityByIndex->pos.z, playerStatus->pos.x, playerStatus->pos.z);
                 if (distToCenter > 4.0f) {
                     distToCenter -= 1.0f;
                 }
@@ -228,7 +228,7 @@ void action_update_use_spinning_flower(void) {
             if (distToCenter > 40.0f) {
                 if (FlowerGoalPositionY + 30 < playerStatus->pos.y) {
                     playerStatus->actionSubstate++; // SUBSTATE_ASCEND_B
-                    inputAngle = atan2(playerStatus->pos.x, playerStatus->pos.z, FlowerGoalPositionX, FlowerGoalPositionZ);
+                    inputAngle = papermario_atan2(playerStatus->pos.x, playerStatus->pos.z, FlowerGoalPositionX, FlowerGoalPositionZ);
                     sin_cos_rad(DEG_TO_RAD(inputAngle), &dx, &dz);
                     playerStatus->curStateTime = 64;
                     SpinningFlower_AngleToCenter = inputAngle;

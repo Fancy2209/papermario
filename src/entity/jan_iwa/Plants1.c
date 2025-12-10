@@ -255,7 +255,7 @@ void entity_PinkFlowerLight_idle(Entity* entity) {
 void func_802BB8D4_E2E204(Entity* entity) {
     CymbalPlantData* data = entity->dataBuf.cymbalPlant;
     data->dist = fabs(dist2D(entity->pos.x - 2.0f, entity->pos.z - 2.0f, gPlayerStatus.pos.x, gPlayerStatus.pos.z) * 0.25);
-    data->angle = atan2(gPlayerStatus.pos.x, gPlayerStatus.pos.z, entity->pos.x - 2.0f, entity->pos.z - 2.0f);
+    data->angle = papermario_atan2(gPlayerStatus.pos.x, gPlayerStatus.pos.z, entity->pos.x - 2.0f, entity->pos.z - 2.0f);
 }
 
 void func_802BB98C_E2E2BC(Entity* entity) {

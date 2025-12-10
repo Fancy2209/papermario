@@ -2,7 +2,11 @@
 #define _SCRIPT_API_MACROS_H_
 
 #include "evt.h"
+#ifdef PLATFORM_N64
 #include "stdlib/stdarg.h"
+#else
+#include <stdarg.h>
+#endif
 
 /****** EXPRESSIONS ***************************************************************************************************/
 

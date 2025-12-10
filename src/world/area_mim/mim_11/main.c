@@ -57,8 +57,8 @@ API_CALLABLE(N(func_80240790_BB7800)) {
         script->functionTemp[1] = 0;
     }
 
-    angle1 = atan2(89.0f, 84.0f, 75.0f, 309.0f);
-    angle2 = atan2(89.0f, 84.0f, 245.0f, 85.0f);
+    angle1 = papermario_atan2(89.0f, 84.0f, 75.0f, 309.0f);
+    angle2 = papermario_atan2(89.0f, 84.0f, 245.0f, 85.0f);
     moveAngle = (((angle2 - angle1) / 40.0f) * script->functionTemp[1]) + angle1;
     cam->movePos.x = (s32) (sin_deg(moveAngle) * 100.0f) + 89;
     cam->movePos.z = (s32)(-cos_deg(moveAngle) * 100.0f) + 84;

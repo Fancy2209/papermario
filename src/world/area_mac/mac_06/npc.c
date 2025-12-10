@@ -242,14 +242,14 @@ API_CALLABLE(N(SeagullYawInterp)) {
     }
 
     if (evt_get_variable(script, LFlag1)) {
-        newYaw = atan2(-x1, y1, -x2, y2);
+        newYaw = papermario_atan2(-x1, y1, -x2, y2);
         evt_set_float_variable(script, LVar6, newYaw);
         evt_set_float_variable(script, LVar7, newYaw);
         evt_set_variable(script, LFlag1, false);
         return ApiStatus_DONE2;
     }
 
-    newYaw = atan2(-x1, y1, -x2, y2);
+    newYaw = papermario_atan2(-x1, y1, -x2, y2);
     newYaw = clamp_angle(newYaw);
     evt_set_float_variable(script, LVar6, newYaw);
 

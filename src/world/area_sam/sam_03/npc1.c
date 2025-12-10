@@ -5,7 +5,7 @@
 API_CALLABLE(N(GetAngleToPlayer)) {
     Npc* npc = get_npc_unsafe(NPC_JrTroopa);
 
-    script->varTable[0] = atan2(npc->pos.x, npc->pos.z, gPlayerStatus.pos.x, gPlayerStatus.pos.z);
+    script->varTable[0] = papermario_atan2(npc->pos.x, npc->pos.z, gPlayerStatus.pos.x, gPlayerStatus.pos.z);
     return ApiStatus_DONE2;
 }
 

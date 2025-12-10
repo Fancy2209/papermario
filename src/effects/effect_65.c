@@ -305,7 +305,7 @@ void effect_65_appendGfx(void* effect) {
                     next = 0;
                 }
                 firstPointIdx = i;
-                angle = -atan2(data->pathY[next], -data->pathX[next], data->pathY[idx], -data->pathX[idx]);
+                angle = -papermario_atan2(data->pathY[next], -data->pathX[next], data->pathY[idx], -data->pathX[idx]);
             } else {
                 if (i != MAX_POINTS - 1) {
                     next = idx + 1;
@@ -316,8 +316,8 @@ void effect_65_appendGfx(void* effect) {
                     if (prev < 0) {
                         prev = MAX_POINTS - 1;
                     }
-                    nextAngle = -atan2(data->pathY[next], -data->pathX[next], data->pathY[idx], -data->pathX[idx]);
-                    prevAngle = -atan2(data->pathY[idx], -data->pathX[idx], data->pathY[prev], -data->pathX[prev]);
+                    nextAngle = -papermario_atan2(data->pathY[next], -data->pathX[next], data->pathY[idx], -data->pathX[idx]);
+                    prevAngle = -papermario_atan2(data->pathY[idx], -data->pathX[idx], data->pathY[prev], -data->pathX[prev]);
                     deltaAngle = prevAngle - nextAngle;
                     if (deltaAngle > 180.0f) {
                         nextAngle += 360.0f;

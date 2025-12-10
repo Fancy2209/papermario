@@ -113,7 +113,7 @@ API_CALLABLE(N(GetPlayerPosOutsideKeepAwayRing)) {
     }
 
     if (gt | lt) {
-        yaw = atan2(playerStatus->pos.x, playerStatus->pos.z, 0.0f, 0.0f) + 180.0f;
+        yaw = papermario_atan2(playerStatus->pos.x, playerStatus->pos.z, 0.0f, 0.0f) + 180.0f;
         npc.pos.x = 0.0f;
         npc.pos.y = 0.0f;
         npc.pos.z = 0.0f;

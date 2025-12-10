@@ -18,7 +18,7 @@ API_CALLABLE(N(GetPlayerAngles)) {
 API_CALLABLE(N(PlayerRideBeanstalk)) {
     f32 temp = evt_get_variable(nullptr, script->varTable[2]);
     f32 dist = dist2D(BEANSTALK_BASE_X, BEANSTALK_BASE_Z, script->varTable[9], script->varTable[11]);
-    f32 angle = atan2(BEANSTALK_BASE_X, BEANSTALK_BASE_Z, script->varTable[9], script->varTable[11]);
+    f32 angle = papermario_atan2(BEANSTALK_BASE_X, BEANSTALK_BASE_Z, script->varTable[9], script->varTable[11]);
     f32 clamped = clamp_angle(angle - temp);
 
     temp = sin_deg(clamped);
@@ -34,7 +34,7 @@ API_CALLABLE(N(PartnerRideBeanstalk)) {
     Npc* npc = get_npc_by_index(NPC_Dummy_Wisterwood);
     f32 temp = evt_get_variable(nullptr, script->varTable[2]);
     f32 dist = dist2D(BEANSTALK_BASE_X, BEANSTALK_BASE_Z, script->varTable[12], script->varTable[14]);
-    f32 angle = atan2(BEANSTALK_BASE_X, BEANSTALK_BASE_Z, script->varTable[12], script->varTable[14]);
+    f32 angle = papermario_atan2(BEANSTALK_BASE_X, BEANSTALK_BASE_Z, script->varTable[12], script->varTable[14]);
     f32 clamped = clamp_angle(angle - temp);
 
     temp = sin_deg(clamped);

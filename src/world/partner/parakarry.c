@@ -88,7 +88,7 @@ API_CALLABLE(N(Update)) {
             N(TweesterPhysicsPtr)->prevFlags = parakarry->flags;
             N(TweesterPhysicsPtr)->radius = fabsf(dist2D(parakarry->pos.x, parakarry->pos.z,
                                                      entity->pos.x, entity->pos.z));
-            N(TweesterPhysicsPtr)->angle = atan2(entity->pos.x, entity->pos.z,
+            N(TweesterPhysicsPtr)->angle = papermario_atan2(entity->pos.x, entity->pos.z,
                                               parakarry->pos.x, parakarry->pos.z);
             N(TweesterPhysicsPtr)->angularVel = 6.0f;
             N(TweesterPhysicsPtr)->liftoffVelPhase = 50.0f;
@@ -263,7 +263,7 @@ API_CALLABLE(N(UseAbility)) {
             partnerStatus->partnerActionState = PARTNER_ACTION_PARAKARRY_HOVER;
             N(PlayerWasFacingLeft) = partner_force_player_flip_done();
             enable_npc_blur(parakarry);
-            parakarry->yaw = atan2(parakarry->pos.x, parakarry->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+            parakarry->yaw = papermario_atan2(parakarry->pos.x, parakarry->pos.z, playerStatus->pos.x, playerStatus->pos.z);
             parakarry->duration = 4;
             N(AbilityState)++; // AIR_LIFT_GATHER
             break;

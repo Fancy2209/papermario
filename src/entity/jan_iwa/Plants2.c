@@ -114,7 +114,7 @@ void func_802BC0B8_E2E9E8(Entity* entity) {
 void func_802BC0F0_E2EA20(Entity* entity) {
     MunchlesiaData* data = entity->dataBuf.munchlesia;
     data->unk_18 = fabs(dist2D(entity->pos.x, entity->pos.z, gPlayerStatus.pos.x, gPlayerStatus.pos.z) * 0.25);
-    data->unk_14 = atan2(gPlayerStatus.pos.x, gPlayerStatus.pos.z, entity->pos.x, entity->pos.z);
+    data->unk_14 = papermario_atan2(gPlayerStatus.pos.x, gPlayerStatus.pos.z, entity->pos.x, entity->pos.z);
 }
 
 void func_802BC17C_E2EAAC(Entity* entity) {

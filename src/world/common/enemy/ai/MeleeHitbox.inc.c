@@ -77,7 +77,7 @@ s32 N(MeleeHitbox_CanSeePlayer)(Evt* script) {
         angle = 270.0f;
     }
 
-    if (fabsf(get_clamped_angle_diff(angle, atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x,
+    if (fabsf(get_clamped_angle_diff(angle, papermario_atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x,
                                      gPlayerStatusPtr->pos.z))) > hitboxEnemy->AI_VAR_HITNPC_3) {
         ret = false;
     }
@@ -147,7 +147,7 @@ API_CALLABLE(N(MeleeHitbox_Main)) {
                 hitboxNpc->pos.z = posZ;
                 hitboxEnemy->unk_10.z = hitboxNpc->pos.z;
 
-                hitboxNpc->yaw = atan2(hitboxNpc->pos.x, hitboxNpc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
+                hitboxNpc->yaw = papermario_atan2(hitboxNpc->pos.x, hitboxNpc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
                 hitboxEnemy->flags &= ~(ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER);
                 hitboxNpc->duration = 0;
                 script->functionTemp[0] = 1;

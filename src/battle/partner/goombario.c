@@ -112,7 +112,7 @@ API_CALLABLE(N(JumpOnTarget)) {
         stateCurrentX = state->curPos.x;
         stateCurrentZ = actor->curPos.z;
         state->curPos.z = stateCurrentZ;
-        state->angle = atan2(stateCurrentX, stateCurrentZ, stateGoalX, stateGoalZ);
+        state->angle = papermario_atan2(stateCurrentX, stateCurrentZ, stateGoalX, stateGoalZ);
         state->dist = dist2D(stateCurrentX, stateCurrentZ, stateGoalX, stateGoalZ);
         if (state->moveTime == 0) {
             state->moveTime = state->dist / state->speed;
@@ -188,7 +188,7 @@ API_CALLABLE(N(JumpOnTarget)) {
                 actor->curPos.y = state->goalPos.y;
             }
 
-            actor->rot.z = -atan2(oldActorX, -oldActorY, actor->curPos.x, -actor->curPos.y);
+            actor->rot.z = -papermario_atan2(oldActorX, -oldActorY, actor->curPos.x, -actor->curPos.y);
             state->unk_18.y = actor->curPos.y;
             if (state->moveArcAmplitude < 3) {
                 vel1 = state->vel;

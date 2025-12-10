@@ -43,8 +43,8 @@ API_CALLABLE(N(MonitorPlayerOrbiting)) {
             // determine direction the player is orbiting
             dist = get_xz_dist_to_player(orbit->pos.x, orbit->pos.z);
             if (dist < orbit->startRadius) {
-                prevAngle = atan2(orbit->pos.x, orbit->pos.z, orbit->firstPlayerX, orbit->firstPlayerZ);
-                curAngle = atan2(orbit->pos.x, orbit->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+                prevAngle = papermario_atan2(orbit->pos.x, orbit->pos.z, orbit->firstPlayerX, orbit->firstPlayerZ);
+                curAngle = papermario_atan2(orbit->pos.x, orbit->pos.z, playerStatus->pos.x, playerStatus->pos.z);
                 deltaAngle = get_clamped_angle_diff(prevAngle, curAngle);
                 orbit->direction = signF(deltaAngle);
                 orbit->state++;
@@ -56,12 +56,12 @@ API_CALLABLE(N(MonitorPlayerOrbiting)) {
         case ORBIT_STATE_STARTING_ORBIT:
             dist = get_xz_dist_to_player(orbit->pos.x, orbit->pos.z);
             if (dist < orbit->startRadius) {
-                prevAngle = atan2(orbit->pos.x, orbit->pos.z, orbit->lastPlayerX, orbit->lastPlayerZ);
-                curAngle = atan2(orbit->pos.x, orbit->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+                prevAngle = papermario_atan2(orbit->pos.x, orbit->pos.z, orbit->lastPlayerX, orbit->lastPlayerZ);
+                curAngle = papermario_atan2(orbit->pos.x, orbit->pos.z, playerStatus->pos.x, playerStatus->pos.z);
                 deltaAngle = get_clamped_angle_diff(prevAngle, curAngle);
                 if (orbit->direction == signF(deltaAngle)) {
-                    prevAngle = atan2(orbit->pos.x, orbit->pos.z, orbit->firstPlayerX, orbit->firstPlayerZ);
-                    curAngle = atan2(orbit->pos.x, orbit->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+                    prevAngle = papermario_atan2(orbit->pos.x, orbit->pos.z, orbit->firstPlayerX, orbit->firstPlayerZ);
+                    curAngle = papermario_atan2(orbit->pos.x, orbit->pos.z, playerStatus->pos.x, playerStatus->pos.z);
                     deltaAngle = get_clamped_angle_diff(prevAngle, curAngle);
                     if (fabsf(deltaAngle) > 90.0f) {
                         if (orbit->eventListener != nullptr) {
@@ -79,8 +79,8 @@ API_CALLABLE(N(MonitorPlayerOrbiting)) {
         case ORBIT_STATE_MAINTAIN_ORBIT:
             dist = get_xz_dist_to_player(orbit->pos.x, orbit->pos.z);
             if (dist < orbit->orbitRadius) {
-                prevAngle = atan2(orbit->pos.x, orbit->pos.z, orbit->lastPlayerX, orbit->lastPlayerZ);
-                curAngle = atan2(orbit->pos.x, orbit->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+                prevAngle = papermario_atan2(orbit->pos.x, orbit->pos.z, orbit->lastPlayerX, orbit->lastPlayerZ);
+                curAngle = papermario_atan2(orbit->pos.x, orbit->pos.z, playerStatus->pos.x, playerStatus->pos.z);
                 deltaAngle = get_clamped_angle_diff(prevAngle, curAngle);
                 if (orbit->direction != signF(deltaAngle)) {
                     if (orbit->eventListener != nullptr) {

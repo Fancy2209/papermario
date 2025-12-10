@@ -157,7 +157,7 @@ API_CALLABLE(N(JumpStickerTo)) {
         data->goalPos.z = z;
         data->duration = evt_get_variable(script, *args++);
         dist = dist2D(data->pos.x, data->pos.z, data->goalPos.x, data->goalPos.z);
-        data->moveAngle = atan2(data->pos.x, data->pos.z, data->goalPos.x, data->goalPos.z);
+        data->moveAngle = papermario_atan2(data->pos.x, data->pos.z, data->goalPos.x, data->goalPos.z);
 
         y = data->goalPos.y - data->pos.y;
         if (data->duration == 0) {

@@ -645,7 +645,7 @@ void update_encounters_neutral(void) {
                 if (!(enemy->flags & ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER)) {
                     if (npc == playerStatus->encounteredNPC) {
                         enemy->savedNpcYaw = npc->yaw;
-                        npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+                        npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
                         script = get_script_by_id(enemy->aiScriptID);
                         if (script != nullptr) {
                             set_script_flags(script, EVT_FLAG_SUSPENDED);
@@ -746,11 +746,11 @@ void update_encounters_neutral(void) {
                     testY = npcY;
                     testZ = npcZ;
 
-                    if (npc_test_move_taller_with_slipping(COLLIDER_FLAG_IGNORE_PLAYER, &testX, &testY, &testZ, distance, atan2(npcX, npcZ, playerX, playerZ), colHeight, colRadius * 2.0f)) {
+                    if (npc_test_move_taller_with_slipping(COLLIDER_FLAG_IGNORE_PLAYER, &testX, &testY, &testZ, distance, papermario_atan2(npcX, npcZ, playerX, playerZ), colHeight, colRadius * 2.0f)) {
                         testX = playerX;
                         testY = playerY;
                         testZ = playerZ;
-                        if (npc_test_move_taller_with_slipping(COLLIDER_FLAG_IGNORE_PLAYER, &testX, &testY, &testZ, distance, atan2(playerX, playerZ, npcX, npcZ), colHeight, colRadius * 2.0f)) {
+                        if (npc_test_move_taller_with_slipping(COLLIDER_FLAG_IGNORE_PLAYER, &testX, &testY, &testZ, distance, papermario_atan2(playerX, playerZ, npcX, npcZ), colHeight, colRadius * 2.0f)) {
                             break;
                         }
                     }
@@ -760,8 +760,8 @@ void update_encounters_neutral(void) {
                         npcZ = enemy->unk_10.z;
                     }
 
-                    angle1 = fabsf(get_clamped_angle_diff(atan2(playerX, playerZ, npcX, npcZ), playerYaw));
-                    angle2 = fabsf(get_clamped_angle_diff(atan2(npcX, npcZ, playerX, playerZ), npcYaw));
+                    angle1 = fabsf(get_clamped_angle_diff(papermario_atan2(playerX, playerZ, npcX, npcZ), playerYaw));
+                    angle2 = fabsf(get_clamped_angle_diff(papermario_atan2(npcX, npcZ, playerX, playerZ), npcYaw));
                     triggeredBattle = false;
                     if (angle1 >= 90.0f && angle2 >= 90.0f) {
                         triggeredBattle = false;
@@ -809,11 +809,11 @@ void update_encounters_neutral(void) {
                         testX = npcX;
                         testY = npcY;
                         testZ = npcZ;
-                        if (npc_test_move_taller_with_slipping(COLLIDER_FLAG_IGNORE_PLAYER, &testX, &testY, &testZ, distance, atan2(npcX, npcZ, playerX, playerZ), colHeight, colRadius * 2.0f)) {
+                        if (npc_test_move_taller_with_slipping(COLLIDER_FLAG_IGNORE_PLAYER, &testX, &testY, &testZ, distance, papermario_atan2(npcX, npcZ, playerX, playerZ), colHeight, colRadius * 2.0f)) {
                             testX = playerX;
                             testY = playerY;
                             testZ = playerZ;
-                            if (npc_test_move_taller_with_slipping(COLLIDER_FLAG_IGNORE_PLAYER, &testX, &testY, &testZ, distance, atan2(playerX, playerZ, npcX, npcZ), colHeight, colRadius * 2.0f)) {
+                            if (npc_test_move_taller_with_slipping(COLLIDER_FLAG_IGNORE_PLAYER, &testX, &testY, &testZ, distance, papermario_atan2(playerX, playerZ, npcX, npcZ), colHeight, colRadius * 2.0f)) {
                                 break;
                             }
                         }
@@ -894,11 +894,11 @@ void update_encounters_neutral(void) {
             testX = npcX;
             testY = npcY;
             testZ = npcZ;
-            if (npc_test_move_taller_with_slipping(COLLIDER_FLAG_IGNORE_PLAYER, &testX, &testY, &testZ, distance, atan2(npcX, npcZ, playerX, playerZ), colHeight, colRadius * 2.0f)) {
+            if (npc_test_move_taller_with_slipping(COLLIDER_FLAG_IGNORE_PLAYER, &testX, &testY, &testZ, distance, papermario_atan2(npcX, npcZ, playerX, playerZ), colHeight, colRadius * 2.0f)) {
                 testX = playerX;
                 testY = playerY;
                 testZ = playerZ;
-                if (npc_test_move_taller_with_slipping(COLLIDER_FLAG_IGNORE_PLAYER, &testX, &testY, &testZ, distance, atan2(playerX, playerZ, npcX, npcZ), colHeight, colRadius * 2.0f)) {
+                if (npc_test_move_taller_with_slipping(COLLIDER_FLAG_IGNORE_PLAYER, &testX, &testY, &testZ, distance, papermario_atan2(playerX, playerZ, npcX, npcZ), colHeight, colRadius * 2.0f)) {
                     continue;
                 }
             }
@@ -2402,7 +2402,7 @@ bool check_conversation_trigger(void) {
                 }
             }
 
-            yaw = atan2(playerX, playerZ, npcX, npcZ);
+            yaw = papermario_atan2(playerX, playerZ, npcX, npcZ);
             if (fabsf(get_clamped_angle_diff(angle, yaw)) > 90.0f) {
                 continue;
             }
@@ -2413,7 +2413,7 @@ bool check_conversation_trigger(void) {
                 f32 x = npcX;
                 f32 y = npcY;
                 f32 z = npcZ;
-                yaw = atan2(npcX, npcZ, playerX, playerZ);
+                yaw = papermario_atan2(npcX, npcZ, playerX, playerZ);
 
                 if (npc_test_move_taller_with_slipping(0, &x, &y, &z, length, yaw, npcHeight, 2.0f * npcRadius)) {
                     continue;

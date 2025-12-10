@@ -17,7 +17,7 @@ void N(FlyingNoAttackAI_12)(Evt* script, MobileAISettings* aiSettings, EnemyDete
     npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_CHASE];
     npc->moveSpeed = aiSettings->chaseSpeed;
 
-    tempAngle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
+    tempAngle = papermario_atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
     angleDiff = get_clamped_angle_diff(npc->yaw, tempAngle);
 
     if (aiSettings->chaseTurnRate < fabsf(angleDiff)) {

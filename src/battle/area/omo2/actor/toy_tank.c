@@ -215,7 +215,7 @@ EvtScript N(EVS_Idle) = {
             EndIf
             // update position of bulb glow
             Call(GetActorVar, ACTOR_SELF, AVAR_Tank_BulbGlowEffect, LVar5)
-            IfNe(LVar5, nullptr)
+            IfNe(LVar5, 0)
                 Call(ActorExists, ACTOR_BULB, LVar0)
                 IfTrue(LVar0)
                     Call(GetAnimatedNodeRotation, 0, MODEL_shy, LVar0, LVar1, LVar3)
@@ -767,9 +767,9 @@ EvtScript N(EVS_Death) = {
     Call(PlaySoundAtActor, ACTOR_TANK, SOUND_TOY_TANK_FALL_APART)
     Call(PlayModelAnimation, 0, Ref(AS_ToyTank_FallApart))
     Call(GetActorVar, ACTOR_SELF, AVAR_Tank_BulbGlowEffect, LVar0)
-    IfNe(LVar0, nullptr)
+    IfNe(LVar0, 0)
         Call(RemoveEffect, LVar0)
-        Call(SetActorVar, ACTOR_SELF, AVAR_Tank_BulbGlowEffect, nullptr)
+        Call(SetActorVar, ACTOR_SELF, AVAR_Tank_BulbGlowEffect, 0)
         Call(SetActorVar, ACTOR_SELF, AVAR_Tank_UsingBulbAttack, false)
     EndIf
     Wait(45)

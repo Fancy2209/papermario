@@ -23,7 +23,7 @@ s32 N(ProjectileHitbox_GetUsableProjectileID)(Evt* script) {
             facingAngle = 270.0f;
         }
 
-        angleToPlayer = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
+        angleToPlayer = papermario_atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
         deltaAngle = get_clamped_angle_diff(facingAngle, angleToPlayer);
         if (fabsf(deltaAngle) > 75.0 || (2.0 * npc->collisionHeight <= fabsf(npc->pos.y - gPlayerStatusPtr->pos.y))) {
            return -1;
@@ -111,7 +111,7 @@ void N(ProjectileHitbox_32)(Evt* script) {
     Enemy* enemy2 = get_enemy(enemy->npcID + 1);
     Npc* npc2 = get_npc_unsafe(enemy2->npcID);
 
-    npc->yaw = atan2(npc->pos.x, npc->pos.z, npc2->pos.x, npc2->pos.z);
+    npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, npc2->pos.x, npc2->pos.z);
     if (enemy2->varTable[0] == 0) {
         npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         npc->duration = enemy->varTable[2];
@@ -191,7 +191,7 @@ API_CALLABLE(N(ProjectileAI_Main)) {
                         npc->rot.y = 0.0f;
                         npc->rot.z = 0.0f;
                         npc->moveSpeed = aiSettings->moveSpeed;
-                        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
+                        npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
                         npc->jumpVel = aiSettings->alertRadius;
                         npc->jumpScale = aiSettings->alertOffsetDist;
                         npc->moveToPos.y = npc2->pos.y;

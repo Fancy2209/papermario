@@ -76,7 +76,7 @@ void N(PatrolAI_Move)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolu
         //TODO strange match -- index and array are backwards!
         x = script->AI_PATROL_GOAL_INDEX[enemy->territory->patrol.points].x;
         z = script->AI_PATROL_GOAL_INDEX[enemy->territory->patrol.points].z;
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, x, z);
+        npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, x, z);
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
         if (dist2D(npc->pos.x, npc->pos.z, x, z) <= npc->moveSpeed) {
             script->AI_TEMP_STATE = AI_STATE_LOITER_INIT;
@@ -110,7 +110,7 @@ void N(PatrolAI_Loiter)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
 
     if ((aiSettings->playerSearchInterval >= 0) && basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 0)) {
         fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &emoteTemp);
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
+        npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
         ai_enemy_play_sound(npc, SOUND_AI_ALERT_A, SOUND_PARAM_MORE_QUIET);
         if (!(enemy->npcSettings->actionFlags & AI_ACTION_JUMP_WHEN_SEE_PLAYER)) {
             script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
@@ -190,7 +190,7 @@ void N(PatrolAI_ChaseInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetec
     npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_CHASE];
     npc->moveSpeed = aiSettings->chaseSpeed;
 
-    angle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
+    angle = papermario_atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
     angleDiff = get_clamped_angle_diff(npc->yaw, angle);
 
     if (aiSettings->chaseTurnRate < fabsf(angleDiff)) {

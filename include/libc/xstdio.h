@@ -1,8 +1,16 @@
 #ifndef _XSTDIO_H
 #define _XSTDIO_H
 #include "PR/ultratypes.h"
+#ifdef PLATFORM_N64
 #include "gcc/stdlib.h"
-#include "gcc/stdarg.h"
+#else
+#include <stdlib.h>
+#endif
+#ifdef PLATFORM_N64
+#include "stdlib/stdarg.h"
+#else
+#include <stdarg.h>
+#endif
 
 typedef struct {
     /* 0x0 */ union {

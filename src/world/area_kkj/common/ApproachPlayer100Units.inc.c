@@ -24,7 +24,7 @@ API_CALLABLE(N(ApproachPlayer100Units)) {
         isCloseToPlayer = true;
     }
 
-    angle = clamp_angle(atan2(playerStatus->pos.x, playerStatus->pos.z, npc->pos.x, npc->pos.z));
+    angle = clamp_angle(papermario_atan2(playerStatus->pos.x, playerStatus->pos.z, npc->pos.x, npc->pos.z));
     posX = playerStatus->pos.x + (sin_deg(angle) * 100.0f);
     posZ = playerStatus->pos.z - (cos_deg(angle) * 100.0f);
     evt_set_variable(script, outVar1, isCloseToPlayer);

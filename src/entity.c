@@ -1668,8 +1668,8 @@ s32 entity_raycast_down(f32* x, f32* y, f32* z, f32* hitYaw, f32* hitPitch, f32*
     if (hitID >= 0) {
         *hitLength = hitDepth;
         *y = hitY;
-        *hitYaw = -atan2(0.0f, 0.0f, hitNz * 100.0f, hitNy * 100.0f);
-        *hitPitch = -atan2(0.0f, 0.0f, hitNx * 100.0f, hitNy * 100.0f);
+        *hitYaw = -papermario_atan2(0.0f, 0.0f, hitNz * 100.0f, hitNy * 100.0f);
+        *hitPitch = -papermario_atan2(0.0f, 0.0f, hitNx * 100.0f, hitNy * 100.0f);
         ret = true;
     } else {
         *hitYaw = 0.0f;

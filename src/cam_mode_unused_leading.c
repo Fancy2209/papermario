@@ -44,12 +44,12 @@ void update_camera_unused_leading(Camera* camera) {
         }
     }
 
-    camera->curYaw = atan2(camera->lookAt_eye.x, camera->lookAt_eye.z, camera->lookAt_obj.x, camera->lookAt_obj.z);
+    camera->curYaw = papermario_atan2(camera->lookAt_eye.x, camera->lookAt_eye.z, camera->lookAt_obj.x, camera->lookAt_obj.z);
     lookXDelta = camera->lookAt_obj.x - camera->lookAt_eye.x;
     lookYDelta = camera->lookAt_obj.y - camera->lookAt_eye.y;
     lookZDelta = camera->lookAt_obj.z - camera->lookAt_eye.z;
-    camera->lookAt_yaw = -atan2(0.0f, 0.0f, lookXDelta, lookZDelta);
-    camera->lookAt_pitch = atan2(0.0f, 0.0f, lookYDelta, -sqrtf(SQ(lookXDelta) + SQ(lookZDelta)));
+    camera->lookAt_yaw = -papermario_atan2(0.0f, 0.0f, lookXDelta, lookZDelta);
+    camera->lookAt_pitch = papermario_atan2(0.0f, 0.0f, lookYDelta, -sqrtf(SQ(lookXDelta) + SQ(lookZDelta)));
 }
 
 void interp_lookat_pos(Camera* camera, f32 interpAmtXZ, f32 maxDeltaXZ, s16 lockPosY) {

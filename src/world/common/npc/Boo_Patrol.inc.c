@@ -14,7 +14,7 @@ void N(BooPatrolAI_Move)(Evt* script, MobileAISettings* aiSettings, EnemyDetectV
     temp_f22 = script->functionTemp[2][enemy->territory->patrol.points].x;
     temp_f20 = script->functionTemp[2][enemy->territory->patrol.points].z;
 
-    npc->yaw = atan2(posX, posZ, temp_f22, temp_f20);
+    npc->yaw = papermario_atan2(posX, posZ, temp_f22, temp_f20);
     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
 
     posX = npc->pos.x;

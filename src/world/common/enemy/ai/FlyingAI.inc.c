@@ -24,7 +24,7 @@ void N(FlyingAI_WanderInit)(Evt* script, MobileAISettings* aiSettings, EnemyDete
             enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z,
             npc->pos.x, npc->pos.z,
             enemy->territory->wander.wanderSize.x, enemy->territory->wander.wanderSize.z)) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
+        npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
     } else {
         npc->yaw = clamp_angle((npc->yaw + rand_int(60)) - 30.0f);
     }
@@ -158,7 +158,7 @@ void N(FlyingAI_Wander)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
                                enemy->territory->wander.wanderSize.x, enemy->territory->wander.wanderSize.z)) {
         posW = dist2D(enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z, npc->pos.x, npc->pos.z);
         if (npc->moveSpeed < posW) {
-            npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
+            npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
             cond = true;
         }
     }
@@ -264,7 +264,7 @@ void N(FlyingAI_JumpInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
     PlayerStatus* playerStatus = gPlayerStatusPtr;
 
     npc->duration = 0;
-    npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+    npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
     npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_PRE];
     script->functionTemp[0] = AI_STATE_ALERT;
 }
@@ -289,7 +289,7 @@ void N(FlyingAI_ChaseInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetec
     npc->jumpVel = jumpVel;
     npc->jumpScale = jumpScale;
     npc->moveSpeed = aiSettings->chaseSpeed;
-    npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
+    npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
 
     enemy->varTable[2] = 0;
 
@@ -361,7 +361,7 @@ void N(FlyingAI_LosePlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDete
         npc->duration++;
         if (npc->duration >= aiSettings->chaseUpdateInterval) {
             npc->duration = 0;
-            angle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
+            angle = papermario_atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
             deltaAngle = get_clamped_angle_diff(npc->yaw, angle);
             if (aiSettings->chaseTurnRate < fabsf(deltaAngle)) {
                 angle = npc->yaw;

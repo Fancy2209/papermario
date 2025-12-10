@@ -1179,7 +1179,7 @@ API_CALLABLE(PlayerHopToGoal) {
         goalY = player->state.goalPos.y;
         goalZ = player->state.goalPos.z;
 
-        player->state.angle = atan2(x, z, goalX, goalZ);
+        player->state.angle = papermario_atan2(x, z, goalX, goalZ);
         player->state.dist = dist2D(x, z, goalX, goalZ);
 
         y = goalY - y;
@@ -1277,7 +1277,7 @@ API_CALLABLE(PlayerFallToGoal) {
 
         state->moveTime = moveTime;
 
-        player->state.angle = atan2(x, z, goalX, goalZ);
+        player->state.angle = papermario_atan2(x, z, goalX, goalZ);
         player->state.dist = dist2D(x, z, goalX, goalZ);
 
         y = goalY - y;
@@ -1388,7 +1388,7 @@ API_CALLABLE(PlayerRunToGoal) {
         currentX = player->state.curPos.x;
         currentZ = player->state.curPos.z;
 
-        player->state.angle = atan2(currentX, currentZ, goalX, goalZ);
+        player->state.angle = papermario_atan2(currentX, currentZ, goalX, goalZ);
         player->state.dist = dist2D(currentX, currentZ, goalX, goalZ);
         if (player->state.moveTime == 0) {
             player->state.moveTime = player->state.dist / player->state.speed;
@@ -1459,7 +1459,7 @@ API_CALLABLE(CancelablePlayerRunToGoal) {
         currentX = player->state.curPos.x;
         currentZ = player->state.curPos.z;
 
-        player->state.angle = atan2(currentX, currentZ, goalX, goalZ);
+        player->state.angle = papermario_atan2(currentX, currentZ, goalX, goalZ);
         player->state.dist = dist2D(currentX, currentZ, goalX, goalZ);
         if (player->state.moveTime == 0) {
             player->state.moveTime = player->state.dist / player->state.speed;
@@ -1822,7 +1822,7 @@ API_CALLABLE(PlayerBasicJumpToGoal) {
         posX = playerState->curPos.x;
         posY = playerState->curPos.y;
         posZ = playerState->curPos.z;
-        playerState->angle = atan2(posX, posZ, goalX, goalZ);
+        playerState->angle = papermario_atan2(posX, posZ, goalX, goalZ);
         playerState->dist = dist2D(posX, posZ, goalX, goalZ);
         if (playerState->moveTime == 0) {
             playerState->moveTime = playerState->dist / playerState->speed;
@@ -2005,7 +2005,7 @@ API_CALLABLE(PlayerSuperJumpToGoal) {
             posX = playerState->curPos.x;
             posY = playerState->curPos.y;
             posZ = playerState->curPos.z;
-            playerState->angle = atan2(posX, posZ, goalX, goalZ);
+            playerState->angle = papermario_atan2(posX, posZ, goalX, goalZ);
             playerState->dist = dist2D(posX, posZ, goalX, goalZ);
 
             if (playerState->moveTime == 0) {
@@ -2056,7 +2056,7 @@ API_CALLABLE(PlayerSuperJumpToGoal) {
             posX = playerState->curPos.x;
             posY = playerState->curPos.y;
             posZ = playerState->curPos.z;
-            playerState->angle = atan2(posX, posZ, goalX, goalZ);
+            playerState->angle = papermario_atan2(posX, posZ, goalX, goalZ);
             playerState->dist = dist2D(posX, posZ, goalX, goalZ);
             if (playerState->moveTime == 0) {
                 playerState->moveTime = playerState->dist / playerState->speed;
@@ -2266,7 +2266,7 @@ API_CALLABLE(PlayerUltraJumpToGoal) {
             posX = playerState->curPos.x;
             posY = playerState->curPos.y;
             posZ = playerState->curPos.z;
-            playerState->angle = atan2(posX, posZ, goalX, goalZ);
+            playerState->angle = papermario_atan2(posX, posZ, goalX, goalZ);
             playerState->dist = dist2D(posX, posZ, goalX, goalZ);
             if (playerState->moveTime == 0) {
                 playerState->moveTime = playerState->dist / playerState->speed;
@@ -2309,7 +2309,7 @@ API_CALLABLE(PlayerUltraJumpToGoal) {
             posX = playerState->curPos.x;
             posY = playerState->curPos.y;
             posZ = playerState->curPos.z;
-            playerState->angle = atan2(posX, posZ, goalX, goalZ);
+            playerState->angle = papermario_atan2(posX, posZ, goalX, goalZ);
             playerState->dist = dist2D(posX, posZ, goalX, goalZ);
             if (playerState->moveTime == 0) {
                 playerState->moveTime = playerState->dist / playerState->speed;
@@ -2365,7 +2365,7 @@ API_CALLABLE(PlayerUltraJumpToGoal) {
             posX = playerState->curPos.x;
             posY = playerState->curPos.y;
             posZ = playerState->curPos.z;
-            playerState->angle = atan2(posX, posZ, goalX, goalZ);
+            playerState->angle = papermario_atan2(posX, posZ, goalX, goalZ);
             playerState->dist = dist2D(posX, posZ, goalX, goalZ);
             if (playerState->moveTime == 0) {
                 playerState->moveTime = playerState->dist / playerState->speed;

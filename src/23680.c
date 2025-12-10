@@ -460,7 +460,7 @@ bool basic_ai_check_player_dist(EnemyDetectVolume* territory, Enemy* enemy, f32 
         dist = dist2D(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
         if (npc_test_move_simple_with_slipping(COLLIDER_FLAG_IGNORE_PLAYER | COLLISION_IGNORE_ENTITIES,
                 &x, &y, &z,
-                dist, atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z),
+                dist, papermario_atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z),
                 0.1f, 0.1f)) {
             return false;
         }
@@ -584,7 +584,7 @@ void basic_ai_wander(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolum
                 x = npc->pos.x;
                 y = npc->pos.y;
                 z = npc->pos.z;
-                yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
+                yaw = papermario_atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
                 if (!npc_test_move_simple_with_slipping(npc->collisionChannel, &x, &y, &z, aiSettings->chaseSpeed, yaw, npc->collisionHeight, npc->collisionDiameter)) {
                     npc->yaw = yaw;
                     ai_enemy_play_sound(npc, SOUND_AI_ALERT_A, SOUND_PARAM_MORE_QUIET);
@@ -619,7 +619,7 @@ void basic_ai_wander(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolum
         }
 
         if (enemy->aiFlags & AI_FLAG_NEEDS_HEADING) {
-            npc->yaw = clamp_angle(atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z));
+            npc->yaw = clamp_angle(papermario_atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z));
             enemy->aiFlags &= ~AI_FLAG_NEEDS_HEADING;
         }
 
@@ -628,7 +628,7 @@ void basic_ai_wander(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolum
         y = npc->pos.y;
         z = npc->pos.z;
         if (npc_test_move_simple_with_slipping(npc->collisionChannel, &x, &y, &z, 2.0 * npc->moveSpeed, npc->yaw, npc->collisionHeight, npc->collisionDiameter)) {
-            yaw = clamp_angle(atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z));
+            yaw = clamp_angle(papermario_atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z));
             enemy->aiFlags &= ~AI_FLAG_NEEDS_HEADING;
             ai_check_fwd_collisions(npc, 5.0f, &yaw, nullptr, nullptr, nullptr);
             npc->yaw = yaw;
@@ -683,7 +683,7 @@ void basic_ai_loiter(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolum
             x = npc->pos.x;
             y = npc->pos.y;
             z = npc->pos.z;
-            yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
+            yaw = papermario_atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
             if (!npc_test_move_simple_with_slipping(npc->collisionChannel, &x, &y, &z, aiSettings->chaseSpeed, yaw, npc->collisionHeight, npc->collisionDiameter)) {
                 npc->yaw = yaw;
                 ai_enemy_play_sound(npc, SOUND_AI_ALERT_A, SOUND_PARAM_MORE_QUIET);
@@ -762,7 +762,7 @@ void basic_ai_chase_init(Evt* script, MobileAISettings* npcAISettings, EnemyDete
     }
 
     if (!skipTurnAround) {
-        f32 angle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
+        f32 angle = papermario_atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
         f32 deltaAngleToPlayer = get_clamped_angle_diff(npc->yaw, angle);
 
         if (npcAISettings->chaseTurnRate < fabsf(deltaAngleToPlayer)) {
@@ -834,7 +834,7 @@ void basic_ai_lose_player(Evt* script, MobileAISettings* npcAISettings, EnemyDet
     npc->duration--;
     if (npc->duration == 0) {
         // turn to face home position
-        npc->yaw = clamp_angle(atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z));
+        npc->yaw = clamp_angle(papermario_atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z));
         script->AI_TEMP_STATE = AI_STATE_WANDER_INIT;
     }
 }

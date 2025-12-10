@@ -152,7 +152,7 @@ API_CALLABLE(N(ShellShotActionCommand)) {
             state->curPos.x = parakarry->curPos.x + 8.0f;
             state->curPos.y = parakarry->curPos.y + 16.0f;
             state->curPos.z = parakarry->curPos.z;
-            state->angle = atan2(state->curPos.x, state->curPos.y, state->goalPos.x, state->goalPos.y);
+            state->angle = papermario_atan2(state->curPos.x, state->curPos.y, state->goalPos.x, state->goalPos.y);
             state->bounceDivisor = state->angle;
             state->dist = 116.0f;
             state->unk_18.x = state->angle;

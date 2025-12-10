@@ -51,7 +51,7 @@ void N(SentinelAI_ChaseInit)(Evt* script, MobileAISettings* aiSettings, EnemyDet
         npc->duration = aiSettings->chaseUpdateInterval / 2 + rand_int(aiSettings->chaseUpdateInterval / 2 + 1);
         npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_PRE];
         npc->moveSpeed = aiSettings->chaseSpeed;
-        angle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
+        angle = papermario_atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
         deltaAngle = get_clamped_angle_diff(npc->yaw, angle);
         if (aiSettings->chaseTurnRate < fabsf(deltaAngle)) {
             angle = npc->yaw;
@@ -184,7 +184,7 @@ void N(SentinelAI_LosePlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDe
     posW = 1000.0f;
     npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &posW);
     if (!(npc->pos.y < posY + idleHeight)) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
+        npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
         npc->pos.y = posY + idleHeight;
         fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 10, &emoteTemp);
         npc->duration = 10;
@@ -264,7 +264,7 @@ void N(SentinelAI_ReturnHome)(Evt* script, MobileAISettings* aiSettings, EnemyDe
 
     script->functionTemp[1]--;
     if (npc->turnAroundYawAdjustment == 0) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
+        npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
         hitDepth = dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
         if (hitDepth <= (2.0f * npc->moveSpeed)) {

@@ -136,7 +136,7 @@ void npc_follow_npc(Npc* npc) {
 
             while (true) {
                 dist = dist2D(currentX, currentZ, targetX, targetZ);
-                yaw = atan2(currentX, currentZ, targetX, targetZ);
+                yaw = papermario_atan2(currentX, currentZ, targetX, targetZ);
                 if (dist > npc->moveSpeed) {
                     dist = dist2D(currentX, currentZ, x, z);
                     if (dist > followData->walkRadius) {
@@ -211,7 +211,7 @@ void npc_follow_npc(Npc* npc) {
                 npc->jumpScale = 2.0f;
                 npc->moveSpeed = followData->runSpeed;
                 npc->planarFlyDist = dist2D(npc->pos.x, npc->pos.z, npc->moveToPos.x, npc->moveToPos.z);
-                npc->yaw = atan2(npc->pos.x, npc->pos.z, npc->moveToPos.x, npc->moveToPos.z);
+                npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, npc->moveToPos.x, npc->moveToPos.z);
                 dist = npc->planarFlyDist;
                 currentY = npc->moveToPos.y - npc->pos.y;
                 if (npc->planarFlyDist < currentY) {
@@ -220,7 +220,7 @@ void npc_follow_npc(Npc* npc) {
                 if (dist < followData->idleRadius) {
                     npc->jumpVel = 0.0f;
                     npc->flags |= NPC_FLAG_GRAVITY;
-                    npc->yaw = atan2(npc->pos.x, npc->pos.z, x, z);
+                    npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, x, z);
                     followData->followState = NPC_FOLLOW_STATE_RUN;
                     return;
                 }
@@ -254,7 +254,7 @@ void npc_follow_npc(Npc* npc) {
                     npc->jumpVel = 0.0f;
                     npc->pos.y = currentY;
                     npc->flags |= NPC_FLAG_GRAVITY;
-                    npc->yaw = atan2(currentX, currentZ, x, z);
+                    npc->yaw = papermario_atan2(currentX, currentZ, x, z);
                     followData->followState = NPC_FOLLOW_STATE_RUN;
                 }
             }
@@ -277,8 +277,8 @@ void npc_follow_npc(Npc* npc) {
                     break;
                 }
 
-                yaw = atan2(npc->pos.x, npc->pos.z, targetX, targetZ);
-                if (fabsf(get_clamped_angle_diff(yaw, atan2(npc->pos.x, npc->pos.z, x, z))) < 90.0f) {
+                yaw = papermario_atan2(npc->pos.x, npc->pos.z, targetX, targetZ);
+                if (fabsf(get_clamped_angle_diff(yaw, papermario_atan2(npc->pos.x, npc->pos.z, x, z))) < 90.0f) {
                     break;
                 }
 
@@ -306,8 +306,8 @@ void npc_follow_npc(Npc* npc) {
                     break;
                 }
 
-                yaw = atan2(npc->pos.x, npc->pos.z, targetX, targetZ);
-                if (fabsf(get_clamped_angle_diff(yaw, atan2(npc->pos.x, npc->pos.z, x, z))) < 90.0f) {
+                yaw = papermario_atan2(npc->pos.x, npc->pos.z, targetX, targetZ);
+                if (fabsf(get_clamped_angle_diff(yaw, papermario_atan2(npc->pos.x, npc->pos.z, x, z))) < 90.0f) {
                     break;
                 }
 

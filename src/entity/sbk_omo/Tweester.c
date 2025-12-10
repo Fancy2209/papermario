@@ -179,7 +179,7 @@ void entity_Tweester_move(Entity* entity) {
     TweesterData* data = entity->dataBuf.tweester;
     f32 yawRad;
 
-    f32 temp_f4 = (atan2(entity->pos.x, entity->pos.z, data->targetX, data->targetZ) - data->yaw) * 0.03125f;
+    f32 temp_f4 = (papermario_atan2(entity->pos.x, entity->pos.z, data->targetX, data->targetZ) - data->yaw) * 0.03125f;
     if (temp_f4 >= 0.0f && temp_f4 < 0.01) {
         temp_f4 = 0.01f;
     }

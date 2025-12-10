@@ -7,8 +7,8 @@ API_CALLABLE(N(GetRunToPos)) {
     f32 npcAngle;
     f32 angle;
 
-    angle = atan2(183.0f, -75.0f, playerStatus->pos.x, playerStatus->pos.z);
-    npcAngle = atan2(183.0f, -75.0f, npc->pos.x, npc->pos.z);
+    angle = papermario_atan2(183.0f, -75.0f, playerStatus->pos.x, playerStatus->pos.z);
+    npcAngle = papermario_atan2(183.0f, -75.0f, npc->pos.x, npc->pos.z);
     angle = get_clamped_angle_diff(npcAngle, angle);
     rand = rand_int(10) + 30;
     if (angle < 0.0f) {

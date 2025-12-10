@@ -26,7 +26,7 @@ void action_update_use_tweester(void) {
         playerStatus->actionSubstate = SUBSTATE_LAUNCH;
         mem_clear(PlayerTweesterPhysicsPtr, sizeof(*PlayerTweesterPhysicsPtr));
         PlayerTweesterPhysicsPtr->radius = fabsf(dist2D(playerStatus->pos.x, playerStatus->pos.z, entity->pos.x, entity->pos.z));
-        PlayerTweesterPhysicsPtr->angle = atan2(entity->pos.x, entity->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+        PlayerTweesterPhysicsPtr->angle = papermario_atan2(entity->pos.x, entity->pos.z, playerStatus->pos.x, playerStatus->pos.z);
         PlayerTweesterPhysicsPtr->angularVel = 6.0f;
         PlayerTweesterPhysicsPtr->liftoffVelPhase = 50.0f;
         PlayerTweesterPhysicsPtr->countdown = 120;

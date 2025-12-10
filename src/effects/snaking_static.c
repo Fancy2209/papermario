@@ -122,7 +122,7 @@ void snaking_static_update(EffectInstance* effect) {
             data[1] = data[0];
             data->pos.x = tempPosX + tempOffsetX;
             data->pos.y = tempPosY + tempOffsetY;
-            data->unk_3C = atan2(0.0f, 0.0f, tempOffsetX, tempOffsetY);
+            data->unk_3C = papermario_atan2(0.0f, 0.0f, tempOffsetX, tempOffsetY);
             if (tempOffsetX != 0.0f || tempOffsetY != 0.0f) {
                 data->unk_34 = sqrtf((tempOffsetX * tempOffsetX) + (tempOffsetY * tempOffsetY));
             } else {

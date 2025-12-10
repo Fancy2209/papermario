@@ -281,7 +281,7 @@ API_CALLABLE(N(Atan2)) {
     f32 endX = evt_get_float_variable(script, *args++);
     f32 endZ = evt_get_float_variable(script, *args++);
 
-    evt_set_float_variable(script, outVar, atan2(startX, startZ, endX, endZ));
+    evt_set_float_variable(script, outVar, papermario_atan2(startX, startZ, endX, endZ));
     return ApiStatus_DONE2;
 }
 

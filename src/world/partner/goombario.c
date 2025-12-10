@@ -129,7 +129,7 @@ API_CALLABLE(N(Update)) {
             N(TweesterPhysicsPtr)->state = 1;
             N(TweesterPhysicsPtr)->prevFlags = npc->flags;
             N(TweesterPhysicsPtr)->radius = fabsf(dist2D(npc->pos.x, npc->pos.z, entity->pos.x, entity->pos.z));
-            N(TweesterPhysicsPtr)->angle = atan2(entity->pos.x, entity->pos.z, npc->pos.x, npc->pos.z);
+            N(TweesterPhysicsPtr)->angle = papermario_atan2(entity->pos.x, entity->pos.z, npc->pos.x, npc->pos.z);
             N(TweesterPhysicsPtr)->angularVel = 6.0f;
             N(TweesterPhysicsPtr)->liftoffVelPhase = 50.0f;
             N(TweesterPhysicsPtr)->countdown = 120;

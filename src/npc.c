@@ -448,7 +448,7 @@ void npc_do_other_npc_collision(Npc* npc) {
                             }
 
                             if (collision) {
-                                angle = DEG_TO_RAD(atan2(otherX, otherZ, thisX, thisZ));
+                                angle = DEG_TO_RAD(papermario_atan2(otherX, otherZ, thisX, thisZ));
                                 dist = (thisBuf + otherBuf) - dist;
                                 xDiff = dist * sin_rad(angle);
                                 zDiff = -dist * cos_rad(angle);
@@ -522,7 +522,7 @@ s32 npc_do_player_collision(Npc* npc) {
     deltaZ = playerZ - npcZ;
 
     dist = sqrtf(SQ(deltaX) + SQ(deltaZ));
-    yaw = atan2(playerX, playerZ, npcX, npcZ);
+    yaw = papermario_atan2(playerX, playerZ, npcX, npcZ);
 
     playerYaw = playerStatus->targetYaw;
     dist = colDist - dist;

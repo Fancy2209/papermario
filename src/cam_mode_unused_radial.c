@@ -34,7 +34,7 @@ void update_camera_unused_radial(Camera* camera) {
         camera->curBoomLength = camera->params.radial.dist * 100 / CamLengthScale;
         camera->targetOffsetY = camera->params.radial.offsetY * 20 / CamLengthScale;
 
-        f20 = atan2(deltaX, deltaZ2, deltaX2, deltaZ);
+        f20 = papermario_atan2(deltaX, deltaZ2, deltaX2, deltaZ);
         if ((dist2D(deltaX, deltaZ2, deltaX2, deltaZ) < camera->params.radial.minRadius * 100 / CamLengthScale)) {
             f20 = camera->curBoomYaw;
             camera->curBoomYaw = f20;
@@ -106,7 +106,7 @@ void update_camera_unused_radial(Camera* camera) {
     camera->lookAt_obj.y += y3 / 10.0f;
     camera->lookAt_obj.z += z3 * 0.5f;
 
-    f20 = atan2(deltaX, deltaZ2, deltaX2, deltaZ);
+    f20 = papermario_atan2(deltaX, deltaZ2, deltaX2, deltaZ);
     if ((dist2D(deltaX, deltaZ2, deltaX2, deltaZ) < camera->params.radial.minRadius * 100 / CamLengthScale)) {
         f20 = camera->curBoomYaw;
     } else {
@@ -145,12 +145,12 @@ void update_camera_unused_radial(Camera* camera) {
     camera->lookAt_eye.y = camera->lookAt_obj.y + deltaY2;
     camera->lookAt_eye.z = camera->lookAt_obj.z + deltaZ;
 
-    camera->curYaw = atan2(camera->lookAt_eye.x, camera->lookAt_eye.z, camera->lookAt_obj.x, camera->lookAt_obj.z);
+    camera->curYaw = papermario_atan2(camera->lookAt_eye.x, camera->lookAt_eye.z, camera->lookAt_obj.x, camera->lookAt_obj.z);
 
     deltaX = camera->lookAt_obj.x - camera->lookAt_eye.x;
     deltaY = camera->lookAt_obj.y - camera->lookAt_eye.y;
     deltaZ2 = camera->lookAt_obj.z - camera->lookAt_eye.z;
 
-    camera->lookAt_yaw = -atan2(0.0f, 0.0f, deltaX, deltaZ2);
-    camera->lookAt_pitch = atan2(0.0f, 0.0f, deltaY, -sqrtf((deltaX * deltaX) + (deltaZ2 * deltaZ2)));
+    camera->lookAt_yaw = -papermario_atan2(0.0f, 0.0f, deltaX, deltaZ2);
+    camera->lookAt_pitch = papermario_atan2(0.0f, 0.0f, deltaY, -sqrtf((deltaX * deltaX) + (deltaZ2 * deltaZ2)));
 }

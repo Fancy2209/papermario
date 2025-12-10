@@ -65,7 +65,7 @@ API_CALLABLE(N(FireBarAI_Main)) {
             npc->pos.x = data->centerPos.x + dX;
             npc->pos.y = data->centerPos.y;
             npc->pos.z = data->centerPos.z + dZ;
-            npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+            npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
         }
         if (!(data->flags & 2) && !(playerStatus->flags & PS_FLAG_HAZARD_INVINCIBILITY)) {
             dY = playerStatus->pos.y - npc->pos.y;
@@ -97,8 +97,8 @@ API_CALLABLE(N(FireBarAI_Main)) {
     distToNpc = dist2D(data->centerPos.x, data->centerPos.z, npc->pos.x, npc->pos.z)
         + (npc->collisionDiameter * 0.5f * npc->scale.x * 0.5f) + (playerStatus->colliderDiameter * 0.5f * 0.5f);
     tempPlayerDist = distToPlayer; // needed to match
-    angleToPlayer = atan2(data->centerPos.x, data->centerPos.z, playerStatus->pos.x, playerStatus->pos.z);
-    angleToNpc = atan2(data->centerPos.x, data->centerPos.z, npc->pos.x, npc->pos.z);
+    angleToPlayer = papermario_atan2(data->centerPos.x, data->centerPos.z, playerStatus->pos.x, playerStatus->pos.z);
+    angleToNpc = papermario_atan2(data->centerPos.x, data->centerPos.z, npc->pos.x, npc->pos.z);
     deltaYaw = get_clamped_angle_diff(angleToPlayer, angleToNpc);
     if ((hitDetected > 0) && (playerStatus->actionState != ACTION_STATE_HIT_FIRE)) {
         playerStatus->hazardType = HAZARD_TYPE_FIRE_BAR;

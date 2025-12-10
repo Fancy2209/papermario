@@ -8,7 +8,7 @@ API_CALLABLE(N(DoCircleSprint)) {
         npc->moveToPos.x = (evt_get_variable(script, *args++) + npc->pos.x) * 0.5f;
         npc->moveToPos.z = (evt_get_variable(script, *args++) + npc->pos.z) * 0.5f;
         npc->moveToPos.y = dist2D(npc->moveToPos.x, npc->moveToPos.z, npc->pos.x, npc->pos.z);
-        script->functionTemp[2] = atan2(npc->moveToPos.x, npc->moveToPos.z, npc->pos.x, npc->pos.z);
+        script->functionTemp[2] = papermario_atan2(npc->moveToPos.x, npc->moveToPos.z, npc->pos.x, npc->pos.z);
         npc->duration = 0;
     }
 

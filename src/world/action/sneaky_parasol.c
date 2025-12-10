@@ -56,7 +56,7 @@ Npc* parasol_get_npc(void) {
                     if (fabs(ret->pos.y - playerStatus->pos.y) - 1.0 > 0.0) {
                         ret = nullptr;
                     } else {
-                        angle = clamp_angle(atan2(playerStatus->pos.x, playerStatus->pos.z, ret->pos.x, ret->pos.z));
+                        angle = clamp_angle(papermario_atan2(playerStatus->pos.x, playerStatus->pos.z, ret->pos.x, ret->pos.z));
                         if (fabs(angle - player_get_side_angle()) > 30.0) {
                             ret = nullptr;
                         }

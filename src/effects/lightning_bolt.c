@@ -258,14 +258,14 @@ void lightning_bolt_appendGfx(void* effect) {
     for (i = 0; i < ARRAY_COUNT(data->boltVertexPosX); i++) {
         if (i == 0) {
             edgeLength = 8.0f;
-            edgeAngle = -atan2(data->boltVertexPosY[1], -data->boltVertexPosX[1], data->boltVertexPosY[0], -data->boltVertexPosX[0]);
+            edgeAngle = -papermario_atan2(data->boltVertexPosY[1], -data->boltVertexPosX[1], data->boltVertexPosY[0], -data->boltVertexPosX[0]);
         } else {
             edgeLength = 8.0f;
             if (i == ARRAY_COUNT(data->boltVertexPosX) - 1) {
                 edgeAngle = -90.0f;
             } else {
-                nextAngle = -atan2(data->boltVertexPosY[i + 1], -data->boltVertexPosX[i + 1], data->boltVertexPosY[i], -data->boltVertexPosX[i]);
-                prevAngle = -atan2(data->boltVertexPosY[i], -data->boltVertexPosX[i], data->boltVertexPosY[i - 1], -data->boltVertexPosX[i - 1]);
+                nextAngle = -papermario_atan2(data->boltVertexPosY[i + 1], -data->boltVertexPosX[i + 1], data->boltVertexPosY[i], -data->boltVertexPosX[i]);
+                prevAngle = -papermario_atan2(data->boltVertexPosY[i], -data->boltVertexPosX[i], data->boltVertexPosY[i - 1], -data->boltVertexPosX[i - 1]);
                 if (prevAngle - nextAngle > 180.0f) {
                     nextAngle += 360.0f;
                 } else if (prevAngle - nextAngle < -180.0f) {

@@ -151,7 +151,7 @@ void player_input_to_move_vector(f32* outAngle, f32* outMagnitude) {
         magnitude = maxRadius;
     }
 
-    angle = clamp_angle(atan2(0.0f, 0.0f, stickAxisX, stickAxisY) + gCameras[CAM_DEFAULT].curYaw);
+    angle = clamp_angle(papermario_atan2(0.0f, 0.0f, stickAxisX, stickAxisY) + gCameras[CAM_DEFAULT].curYaw);
     if (magnitude == 0.0f) {
         angle = playerStatus->targetYaw;
     }
@@ -173,7 +173,7 @@ void game_input_to_move_vector(f32* outAngle, f32* outMagnitude) {
         magnitude = maxRadius;
     }
 
-    angle = clamp_angle(atan2(0.0f, 0.0f, stickX, stickY) + gCameras[CAM_DEFAULT].curYaw);
+    angle = clamp_angle(papermario_atan2(0.0f, 0.0f, stickX, stickY) + gCameras[CAM_DEFAULT].curYaw);
     if (magnitude == 0.0f) {
         angle = playerStatus->targetYaw;
     }

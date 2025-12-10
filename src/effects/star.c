@@ -100,7 +100,7 @@ EffectInstance* star_main(s32 type, f32 startX, f32 startY, f32 startZ, f32 endX
         part->starAngleVel = 20.0f;
     }
 
-    part->trailAngle = part->starAngle = atan2(0.0f, 0.0f, -part->vel.y, -projVel);
+    part->trailAngle = part->starAngle = papermario_atan2(0.0f, 0.0f, -part->vel.y, -projVel);
     part->timeLeft = length / speed;
     part->projVel = -projVel;
     guTranslate(&part->trailMatrices[0], part->pos.x, part->pos.y, part->pos.z);
@@ -164,7 +164,7 @@ void star_update(EffectInstance* effect) {
         if (data->bounceTime != 0.0f) {
             data->vel.y += -0.5;
             data->starAngle += data->starAngleVel;
-            data->trailAngle = atan2(0.0f, 0.0f, -data->vel.y, data->projVel);
+            data->trailAngle = papermario_atan2(0.0f, 0.0f, -data->vel.y, data->projVel);
         }
     }
 

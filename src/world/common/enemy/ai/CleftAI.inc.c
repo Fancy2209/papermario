@@ -41,7 +41,7 @@ s32 N(CleftAI_CanSeePlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDete
 
     playerX = gPlayerStatusPtr->pos.x;
     playerZ = gPlayerStatusPtr->pos.z;
-    if (fabsf(get_clamped_angle_diff(angle, atan2(npc->pos.x, npc->pos.z, playerX, playerZ))) > 75.0) {
+    if (fabsf(get_clamped_angle_diff(angle, papermario_atan2(npc->pos.x, npc->pos.z, playerX, playerZ))) > 75.0) {
         seesPlayer = false;
     }
     if (fabsf(npc->pos.y - gPlayerStatusPtr->pos.y) >= 40.0f) {
@@ -91,7 +91,7 @@ void N(CleftAI_PreAmbush)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
 
     npc->duration--;
     if (npc->duration <= 0) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
+        npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
         enable_npc_shadow(npc);
         npc->curAnim = enemy->animList[10];
         npc->duration = 8;
@@ -104,7 +104,7 @@ void N(CleftAI_Ambush)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
 
     npc->duration--;
     if (npc->duration <= 0) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
+        npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
         npc->collisionHeight = 26;
         npc->collisionDiameter = 24;
         script->AI_TEMP_STATE = AI_STATE_CLEFT_FIND_PLAYER_INIT;
@@ -127,7 +127,7 @@ void N(CleftAI_FindPlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDetec
     EffectInstance* var;
 
     if (basic_ai_check_player_dist(volume, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 0)) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
+        npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
         script->AI_TEMP_STATE = AI_STATE_CLEFT_CHASE_INIT;
     } else {
         npc->duration--;
@@ -158,7 +158,7 @@ void N(CleftAI_RevUp)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolu
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
+    npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
     if (npc->duration % 3 == 0) {
         fx_walking_dust(2, npc->pos.x, npc->pos.y, npc->pos.z + 2.0f, 0, 0);
     }
@@ -235,13 +235,13 @@ void N(CleftAI_ReturnHome)(Evt* script, MobileAISettings* aiSettings, EnemyDetec
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     if (basic_ai_check_player_dist(volume, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 0)) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
+        npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
         script->AI_TEMP_STATE = AI_STATE_CLEFT_CHASE_INIT;
     } else if (dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z) <= npc->moveSpeed) {
         npc->duration = 10;
         script->AI_TEMP_STATE = AI_STATE_CLEFT_DISGUISE_INIT;
     } else if (npc->turnAroundYawAdjustment == 0) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
+        npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
     }
 }

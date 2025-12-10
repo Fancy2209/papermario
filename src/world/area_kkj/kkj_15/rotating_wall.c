@@ -8,13 +8,13 @@ API_CALLABLE(N(UpdateRotatingPartyPositions)) {
     f32 mag;
 
     mag = dist2D(50.0f, -200.0f, script->varTable[7], script->varTable[8]);
-    angle = atan2(50.0f, -200.0f, script->varTable[7], script->varTable[8]);
+    angle = papermario_atan2(50.0f, -200.0f, script->varTable[7], script->varTable[8]);
     angle = clamp_angle(angle - var);
     gPlayerStatus.pos.x = 50.0f + mag * sin_deg(angle);
     gPlayerStatus.pos.z = -200.0f - mag * cos_deg(angle);
 
     mag = dist2D(50.0f, -200.0f, script->varTable[9], script->varTable[10]);
-    angle = atan2(50.0f, -200.0f, script->varTable[9], script->varTable[10]);
+    angle = papermario_atan2(50.0f, -200.0f, script->varTable[9], script->varTable[10]);
     angle = clamp_angle(angle - var);
     partner->pos.x = 50.0f + mag * sin_deg(angle);
     partner->pos.z = -200.0f - mag * cos_deg(angle);

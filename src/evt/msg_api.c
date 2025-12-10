@@ -107,10 +107,10 @@ s32 _show_message(Evt* script, s32 isInitialCall, s32 mode) {
         if (speakerNpc != (Npc*) NPC_PLAYER) {
             if (mode == SHOW_MESSAGE_SPEAK_TO_NPC) {
                 listenerYaw = &targetNpc->yaw;
-                angle = atan2(speakerNpc->pos.x, speakerNpc->pos.z, targetNpc->pos.x, targetNpc->pos.z);
+                angle = papermario_atan2(speakerNpc->pos.x, speakerNpc->pos.z, targetNpc->pos.x, targetNpc->pos.z);
             } else {
                 listenerYaw = &playerStatus->targetYaw;
-                angle = atan2(speakerNpc->pos.x, speakerNpc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+                angle = papermario_atan2(speakerNpc->pos.x, speakerNpc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
             }
 
             reverseAngle = clamp_angle(angle + 180.0f);

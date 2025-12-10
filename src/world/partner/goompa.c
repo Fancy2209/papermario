@@ -59,7 +59,7 @@ API_CALLABLE(N(Update)) {
             N(TweesterPhysicsPtr)->prevFlags = goompa->flags;
             N(TweesterPhysicsPtr)->radius = fabsf(dist2D(goompa->pos.x, goompa->pos.z,
                                                     entity->pos.x, entity->pos.z));
-            N(TweesterPhysicsPtr)->angle = atan2(entity->pos.x, entity->pos.z, goompa->pos.x, goompa->pos.z);
+            N(TweesterPhysicsPtr)->angle = papermario_atan2(entity->pos.x, entity->pos.z, goompa->pos.x, goompa->pos.z);
             N(TweesterPhysicsPtr)->angularVel = 6.0f;
             N(TweesterPhysicsPtr)->liftoffVelPhase = 50.0f;
             N(TweesterPhysicsPtr)->countdown = 120;

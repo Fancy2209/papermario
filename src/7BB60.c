@@ -540,7 +540,7 @@ void collision_main_lateral(void) {
                     gCameras[CAM_DEFAULT].targetPos.z = playerStatus->pos.z;
                     if (playerStatus->curAlpha != 128) {
                         collision_check_player_intersecting_world(PLAYER_COLLISION_0, 0,
-                            atan2(0.0f, 0.0f, playerStatus->pushVel.x, playerStatus->pushVel.z));
+                            papermario_atan2(0.0f, 0.0f, playerStatus->pushVel.x, playerStatus->pushVel.z));
                     }
                 }
             }
@@ -643,7 +643,7 @@ void collision_main_lateral(void) {
                     }
                     playerX = xBump + (speed * sinTheta);
                     playerZ = zBump - (speed * cosTheta);
-                    yaw = atan2(0.0f, 0.0f, playerX, playerZ);
+                    yaw = papermario_atan2(0.0f, 0.0f, playerX, playerZ);
                     speed = sqrtf(SQ(playerX) + SQ(playerZ));
                     if (playerStatus->flags & (PS_FLAG_FALLING | PS_FLAG_JUMPING)) {
                         if (speed > playerStatus->runSpeed) {

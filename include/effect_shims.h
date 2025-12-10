@@ -53,7 +53,7 @@ void shim_sfx_play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY
 #define clamp_angle shim_clamp_angle
 #define sin_deg shim_sin_deg
 #define cos_deg shim_cos_deg
-#define atan2 shim_atan2
+#define papermario_atan2 shim_atan2
 #define npc_raycast_down_sides shim_npc_raycast_down_sides
 #define load_effect shim_load_effect
 #define sqrtf shim_sqrtf

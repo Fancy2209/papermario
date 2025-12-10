@@ -109,7 +109,7 @@ void N(PiranhaPlantAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
             }
 
             sp38 = sqrtf(SQ(npc->pos.x) + SQ(npc->pos.z));
-            yaw2 = atan2(0.0f, 0.0f, npc->pos.x, npc->pos.z);
+            yaw2 = papermario_atan2(0.0f, 0.0f, npc->pos.x, npc->pos.z);
 
             if (sp38 < 305.0) {
                 npc->pos.x = 0.0f;
@@ -170,7 +170,7 @@ void N(PiranhaPlantAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
                     sp38 = dist2D(npc->pos.x, npc->pos.z, territory->pointX, territory->pointZ);
 
                     if (territory->sizeX < sp38) {
-                        terSize = atan2(territory->pointX, territory->pointZ, npc->pos.x, npc->pos.z);
+                        terSize = papermario_atan2(territory->pointX, territory->pointZ, npc->pos.x, npc->pos.z);
                         npc->pos.x = territory->pointX;
                         npc->pos.z = territory->pointZ;
                         add_vec2D_polar(&npc->pos.x, &npc->pos.z, territory->sizeX, terSize);
@@ -211,7 +211,7 @@ void N(PiranhaPlantAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
             }
         }
 
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
+        npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
         ai_enemy_play_sound(npc, SOUND_BURROW_SURFACE, 0);
         npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_HIT];
         npc->duration = enemy->varTable[10];

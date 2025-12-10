@@ -80,10 +80,13 @@ extern "C" {
 
 /* byte string operations */
 
-
+#ifndef PLATFORM_N64
+#include <strings.h>
+#else
 extern void     bcopy(const void *, void *, int);
 extern int      bcmp(const void *, const void *, int);
 extern void     bzero(void *, int);
+#endif
 
 /* Printf */
 

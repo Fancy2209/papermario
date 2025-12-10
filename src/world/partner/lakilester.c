@@ -142,7 +142,7 @@ API_CALLABLE(N(Update)) {
             N(TweesterPhysicsPtr)->state++;
             N(TweesterPhysicsPtr)->prevFlags = lakilester->flags;
             N(TweesterPhysicsPtr)->radius = fabsf(dist2D(lakilester->pos.x, lakilester->pos.z, entity->pos.x, entity->pos.z));
-            N(TweesterPhysicsPtr)->angle = atan2(entity->pos.x, entity->pos.z, lakilester->pos.x, lakilester->pos.z);
+            N(TweesterPhysicsPtr)->angle = papermario_atan2(entity->pos.x, entity->pos.z, lakilester->pos.x, lakilester->pos.z);
             N(TweesterPhysicsPtr)->angularVel = 6.0f;
             N(TweesterPhysicsPtr)->liftoffVelPhase = 50.0f;
             N(TweesterPhysicsPtr)->countdown = 120;
@@ -216,7 +216,7 @@ void N(get_movement_from_input)(f32* outAngle, f32* outSpeed) {
     PartnerStatus* partnerStatus = &gPartnerStatus;
     f32 stickX = partnerStatus->stickX;
     f32 stickY = partnerStatus->stickY;
-    f32 moveAngle = clamp_angle(atan2(0.0f, 0.0f, stickX, -stickY) + gCameras[CAM_DEFAULT].curYaw);
+    f32 moveAngle = clamp_angle(papermario_atan2(0.0f, 0.0f, stickX, -stickY) + gCameras[CAM_DEFAULT].curYaw);
     f32 moveSpeed = 0.0f;
 
     if (dist2D(0.0f, 0.0f, stickX, -stickY) >= 1.0) {
@@ -756,7 +756,7 @@ API_CALLABLE(N(UseAbility)) {
                 yaw += 90.0f;
             }
 
-            lakilester->yaw = atan2(lakilester->pos.x, lakilester->pos.z, lakilester->moveToPos.x, lakilester->moveToPos.z);
+            lakilester->yaw = papermario_atan2(lakilester->pos.x, lakilester->pos.z, lakilester->moveToPos.x, lakilester->moveToPos.z);
             lakilester->duration = 12;
             lakilester->curAnim = ANIM_WorldLakilester_Walk;
             lakilester->jumpVel = 8.0f;
@@ -887,7 +887,7 @@ API_CALLABLE(N(UseAbility)) {
             lakilester->yaw = yaw;
             dist = dist2D(playerStatus->pos.x, playerStatus->pos.z,
                             lakilester->moveToPos.x, lakilester->moveToPos.z);
-            lakilester->yaw = atan2(playerStatus->pos.x, playerStatus->pos.z,
+            lakilester->yaw = papermario_atan2(playerStatus->pos.x, playerStatus->pos.z,
                             lakilester->moveToPos.x, lakilester->moveToPos.z);
             lakilester->duration = 14;
             lakilester->jumpScale = 1.2f;
@@ -1032,7 +1032,7 @@ API_CALLABLE(N(PutAway)) {
             }
             lakilester->jumpScale = 1.2f;
             lakilester->moveSpeed = sp2C / lakilester->duration;
-            lakilester->yaw = atan2(playerStatus->pos.x, playerStatus->pos.z,
+            lakilester->yaw = papermario_atan2(playerStatus->pos.x, playerStatus->pos.z,
                                  lakilester->moveToPos.x, lakilester->moveToPos.z);
             suggest_player_anim_allow_backward(ANIM_Mario1_BeforeJump);
             N(PutAwayState)++;
@@ -1207,7 +1207,7 @@ API_CALLABLE(N(EnterMap)) {
 
             script->functionTemp[1] = script->varTable[4];
             temp_s0_2 = (f32*)&script->varTable[5];
-            temp_f2 = atan2(lakilester->pos.x, lakilester->pos.z, script->varTable[1], script->varTable[3]);
+            temp_f2 = papermario_atan2(lakilester->pos.x, lakilester->pos.z, script->varTable[1], script->varTable[3]);
             lakilester->yaw = temp_f2;
 
             if (script->varTable[12]) {

@@ -51,7 +51,7 @@ static s32 N(MontyMoleAI_CanAttack)(Evt* script, EnemyDetectVolume* territory, f
     if (clamp_angle(get_clamped_angle_diff(cam->curYaw, npc->yaw)) < 180.0) {
         angle = 90.0f;
     }
-    if (fabsf(get_clamped_angle_diff(angle, atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z))) > 60.0) {
+    if (fabsf(get_clamped_angle_diff(angle, papermario_atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z))) > 60.0) {
         retVal = false;
     }
     // check for overlap with player
@@ -96,7 +96,7 @@ static void N(MontyMoleAI_Wander)(Evt* script, MobileAISettings* aiSettings, Ene
             enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z,
             npc->pos.x, npc->pos.z,
             enemy->territory->wander.wanderSize.x, enemy->territory->wander.wanderSize.z)) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
+        npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
     }
     dummyNpc.pos.x = npc->pos.x;
     dummyNpc.pos.y = npc->pos.y + 1.0f;
@@ -136,7 +136,7 @@ static void N(MontyMoleAI_PreSurface)(Evt* script, MobileAISettings* aiSettings,
 
     npc->flags &= ~NPC_FLAG_INVISIBLE;
     ai_enemy_play_sound(npc, SOUND_BURROW_SURFACE, 0);
-    npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
+    npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
     npc->curAnim = ANIM_MontyMole_Anim10; // emerge from ground
     npc->duration = 10;
     script->AI_TEMP_STATE = AI_STATE_MOLE_SURFACE;

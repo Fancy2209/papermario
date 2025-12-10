@@ -338,7 +338,7 @@ API_CALLABLE(VirtualEntityMoveTo) {
         goalPosZ = virtualEntity->goalPos.z;
 
         virtualEntity->moveTime = moveTime;
-        virtualEntity->moveAngle = atan2(xTemp, zTemp, goalPosX, goalPosZ);
+        virtualEntity->moveAngle = papermario_atan2(xTemp, zTemp, goalPosX, goalPosZ);
         virtualEntity->moveDist = dist2D(xTemp, zTemp, goalPosX, goalPosZ);
 
         if (virtualEntity->moveTime == 0.0f) {
@@ -402,7 +402,7 @@ API_CALLABLE(VirtualEntityJumpTo) {
         goalPosZ = virtualEntity->goalPos.z;
 
         virtualEntity->moveTime = moveTime;
-        virtualEntity->moveAngle = atan2(xTemp, zTemp, goalPosX, goalPosZ);
+        virtualEntity->moveAngle = papermario_atan2(xTemp, zTemp, goalPosX, goalPosZ);
         virtualEntity->moveDist = dist2D(xTemp, zTemp, goalPosX, goalPosZ);
 
         if (virtualEntity->moveTime == 0.0f) {

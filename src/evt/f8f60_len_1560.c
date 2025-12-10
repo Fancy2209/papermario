@@ -53,7 +53,7 @@ API_CALLABLE(GetAngleBetweenNPCs) {
 
     Npc* a = resolve_npc(script, aID);
     Npc* b = resolve_npc(script, bID);
-    evt_set_variable(script, outVar, atan2(a->pos.x, a->pos.z, b->pos.x, b->pos.z));
+    evt_set_variable(script, outVar, papermario_atan2(a->pos.x, a->pos.z, b->pos.x, b->pos.z));
 
     return ApiStatus_DONE2;
 }
@@ -66,7 +66,7 @@ API_CALLABLE(GetAngleToNPC) {
     Bytecode outVar = *args++;
 
     Npc* npc = resolve_npc(script, npcID);
-    evt_set_variable(script, outVar, atan2(playerStatus->pos.x, playerStatus->pos.z, npc->pos.x, npc->pos.z));
+    evt_set_variable(script, outVar, papermario_atan2(playerStatus->pos.x, playerStatus->pos.z, npc->pos.x, npc->pos.z));
 
     return ApiStatus_DONE2;
 }
@@ -79,7 +79,7 @@ API_CALLABLE(GetAngleToPlayer) {
     Bytecode outVar = *args++;
 
     Npc* npc = resolve_npc(script, npcID);
-    evt_set_variable(script, outVar, atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z));
+    evt_set_variable(script, outVar, papermario_atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z));
 
     return ApiStatus_DONE2;
 }

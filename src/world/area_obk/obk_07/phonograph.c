@@ -551,12 +551,12 @@ API_CALLABLE(N(UpdateGuardBooPos)) {
         if (dist2D(x, z, guardPosX, booPosZ) < speed) {
             npc->pos.x = guardPosX;
             npc->pos.z = booPosZ;
-            npc->yaw = atan2(x, z, dancePosX, booPosZ);
+            npc->yaw = papermario_atan2(x, z, dancePosX, booPosZ);
             script->varTable[10] = 0;
             script->varTable[11] = 1;
             return ApiStatus_DONE2;
         } else {
-            npc->yaw = atan2(x, z, guardPosX, booPosZ);
+            npc->yaw = papermario_atan2(x, z, guardPosX, booPosZ);
             npc_move_heading(npc, speed, npc->yaw);
         }
         return ApiStatus_DONE2;
@@ -570,7 +570,7 @@ API_CALLABLE(N(UpdateGuardBooPos)) {
             npc->pos.x = dancePosX;
             npc->pos.z = booPosZ;
         } else {
-            npc->yaw = atan2(x, z, dancePosX, booPosZ);
+            npc->yaw = papermario_atan2(x, z, dancePosX, booPosZ);
             npc_move_heading(npc, speed, npc->yaw);
         }
     }
@@ -582,9 +582,9 @@ API_CALLABLE(N(UpdateGuardBooPos)) {
         if (dist2D(x, z, guardPosX, booPosZ) < speed) {
             npc->pos.x = guardPosX;
             npc->pos.z = booPosZ;
-            npc->yaw = atan2(x, z, dancePosX, -136.0f);
+            npc->yaw = papermario_atan2(x, z, dancePosX, -136.0f);
         } else {
-            npc->yaw = atan2(x, z, guardPosX, booPosZ);
+            npc->yaw = papermario_atan2(x, z, guardPosX, booPosZ);
             npc_move_heading(npc, speed, npc->yaw);
         }
     }

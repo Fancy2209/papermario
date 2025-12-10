@@ -265,7 +265,7 @@ API_CALLABLE(NpcMoveTo) {
     }
 
     npc = script->functionTempPtr[1];
-    npc->yaw = atan2(npc->pos.x, npc->pos.z, npc->moveToPos.x, npc->moveToPos.z);
+    npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, npc->moveToPos.x, npc->moveToPos.z);
     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
 
     if (npc->moveSpeed < 4.0) {
@@ -319,7 +319,7 @@ ApiStatus _npc_jump_to(Evt* script, s32 isInitialCall, s32 snapYaw) {
         dist = dist2D(npc->pos.x, npc->pos.z, npc->moveToPos.x, npc->moveToPos.z);
         *yaw = 0.0f;
         if (dist > 2.0) {
-            *yaw = atan2(npc->pos.x, npc->pos.z, npc->moveToPos.x, npc->moveToPos.z);
+            *yaw = papermario_atan2(npc->pos.x, npc->pos.z, npc->moveToPos.x, npc->moveToPos.z);
             if (snapYaw == 0) {
                 npc->yaw = *yaw;
             }
@@ -391,7 +391,7 @@ API_CALLABLE(NpcFlyTo) {
         *outX = npc->pos.x;
         *outY = npc->pos.y;
         *outZ = npc->pos.z;
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, npc->moveToPos.x, npc->moveToPos.z);
+        npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, npc->moveToPos.x, npc->moveToPos.z);
         dist = dist2D(npc->pos.x, npc->pos.z, npc->moveToPos.x, npc->moveToPos.z);
         npc->planarFlyDist = dist;
 
@@ -529,7 +529,7 @@ API_CALLABLE(NpcFacePlayer) {
         }
 
         *initialYaw = npc->yaw;
-        *deltaYaw = atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z) - *initialYaw;
+        *deltaYaw = papermario_atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z) - *initialYaw;
         script->functionTempPtr[0] = npc;
         *turnTime = evt_get_variable(script, *args++);
         npc->duration = 0;
@@ -577,7 +577,7 @@ API_CALLABLE(NpcFaceNpc) {
         }
 
         *initialYaw = turningNpc->yaw;
-        *deltaYaw = atan2(turningNpc->pos.x, turningNpc->pos.z, targetNpc->pos.x, targetNpc->pos.z) - *initialYaw;
+        *deltaYaw = papermario_atan2(turningNpc->pos.x, turningNpc->pos.z, targetNpc->pos.x, targetNpc->pos.z) - *initialYaw;
         script->functionTempPtr[0] = turningNpc;
         *turnTime = evt_get_variable(script, *args++);
         turningNpc->duration = 0;
@@ -832,7 +832,7 @@ API_CALLABLE(BringPartnerOut) {
         npc->pos.z = playerZ;
 
         npc->planarFlyDist = dist2D(playerX, npc->pos.z, targetX, targetZ);
-        npc->yaw = atan2(playerX, playerZ, targetX, targetZ);
+        npc->yaw = papermario_atan2(playerX, playerZ, targetX, targetZ);
         npc->duration = npc->planarFlyDist / npc->moveSpeed;
 
         if (npc->duration < 10) {
@@ -901,7 +901,7 @@ API_CALLABLE(PutPartnerAway) {
             partner->moveSpeed = 4.0f;
             partner->jumpScale = 2.6f;
             partner->planarFlyDist = dist2D(partnerX, partnerZ, targetX, targetZ);
-            partner->yaw = atan2(partnerX, partnerZ, targetX, targetZ);
+            partner->yaw = papermario_atan2(partnerX, partnerZ, targetX, targetZ);
             partner->duration = partner->planarFlyDist / partner->moveSpeed;
 
             if (partner->duration < 10) {

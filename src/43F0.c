@@ -564,7 +564,7 @@ f32 signF(f32 val) {
     return sign;
 }
 
-s32 round(f32 x) {
+s32 papermario_round(f32 x) {
     if (!(x >= 0.0f)) {
         return -(s32)(0.5 - x);
     } else {
@@ -609,7 +609,7 @@ f32 get_clamped_angle_diff(f32 a, f32 b) {
     return b - a;
 }
 
-f32 atan2(f32 startX, f32 startZ, f32 endX, f32 endZ) {
+f32 papermario_atan2(f32 startX, f32 startZ, f32 endX, f32 endZ) {
     f32 dx = endX - startX;
     f32 dz = endZ - startZ;
     f32 absXDiff = fabsf(dx);
@@ -618,7 +618,7 @@ f32 atan2(f32 startX, f32 startZ, f32 endX, f32 endZ) {
 
     if (absZDiff < absXDiff) {
         ret = (absZDiff / absXDiff) * 45.0f;
-        ret *= sAtanFactors[round(2.0f * ret)];
+        ret *= sAtanFactors[papermario_round(2.0f * ret)];
         if (dx >= 0.0f) {
             if (dz >= 0.0f) {
                 return ret + 90.0f;
@@ -636,7 +636,7 @@ f32 atan2(f32 startX, f32 startZ, f32 endX, f32 endZ) {
             return 0.0f;
         }
         ret = (absXDiff / absZDiff) * 45.0f;
-        ret *= sAtanFactors[round(2.0f * ret)];
+        ret *= sAtanFactors[papermario_round(2.0f * ret)];
         if (dz >= 0.0f) {
             if (dx >= 0.0f) {
                 return 180.0f - ret;
@@ -651,7 +651,7 @@ f32 atan2(f32 startX, f32 startZ, f32 endX, f32 endZ) {
 }
 
 f32 get_player_normal_yaw(void) {
-    return atan2(0, 0, gGameStatusPtr->playerGroundTraceNormal.x, gGameStatusPtr->playerGroundTraceNormal.z);
+    return papermario_atan2(0, 0, gGameStatusPtr->playerGroundTraceNormal.x, gGameStatusPtr->playerGroundTraceNormal.z);
 }
 
 f32 get_player_normal_pitch(void) {
@@ -659,7 +659,7 @@ f32 get_player_normal_pitch(void) {
     f32 traceNormalZ = gGameStatusPtr->playerGroundTraceNormal.z;
     f32 sqrt = sqrtf(SQ(traceNormalX) + SQ(traceNormalZ));
 
-    return atan2(0.0f, 0.0f, sqrt, -gGameStatusPtr->playerGroundTraceNormal.y);
+    return papermario_atan2(0.0f, 0.0f, sqrt, -gGameStatusPtr->playerGroundTraceNormal.y);
 }
 
 f32 dist2D(f32 ax, f32 ay, f32 bx, f32 by) {

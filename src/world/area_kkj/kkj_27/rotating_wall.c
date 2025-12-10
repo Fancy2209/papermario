@@ -9,7 +9,7 @@ API_CALLABLE(N(UpdateRotatingPlayerPosition)) {
     f32 mag;
 
     mag = dist2D(-250.0f, 0.0f, script->varTable[9], script->varTable[10]);
-    angle = atan2(-250.0f, 0.0f, script->varTable[9], script->varTable[10]);
+    angle = papermario_atan2(-250.0f, 0.0f, script->varTable[9], script->varTable[10]);
     angle = clamp_angle(angle - var);
     gPlayerStatus.pos.x = -250.0f + mag * sin_deg(angle);
     gPlayerStatus.pos.z = 0.0f - mag * cos_deg(angle);

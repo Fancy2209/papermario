@@ -5,7 +5,14 @@
 #include "common.h"
 #include "map.h"
 #include "enums.h"
+#ifdef PLATFORM_N64
 #include "stdlib/stdarg.h"
+#else
+#include <stdarg.h>
+#endif
+#ifndef PLATFORM_N64
+#include <math.h>
+#endif
 #include "libc/xstdio.h"
 
 f32 fabsf(f32 f);
@@ -266,8 +273,8 @@ f32 sin_deg(f32 x);
 f32 cos_deg(f32 x);
 f32 sin_rad(f32 x);
 f32 cos_rad(f32 x);
-s32 round(f32);
-f32 atan2(f32 startX, f32 startZ, f32 endX, f32 endZ);
+s32 papermario_round(f32);
+f32 papermario_atan2(f32 startX, f32 startZ, f32 endX, f32 endZ);
 f32 clamp_angle(f32 theta);
 s32 sign(s32 value);
 

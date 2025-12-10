@@ -61,13 +61,13 @@ void N(FlyingMagikoopaAI_15)(Evt* arg0, MobileAISettings* arg1, EnemyDetectVolum
         randomDist = rand_int(30) + 180.0;
         isCCW = false;
         if (is_point_outside_territory(enemy->territory->wander.wanderShape, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z, npc->pos.x, npc->pos.z, enemy->territory->wander.wanderSize.x, enemy->territory->wander.wanderSize.z)) {
-            npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z) - iterations;
+            npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z) - iterations;
             moveDist = dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
             if (randomDist > moveDist) {
                 randomDist = moveDist;
             }
         } else {
-            npc->yaw  = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
+            npc->yaw  = papermario_atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
             if (npc->yaw  < 180.0) {
                 baseYaw = (rand_int(10) + 90.0) - 5.0;
             } else {
@@ -161,7 +161,7 @@ void N(FlyingMagikoopaAI_17)(Evt* script, MobileAISettings* aiSettings, EnemyDet
 
     npc->duration++;
     if (npc->duration == (enemy->varTable[3] - 8)) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
+        npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
     }
     if (limitY <= npc->pos.y) {
         npc->pos.y = limitY;

@@ -3,6 +3,12 @@
 #define ASTRINGIFY_(x) #x
 #define ASTRINGIFY(x) ASTRINGIFY_(x)
 
+#ifdef PLATFORM_N64
+#define ASM_ALIGN(x) ".align " #x "\n"
+#else
+#define ASM_ALIGN(x) ".p2align " #x "\n"
+#endif
+
 #ifdef MODERN_COMPILER
 #  define PUSHSECTION(SECTION) ".pushsection " SECTION "\n"
 #  define POPSECTION ".popsection\n"
@@ -16,7 +22,7 @@
     __asm__( \
         ".globl " #SYMBOLNAME"\n" \
         PUSHSECTION(".data") \
-        ".align 3\n" \
+        ASM_ALIGN(3) \
         ".type " #SYMBOLNAME", @object\n" \
         #SYMBOLNAME":\n" \
         ".incbin \"ver/"ASTRINGIFY(VERSION)"/build/" FILENAME ".bin\"\n" \
@@ -32,7 +38,7 @@
     __asm__( \
         ".globl " #SYMBOLNAME"\n" \
         PUSHSECTION(".data") \
-        ".align 3\n" \
+        ASM_ALIGN(3) \
         ".type " #SYMBOLNAME", @object\n" \
         #SYMBOLNAME":\n" \
         ".incbin \"ver/"ASTRINGIFY(VERSION)"/build/" FILENAME ".bin\"\n" \
@@ -44,7 +50,7 @@
     __asm__( \
         ".globl " #SYMBOLNAME"\n" \
         PUSHSECTION(".data") \
-        ".align 3\n" \
+        ASM_ALIGN(3) \
         ".type " #SYMBOLNAME", @object\n" \
         #SYMBOLNAME":\n" \
         ".incbin \"ver/"ASTRINGIFY(VERSION)"/build/assets/"ASTRINGIFY(VERSION)"/" FILENAME "\"\n" \

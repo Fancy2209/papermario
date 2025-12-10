@@ -13,7 +13,7 @@ void N(set_script_owner_npc_anim)(Evt* script, MobileAISettings* aiSettings, Ene
 
     npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_PRE];
     npc->duration = enemy->varTable[2];
-    npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
+    npc->yaw = papermario_atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
     script->AI_TEMP_STATE = 13;
 }
 

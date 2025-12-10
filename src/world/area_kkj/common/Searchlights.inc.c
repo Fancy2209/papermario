@@ -45,7 +45,7 @@ API_CALLABLE(N(UnkPhysicsFunc)) {
 
         channel = COLLISION_IGNORE_ENTITIES | COLLIDER_FLAG_IGNORE_NPC | COLLIDER_FLAG_IGNORE_PLAYER | COLLIDER_FLAG_IGNORE_SHELL;
         if (npc_test_move_taller_with_slipping(channel, &x, &y, &z, r,
-                    atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z),
+                    papermario_atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z),
                     npc->collisionDiameter, npc->collisionHeight))
         {
             outVal = false;
@@ -124,7 +124,7 @@ API_CALLABLE(N(UpdateSearchlight)) {
 
         dist = dist2D(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
         if (npc_test_move_taller_with_slipping(0, &x, &y, &z, dist,
-                atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z),
+                papermario_atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z),
                 npc->collisionDiameter, npc->collisionHeight)) {
             outVal = 0;
         }
@@ -142,6 +142,6 @@ API_CALLABLE(N(GetAngleBetweenPoints)) {
     s32 Bx = evt_get_variable(script, *args++);
     s32 Bz = evt_get_variable(script, *args++);
 
-    evt_set_variable(script, outVar, atan2(Ax, Az, Bx, Bz));
+    evt_set_variable(script, outVar, papermario_atan2(Ax, Az, Bx, Bz));
     return ApiStatus_DONE2;
 }

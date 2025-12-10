@@ -72,7 +72,7 @@ API_CALLABLE(N(Update)) {
             N(TweesterPhysicsPtr)->state++;
             N(TweesterPhysicsPtr)->prevFlags = bow->flags;
             N(TweesterPhysicsPtr)->radius = fabsf(dist2D(bow->pos.x, bow->pos.z, entity->pos.x, entity->pos.z));
-            N(TweesterPhysicsPtr)->angle = atan2(entity->pos.x, entity->pos.z, bow->pos.x, bow->pos.z);
+            N(TweesterPhysicsPtr)->angle = papermario_atan2(entity->pos.x, entity->pos.z, bow->pos.x, bow->pos.z);
             N(TweesterPhysicsPtr)->angularVel = 6.0f;
             N(TweesterPhysicsPtr)->liftoffVelPhase = 50.0f;
             N(TweesterPhysicsPtr)->countdown = 120;
@@ -154,7 +154,7 @@ s32 N(check_for_treadmill_overlaps)(void) {
         return NO_COLLIDER;
     }
 
-    yaw = atan2(0.0f, 0.0f, playerStatus->pushVel.x, playerStatus->pushVel.z);
+    yaw = papermario_atan2(0.0f, 0.0f, playerStatus->pushVel.x, playerStatus->pushVel.z);
     x = playerStatus->pos.x;
     y = playerStatus->pos.y + (playerStatus->colliderHeight * 0.5f);
     z = playerStatus->pos.z;
@@ -262,7 +262,7 @@ API_CALLABLE(N(UseAbility)) {
             add_vec2D_polar(&bow->moveToPos.x, &bow->moveToPos.z, -2.0f, gCameras[gCurrentCameraID].curYaw);
             add_vec2D_polar(&bow->moveToPos.x, &bow->moveToPos.z, playerStatus->colliderDiameter * 0.5f, bow->yaw);
             bow->duration = 5;
-            bow->yaw = atan2(bow->pos.x, bow->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+            bow->yaw = papermario_atan2(bow->pos.x, bow->pos.z, playerStatus->pos.x, playerStatus->pos.z);
             set_action_state(ACTION_STATE_RIDE);
             suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
             script->USE_STATE++; // OUTTA_SIGHT_GATHER

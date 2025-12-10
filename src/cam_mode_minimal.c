@@ -21,12 +21,12 @@ void update_camera_minimal(Camera* camera) {
         camera->lookAt_eye.z = camera->lookAt_obj.z - (1000.0f / CamLengthScale);
     }
 
-    camera->curYaw = atan2(camera->lookAt_eye.x, camera->lookAt_eye.z, camera->lookAt_obj.x, camera->lookAt_obj.z);
+    camera->curYaw = papermario_atan2(camera->lookAt_eye.x, camera->lookAt_eye.z, camera->lookAt_obj.x, camera->lookAt_obj.z);
     dx = camera->lookAt_obj.x - camera->lookAt_eye.x;
     dy = camera->lookAt_obj.y - camera->lookAt_eye.y;
     dz = camera->lookAt_obj.z - camera->lookAt_eye.z;
 
-    camera->lookAt_yaw = -atan2(0.0f, 0.0f, dx, dz);
+    camera->lookAt_yaw = -papermario_atan2(0.0f, 0.0f, dx, dz);
     dx = sqrtf(SQ(dx) + SQ(dz));
-    camera->lookAt_pitch = atan2(0.0f, 0.0f, dy, -dx);
+    camera->lookAt_pitch = papermario_atan2(0.0f, 0.0f, dy, -dx);
 }
