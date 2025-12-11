@@ -35,7 +35,7 @@ EntityBlueprint Entity_Signpost = {
     .fpInit = nullptr,
     .updateEntityScript = Entity_Signpost_Script,
     .fpHandleCollision = nullptr,
-    {{ entity_model_Signpost_ROM_START, entity_model_Signpost_ROM_END }},
+    {{ 0, 0 }},
     .entityType = ENTITY_TYPE_SIGNPOST,
     .aabbSize = { 40, 50, 20 }
 };

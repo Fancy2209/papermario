@@ -62,7 +62,11 @@ enum {
     }
 
 #define ENTITY_ADDR(entity, type, data) (type)((s32)(entity->gfxBaseAddr) + ((s32)(data) & 0xFFFF))
+#ifdef PLATFORM_N64
 #define ENTITY_ROM(name) { entity_model_##name##_ROM_START, entity_model_##name##_ROM_END }
+#else
+#define ENTITY_ROM(name) { NULL, NULL }
+#endif
 
 #define BLOCK_GRID_SIZE 25
 

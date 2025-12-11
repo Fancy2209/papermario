@@ -45,9 +45,9 @@ StageList A(Stages) = {
 };
 
 #define PIRANHA_DMA_ENTRY(name) \
-    { world_model_anim_kzn_##name##_ROM_START,\
-      world_model_anim_kzn_##name##_ROM_END,\
-      world_model_anim_kzn_##name##_VRAM }
+    { 0,\
+      0,\
+      0 }
 
 DmaTable A(dmaTable)[] = {
     [VINE_ANIM_BOSS_IDLE]                   PIRANHA_DMA_ENTRY(00),

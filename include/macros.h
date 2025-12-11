@@ -536,7 +536,11 @@ typedef s32 Difficulty2D[AC_DIFFICULTY_LEN][2];
 #define DT (1.0)
 #endif
 
+#ifdef PLATFORM_N64
 #define DMA_COPY_SEGMENT(segment) dma_copy(segment##_ROM_START, segment##_ROM_END, segment##_VRAM)
+#else
+#define DMA_COPY_SEGMENT(segment)
+#endif
 
 #if defined(OLD_GCC) || __STDC_VERSION__ < 202311L
 typedef enum {

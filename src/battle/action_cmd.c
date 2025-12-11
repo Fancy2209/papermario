@@ -50,7 +50,7 @@ Difficulty2D actionCmdTableWaterBlock = { {6, 3}, {5, 3}, {4, 3}, {2, 3}, {1, 3}
 Difficulty1D actionCmdTableTidalWave = { 130, 120, 110, 100, 90, 80, 70, 60 };
 
 #define AC_TBL_ENTRY(name) \
-    action_cmd_ ## name ## _ROM_START, action_cmd_ ## name ## _ROM_END, action_cmd_ ## name ## _VRAM
+    0, 0, 0
 
 void* actionCommandDmaTable[] = {
     nullptr, nullptr, nullptr,

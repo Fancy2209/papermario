@@ -16,7 +16,7 @@ enum RewindArrowStates {
 };
 
 #ifdef SHIFT
-#define MSG_ROM_START (s32)msg_ROM_START
+#define MSG_ROM_START (s32)NULL
 #elif VERSION_JP
 #define MSG_ROM_START 0x1D40000
 #else
@@ -217,7 +217,7 @@ void load_font_data(Addr offset, u32 size, void* dest) {
 #else
 void load_font_data(Addr offset, u16 size, void* dest) {
 #endif
-    u8* base = charset_ROM_START + (s32) offset;
+    u8* base = NULL + (s32) offset;
 
     dma_copy(base, base + size, dest);
 }
@@ -803,16 +803,16 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         printer->stateFlags |= MSG_STATE_FLAG_800;
                         printer->delayFlags |= MSG_DELAY_FLAG_1;
                         printer->letterBackgroundImg = heap_malloc(((charset_postcard_png_width * charset_postcard_png_height) / 2));
-                        romAddr = charset_ROM_START + (s32)charset_postcard_OFFSET;
+                        romAddr = NULL + (s32)charset_postcard_OFFSET;
                         dma_copy(romAddr, romAddr + ((charset_postcard_png_width * charset_postcard_png_height) / 2), printer->letterBackgroundImg);
                         printer->letterBackgroundPal = heap_malloc(0x20);
-                        romAddr = charset_ROM_START + (s32)charset_postcard_pal_OFFSET;
+                        romAddr = NULL + (s32)charset_postcard_pal_OFFSET;
                         dma_copy(romAddr, romAddr + 0x20, printer->letterBackgroundPal);
                         printer->letterContentImg = heap_malloc(charset_letter_content_1_png_width * charset_letter_content_1_png_height);
-                        romAddr = charset_ROM_START + (s32) MsgLetterRasterOffsets[arg];
+                        romAddr = NULL + (s32) MsgLetterRasterOffsets[arg];
                         dma_copy(romAddr, romAddr + (charset_letter_content_1_png_width * charset_letter_content_1_png_height), printer->letterContentImg);
                         printer->letterContentPal = heap_malloc(0x200);
-                        romAddr = charset_ROM_START + (s32) MsgLetterPaletteOffsets[arg];
+                        romAddr = NULL + (s32) MsgLetterPaletteOffsets[arg];
                         dma_copy(romAddr, romAddr + 0x200, printer->letterContentPal);
                         break;
                     case MSG_STYLE_POPUP:
@@ -995,10 +995,10 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         offset = arg << 8 | argQ;
 
                         D_8015131C = D_80159B50;
-                        dma_copy(icon_ROM_START + gItemIconRasterOffsets[offset],
-                                icon_ROM_START + gItemIconRasterOffsets[offset] + 0x200, a2);
-                        romEnd = icon_ROM_START + gItemIconPaletteOffsets[offset] + 0x20;
-                        dma_copy(icon_ROM_START + gItemIconPaletteOffsets[offset],
+                        dma_copy(NULL + gItemIconRasterOffsets[offset],
+                                 NULL + gItemIconRasterOffsets[offset] + 0x200, a2);
+                        romEnd = NULL + gItemIconPaletteOffsets[offset] + 0x20;
+                        dma_copy(NULL + gItemIconPaletteOffsets[offset],
                                  romEnd, D_8015C7E0);
                         printer->curPrintDelay = printer->printDelayTime;
                         if (--arg1 <= 0) {

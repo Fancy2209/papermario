@@ -226,11 +226,11 @@ API_CALLABLE(N(ReadLetters)){
                     evt_set_variable(nullptr, GF_KMR20_ReadThankYouLetterFromKoopaVillage, true);
                 }
 
-                dma_copy(charset_ROM_START + (s32) N(LetterDmaOffsets)[0],
-                         charset_ROM_START + (s32) N(LetterDmaOffsets)[0] + sizeof(N(LetterBackgroundImg)),
+                dma_copy(NULL + (s32) N(LetterDmaOffsets)[0],
+                         NULL + (s32) N(LetterDmaOffsets)[0] + sizeof(N(LetterBackgroundImg)),
                          N(LetterBackgroundImg));
-                dma_copy(charset_ROM_START + (s32) N(LetterDmaOffsets)[1],
-                         charset_ROM_START + (s32) N(LetterDmaOffsets)[1] + sizeof(N(LetterBackgroundPal)),
+                dma_copy(NULL + (s32) N(LetterDmaOffsets)[1],
+                         NULL + (s32) N(LetterDmaOffsets)[1] + sizeof(N(LetterBackgroundPal)),
                          N(LetterBackgroundPal));
 
                 N(LetterImgData)[0].raster = N(LetterBackgroundImg);
@@ -240,11 +240,11 @@ API_CALLABLE(N(ReadLetters)){
                 N(LetterImgData)[0].format = G_IM_FMT_CI;
                 N(LetterImgData)[0].bitDepth = G_IM_SIZ_4b;
 
-                dma_copy(charset_ROM_START + (s32) N(LetterDmaOffsets)[(userIndex * 2) + 2],
-                         charset_ROM_START + (s32) N(LetterDmaOffsets)[(userIndex * 2) + 2] + sizeof(N(LetterPhotoImg)),
+                dma_copy(NULL + (s32) N(LetterDmaOffsets)[(userIndex * 2) + 2],
+                         NULL + (s32) N(LetterDmaOffsets)[(userIndex * 2) + 2] + sizeof(N(LetterPhotoImg)),
                          N(LetterPhotoImg));
-                dma_copy(charset_ROM_START + (s32) N(LetterDmaOffsets)[(userIndex * 2) + 3],
-                         charset_ROM_START + (s32) N(LetterDmaOffsets)[(userIndex * 2) + 3] + sizeof(N(N(LetterPhotoPal))),
+                dma_copy(NULL + (s32) N(LetterDmaOffsets)[(userIndex * 2) + 3],
+                         NULL + (s32) N(LetterDmaOffsets)[(userIndex * 2) + 3] + sizeof(N(N(LetterPhotoPal))),
                          N(N(LetterPhotoPal)));
 
                 N(LetterImgData)[1].raster = N(LetterPhotoImg);

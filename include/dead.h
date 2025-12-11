@@ -1,3 +1,4 @@
+#ifdef PLATFORM_N64
 #ifndef _DEAD_H_
 #define _DEAD_H_
 
@@ -345,6 +346,7 @@
 #define Entity_BrickBlock dead_Entity_BrickBlock
 #define Entity_SimpleSpring dead_Entity_SimpleSpring
 #define MakeTransformGroup dead_MakeTransformGroup
+#endif
 #endif
 
 #endif

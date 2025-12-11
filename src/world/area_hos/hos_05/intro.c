@@ -1476,8 +1476,12 @@ void N(worker_draw_story_graphics)(void) {
 
 #ifdef SHIFT
 // TODO this breaks stuff to enable it for the shift build
-// #define TAPE_OFFSET title_tape_ROM_START - title_bg_1_ROM_START
+// #define TAPE_OFFSET title_tape_ROM_START - 0
+#ifdef PLATFORM_N64
 #define TAPE_OFFSET 0x2A440
+#else
+#define TAPE_OFFSET 0
+#endif
 #else
 #define TAPE_OFFSET 0x2A440
 #endif
@@ -1503,14 +1507,14 @@ void N(load_story_image)(s32 loadBackImage, s32 imageIdx) {
 
     if (!loadBackImage) {
         dma_copy(
-            title_bg_1_ROM_START + imageIdx * (STORY_IMG_SIZE + PAL_256_SIZE),
-            title_bg_1_ROM_START + (imageIdx + 1) * (STORY_IMG_SIZE + PAL_256_SIZE),
+            NULL + imageIdx * (STORY_IMG_SIZE + PAL_256_SIZE),
+            NULL + (imageIdx + 1) * (STORY_IMG_SIZE + PAL_256_SIZE),
             N(StoryGraphicsPtr)->imgFront
         );
     } else {
         dma_copy(
-            title_bg_1_ROM_START + imageIdx * (STORY_IMG_SIZE + PAL_256_SIZE),
-            title_bg_1_ROM_START + (imageIdx + 1) * (STORY_IMG_SIZE + PAL_256_SIZE),
+            NULL + imageIdx * (STORY_IMG_SIZE + PAL_256_SIZE),
+            NULL + (imageIdx + 1) * (STORY_IMG_SIZE + PAL_256_SIZE),
             N(StoryGraphicsPtr)->imgBack
         );
     }
@@ -1554,8 +1558,8 @@ API_CALLABLE(N(InitializeStoryGraphicsData)) {
 
     // load the tape and bowser silhouette images
     tapeOffset = TAPE_OFFSET;
-    dmaStart = title_bg_1_ROM_START + tapeOffset;
-    dmaEnd = title_bg_1_ROM_START + tapeOffset + TAPE_IMG_SIZE;
+    dmaStart = NULL + tapeOffset;
+    dmaEnd = NULL + tapeOffset + TAPE_IMG_SIZE;
 
     dma_copy(dmaStart, dmaEnd + (BOWSER_IMG_SIZE + PAL_256_SIZE), N(StoryGraphicsPtr)->imgTape);
     N(StoryGraphicsPtr)->flipOrder = 0;

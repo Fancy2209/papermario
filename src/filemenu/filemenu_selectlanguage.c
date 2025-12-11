@@ -235,8 +235,8 @@ void filemenu_selectlanguage_init(MenuPanel* menu) {
 
     menu->initialized = 1;
     D_filemenu_8024F124 = 0;
-    dma_copy(titlemenu_flags_ROM_START, titlemenu_flags_ROM_END, D_802517E0[0]);
-    dma_copy(titlemenu_flags_ROM_START + 0x800, titlemenu_flags_ROM_END, D_802517E0[1]);
+    dma_copy(NULL, titlemenu_flags_ROM_END, D_802517E0[0]);
+    dma_copy(NULL + 0x800, titlemenu_flags_ROM_END, D_802517E0[1]);
     D_filemenu_8024F128 = 2;
 }
 
@@ -361,7 +361,7 @@ void filemenu_selectlanguage_update(MenuPanel* menu) {
         D_filemenu_8024F128 = 0;
     }
 
-    dma_copy(titlemenu_flags_ROM_START + (D_filemenu_8024F128 * 0x800), titlemenu_flags_ROM_END, D_802517E0[D_filemenu_8024F124]);
+    dma_copy(NULL + (D_filemenu_8024F128 * 0x800), titlemenu_flags_ROM_END, D_802517E0[D_filemenu_8024F124]);
 }
 
 void filemenu_selectlanguage_cleanup(MenuPanel* arg0) {

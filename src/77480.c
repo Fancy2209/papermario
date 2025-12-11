@@ -6,10 +6,10 @@
 #include "sprite/player.h"
 
 #ifdef SHIFT
-#define inspect_icon_VRAM inspect_icon_VRAM
-#define speech_bubble_VRAM speech_bubble_VRAM
-#define pulse_stone_VRAM pulse_stone_VRAM
-#define i_spy_VRAM i_spy_VRAM
+#define inspect_icon_VRAM 0
+#define speech_bubble_VRAM 0
+#define pulse_stone_VRAM 0
+#define i_spy_VRAM 0
 #else
 #define inspect_icon_VRAM (void*)0x802B7000
 #define speech_bubble_VRAM (void*)0x802B7000

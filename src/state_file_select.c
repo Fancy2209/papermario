@@ -28,15 +28,15 @@ extern u16 gFrameBuf2[];
 u16* fsFrameBuffers[] = { gFrameBuf0, gFrameBuf1, gFrameBuf2 };
 
 NUPiOverlaySegment D_8007798C = {
-    .romStart = filemenu_ROM_START,
-    .romEnd = filemenu_ROM_END,
-    .ramStart = filemenu_VRAM,
-    .textStart = filemenu_TEXT_START,
-    .textEnd = filemenu_TEXT_END,
-    .dataStart = filemenu_DATA_START,
-    .dataEnd = filemenu_RODATA_END,
-    .bssStart = filemenu_BSS_START,
-    .bssEnd = filemenu_BSS_END,
+    .romStart = NULL,
+    .romEnd = NULL,
+    .ramStart = NULL,
+    .textStart = NULL,
+    .textEnd = NULL,
+    .dataStart = NULL,
+    .dataEnd = NULL,
+    .bssStart = NULL,
+    .bssEnd = NULL,
 };
 
 u8 IntroMessageIdx = 0;

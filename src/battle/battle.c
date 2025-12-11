@@ -25,9 +25,9 @@ extern Battle* gCurrentBattlePtr;
 
 // standard battle area table entry
 #define BTL_AREA(id, jpName) { \
-    .dmaStart = battle_area_##id##_ROM_START, \
-    .dmaEnd = battle_area_##id##_ROM_END, \
-    .dmaDest = battle_area_##id##_VRAM, \
+    .dmaStart = NULL, \
+    .dmaEnd =   NULL, \
+    .dmaDest =  NULL, \
     .battles = &b_area_##id##_Formations, \
     .stages = &b_area_##id##_Stages, \
     .name = jpName, \
@@ -35,9 +35,9 @@ extern Battle* gCurrentBattlePtr;
 
 // extended battle area with a dmaTable, used by kzn2 for lava piranha animations
 #define BTL_AREA_DMA(id, jpName) { \
-    .dmaStart = battle_area_##id##_ROM_START, \
-    .dmaEnd = battle_area_##id##_ROM_END, \
-    .dmaDest = battle_area_##id##_VRAM, \
+    .dmaStart = NULL, \
+    .dmaEnd =   NULL, \
+    .dmaDest =  NULL, \
     .battles = &b_area_##id##_Formations, \
     .stages = &b_area_##id##_Stages, \
     .dmaTable = b_area_##id##_dmaTable, \
@@ -46,9 +46,9 @@ extern Battle* gCurrentBattlePtr;
 
 // auxiliary battle area for omo which contains only additional enemy data
 #define BTL_AREA_AUX(id, jpName) { \
-    .dmaStart = battle_area_##id##_ROM_START, \
-    .dmaEnd = battle_area_##id##_ROM_END, \
-    .dmaDest = battle_area_##id##_VRAM, \
+    .dmaStart = NULL, \
+    .dmaEnd =   NULL, \
+    .dmaDest =  NULL, \
     .name = jpName, \
 } \
 

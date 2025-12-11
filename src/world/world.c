@@ -34,7 +34,11 @@ Vec3f gEntityColliderNormals[] = {
 s32 pad_map_table[] = { 0, 0 };
 
 #ifdef SHIFT
+#ifdef PLATFORM_N64
 #define ASSET_TABLE_ROM_START (s32) mapfs_ROM_START
+#else
+#define ASSET_TABLE_ROM_START (s32) 0
+#endif
 #elif VERSION_JP
 #define ASSET_TABLE_ROM_START 0x1E00000
 #elif VERSION_PAL
@@ -309,9 +313,9 @@ s32 get_asset_offset(char* assetName, s32* compressedSize) {
 #define MAP(map) \
     .id = #map, \
     .settings = &map##_settings, \
-    .dmaStart = map##_ROM_START, \
-    .dmaEnd = map##_ROM_END, \
-    .dmaDest = map##_VRAM \
+    .dmaStart = 0, \
+    .dmaEnd = 0, \
+    .dmaDest = 0 \
 
 #define MAP_WITH_INIT(map) \
     MAP(map), \

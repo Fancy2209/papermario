@@ -6,6 +6,13 @@ project(papermario
 
 set(CMAKE_C_FLAGS -m32)
 set(CMAKE_CXX_FLAGS -m32)
+set(CMAKE_EXE_LINKER_FLAGS -m32)
+set(CMAKE_SYSTEM_LIBRARY_PATH /usr/lib32) # doesn't work AAAAAA
+set(USE_LUS OFF)
+
+if(USE_LUS)
+    add_subdirectory(port/libultraship ${CMAKE_BINARY_DIR}/libultraship)
+endif()
 
 #add_library(libultra_dc STATIC
 #    port/os/alBnkfNew.c
@@ -3676,7 +3683,7 @@ add_compile_definitions(
     GBI_FLOATS
     TARGET_DC
     _LANGUAGE_C
-    VERSION_US 
+    VERSION_US
     VERSION=us
     ENABLE_OPENGL
     F3DEX_GBI_2
@@ -3694,16 +3701,19 @@ include_directories(
 )
 
 add_compile_options(
-    -fno-strict-aliasing 
-    -Wall 
-    -Os 
-    -g3 
-    -Wall 
-    -Wextra 
-    -Wno-incompatible-pointer-types 
+    -fno-strict-aliasing
+    -Wall
+    -Os
+    -g3
+    -Wall
+    -Wextra
+    -Wno-incompatible-pointer-types
     -Wno-int-conversion
 )
 
 #target_link_libraries(papermario PRIVATE GL fast3d_dc libultra_dc nusys)
 target_link_libraries(papermario PRIVATE nusys)
 
+if(USE_LUS)
+    target_link_libraries(papermario PRIVATE libultraship)
+endif()

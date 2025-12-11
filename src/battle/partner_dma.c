@@ -16,9 +16,9 @@ extern ActorBlueprint battle_partner_twink;
 
 #define BATTLE_PARTNER_ENTRY(name, Y) \
     { \
-        (u32)battle_partner_##name##_ROM_START, \
-        (u32)battle_partner_##name##_ROM_END, \
-        battle_partner_##name##_VRAM, \
+        (u32)NULL, \
+        (u32)NULL, \
+        NULL, \
         &battle_partner_##name, \
         Y \
     }
