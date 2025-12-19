@@ -80,6 +80,7 @@ void nuGfxTaskMgrInit(void) {
         nuGfxTask[i].msgQ = &D_800DAC90;
         nuGfxTask[i].list.t.type = M_GFXTASK;
         nuGfxTask[i].list.t.flags = 0;
+#ifdef PLATFORM_N64
 #if VERSION_IQUE
         nuGfxTask[i].list.t.ucode_boot = (u64*) rspbootTextStart;
         nuGfxTask[i].list.t.ucode_boot_size = (u32) rspbootTextEnd - (u32) rspbootTextStart;
@@ -90,6 +91,7 @@ void nuGfxTaskMgrInit(void) {
 #endif
         nuGfxTask[i].list.t.ucode_size = SP_UCODE_SIZE;
         nuGfxTask[i].list.t.ucode_data_size = SP_UCODE_DATA_SIZE;
+#endif
         nuGfxTask[i].list.t.dram_stack = (u64*) &D_800DA040;
         nuGfxTask[i].list.t.dram_stack_size = SP_DRAM_STACK_SIZE8;
 #if !VERSION_PAL
@@ -110,11 +112,13 @@ void nuGfxTaskStart(Gfx* gfxList_ptr, u32 gfxListSize, u32 ucode, u32 flag) {
     nuGfxTask_ptr->list.t.data_ptr = (u64*) gfxList_ptr;
     nuGfxTask_ptr->list.t.data_size = gfxListSize;
     nuGfxTask_ptr->list.t.flags = flag >> 16;
+#ifdef PLATFORM_N64
     nuGfxTask_ptr->list.t.ucode = nuGfxUcode[ucode].ucode;
     nuGfxTask_ptr->list.t.ucode_data = nuGfxUcode[ucode].ucode_data;
 #if VERSION_PAL
     nuGfxTask_ptr->list.t.output_buff = nuGfxUcodeFifoPtr;
     nuGfxTask_ptr->list.t.output_buff_size = &nuGfxUcodeFifoPtr[nuGfxUcodeFifoSize/sizeof(u64)];
+#endif
 #endif
     nuGfxTask_ptr->flags = flag & 0xFFFF;
     nuGfxTask_ptr->framebuffer = nuGfxCfb_ptr;

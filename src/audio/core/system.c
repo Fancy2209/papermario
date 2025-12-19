@@ -70,6 +70,7 @@ void create_audio_system(void) {
         nuAuTasks[i].next = nullptr;
         nuAuTasks[i].msg = 0;
         nuAuTasks[i].list.t.type = M_AUDTASK;
+#ifdef PLATFORM_N64
 #if VERSION_IQUE
         nuAuTasks[i].list.t.ucode_boot = (u64*) rspbootTextStart;
         nuAuTasks[i].list.t.ucode_boot_size = (u32) rspbootTextEnd - (u32) rspbootTextStart;
@@ -80,6 +81,7 @@ void create_audio_system(void) {
         nuAuTasks[i].list.t.ucode = n_aspMainTextStart;
         nuAuTasks[i].list.t.ucode_data = n_aspMainDataStart;
         nuAuTasks[i].list.t.ucode_data_size = SP_UCODE_DATA_SIZE;
+#endif
         nuAuTasks[i].list.t.dram_stack = nullptr;
         nuAuTasks[i].list.t.dram_stack_size = 0;
         nuAuTasks[i].list.t.output_buff = nullptr;
