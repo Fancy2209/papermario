@@ -75,7 +75,16 @@ add_library(nusys STATIC
 
 
 add_executable(papermario
+    src/os/sins.c
+    src/os/coss.c
+    src/os/xlitob.c
+    src/os/xldtob.c
+    src/os/xprintf.c
+
     port/main.c
+    port/effects.c
+    port/gu.c
+    port/libultra_reimpl.c
 
     assets/us/imgfx/imgfx_data.c
 
@@ -3712,7 +3721,7 @@ add_compile_options(
 )
 
 #target_link_libraries(papermario PRIVATE GL fast3d_dc libultra_dc nusys)
-target_link_libraries(papermario PRIVATE nusys)
+target_link_libraries(papermario PRIVATE nusys m)
 
 if(USE_LUS)
     target_link_libraries(papermario PRIVATE libultraship)

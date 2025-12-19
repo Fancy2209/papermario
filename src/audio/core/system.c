@@ -33,8 +33,13 @@ AuSynDriver auSynDriver;
 u8 rspbootUcodeBuffer[0x100] ALIGNED(16);
 #endif
 
+#ifdef PLATFORM_N64
 extern u64 n_aspMainTextStart[];
 extern u64 n_aspMainDataStart[];
+#else
+u64 *n_aspMainTextStart = NULL;
+u64 *n_aspMainDataStart = NULL;
+#endif
 
 extern u8 AuHeapBase[AUDIO_HEAP_SIZE];
 

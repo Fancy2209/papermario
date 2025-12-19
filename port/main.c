@@ -1,8 +1,10 @@
 #include "common_structs.h"
 BackgroundHeader gBackgroundImage = {0};
-void nuBoot(void);
+void boot_main(void* data);
 
 int main(int argc, char** argv) {
-    nuBoot();
+    boot_main(NULL);
     return 0;
 }
+
+void decode_yay0(void* src, void* dst) { }

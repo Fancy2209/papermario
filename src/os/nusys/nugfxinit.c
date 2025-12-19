@@ -1,12 +1,14 @@
 #include "common.h"
 #include "nu/nusys.h"
 
+#if PLATFORM_N64
 extern u64 gspF3DZEX2_NoN_PosLight_fifoTextStart[];
 extern u64 gspF3DZEX2_NoN_PosLight_fifoDataStart[];
 
 NUUcode nugfx_ucode = {
     gspF3DZEX2_NoN_PosLight_fifoTextStart, gspF3DZEX2_NoN_PosLight_fifoDataStart,
 };
+#endif
 
 extern u16 gFrameBuf0[];
 extern u16 gFrameBuf1[];
@@ -68,7 +70,9 @@ void nuGfxInitEX2(void) {
 #if VERSION_PAL
     nuGfxSetUcodeFifo(D_800B91D0, NU_GFX_RDP_OUTPUTBUFF_SIZE);
 #endif
+#if PLATFORM_N64
     nuGfxUcode = &nugfx_ucode;
+#endif
     nuGfxTaskMgrInit();
 
     ptr = gfx;
