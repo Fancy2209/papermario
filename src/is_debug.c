@@ -23,6 +23,7 @@ void is_debug_init(void) {
 }
 #endif
 
+#ifdef PLATFORM_N64
 void printf(const char* fmt, ...) {
     va_list args;
     va_start(args, fmt);
@@ -43,6 +44,7 @@ void rmonPrintf(const char* fmt, ...) {
 
     _Printf(is_debug_print, nullptr, fmt, args);
 }
+#endif
 
 char* is_debug_print(char* arg0, const char* str, size_t count) {
     u32 data;

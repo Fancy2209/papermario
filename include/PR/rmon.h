@@ -30,7 +30,12 @@ extern "C" {
 #define RMON_STACKSIZE 0x1000
 
 extern void rmonMain( void * );
+#ifdef PLATFORM_N64
 extern void rmonPrintf( const char *, ... );
+#else
+#include <stdio.h>
+#define rmonPrintf printf
+#endif
 
 #ifdef _LANGUAGE_C_PLUS_PLUS
 }

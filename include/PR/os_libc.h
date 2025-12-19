@@ -91,8 +91,12 @@ extern void     bzero(void *, int);
 /* Printf */
 
 extern int		sprintf(char *s, const char *fmt, ...);
+#ifdef PLATFORM_N64
 extern void		osSyncPrintf(const char *fmt, ...);
-
+#else
+#include <stdio.h>
+#define osSyncPrintf printf
+#endif
 
 #endif  /* defined(_LANGUAGE_C) || defined(_LANGUAGE_C_PLUS_PLUS) */
 
