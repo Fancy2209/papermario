@@ -6,7 +6,7 @@
 // ----------------------------------------------------------------------------------
 void create_audio_system(void);
 //void nuAuPreNMIFuncSet(NUAuPreNMIFunc func);
-void nuAuMgr(void* arg);
+int nuAuMgr(void* arg);
 s32 nuAuDmaCallBack(s32 addr, s32 len, void *state, u8 useDma);
 //ALDMAproc nuAuDmaNew(NUDMAState** state);
 //void nuAuCleanDMABuffers(void);

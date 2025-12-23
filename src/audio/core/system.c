@@ -1,5 +1,6 @@
 #include "audio.h"
 #include "audio/core.h"
+#include <SDL3/SDL_thread.h>
 
 NOP_FIX
 
@@ -11,7 +12,8 @@ u8 nuAuTaskStop = NU_AU_TASK_RUN;
 u8 volatile AuSynUseStereo = true;
 
 BSS u16 AuInitialGlobalVolume;
-BSS OSThread nuAuMgrThread;
+//BSS OSThread nuAuMgrThread;
+BSS SDL_Thread *nuAuMgrThread;
 BSS char D_800A1108[0x408];
 BSS u64 AuStack[NU_AU_STACK_SIZE / sizeof(u64)];
 BSS Acmd* AlCmdListBuffers[3];
@@ -104,9 +106,10 @@ void create_audio_system(void) {
     osCreateMesgQueue(&nuAuDmaMesgQ, nuAuDmaMesgBuf, 50);
     nuAuPreNMIFunc = nuAuPreNMIProc;
     au_driver_init(&auSynDriver, &config);
-    au_engine_init(config.outputRate);
-    osCreateThread(&nuAuMgrThread, THREAD_ID_AUDIO, nuAuMgr, nullptr, &AuStack[NU_AU_STACK_SIZE / sizeof(u64)], NU_AU_MGR_THREAD_PRI);
-    osStartThread(&nuAuMgrThread);
+    //au_engine_init(config.outputRate);
+    //osCreateThread(&nuAuMgrThread, THREAD_ID_AUDIO, nuAuMgr, nullptr, &AuStack[NU_AU_STACK_SIZE / sizeof(u64)], NU_AU_MGR_THREAD_PRI);
+    //osStartThread(&nuAuMgrThread);
+    //nuAuMgrThread = SDL_CreateThread(nuAuMgr, "nuAuMgrThread", NULL);
 }
 
 void nuAuPreNMIFuncSet(NUAuPreNMIFunc func) {
@@ -116,7 +119,7 @@ void nuAuPreNMIFuncSet(NUAuPreNMIFunc func) {
     osSetIntMask(mask);
 }
 
-void nuAuMgr(void* arg) {
+int nuAuMgr(void* arg) {
     NUScClient auClient;
     OSMesgQueue auMesgQ;
     OSMesg auMsgBuf[NU_AU_MESG_MAX];
@@ -193,6 +196,7 @@ void nuAuMgr(void* arg) {
                 break;
         }
     }
+    return 0;
 }
 
 /// DMA callback for audio sample streaming; manages a DMA buffer cache.

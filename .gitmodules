@@ -1,4 +1,3 @@
-[submodule "port/SDL2"]
-	path = port/SDL2
+[submodule "port/SDL"]
+	path = port/SDL
 	url = https://github.com/libsdl-org/SDL.git
-	branch = SDL2

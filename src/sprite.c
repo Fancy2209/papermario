@@ -3,8 +3,8 @@
 
 #define MAX_SPRITE_ID 0xEA // todo generate this
 
-extern HeapNode heap_generalHead;
-extern HeapNode heap_spriteHead;
+extern HeapNode heap_generalHead[];
+extern HeapNode heap_spriteHead[];
 
 BSS s32 D_802DF520; // unused?
 BSS bool SpriteUseGeneralHeap;
@@ -131,7 +131,7 @@ PlayerSpriteSet PlayerSpriteSets[] = {
 void spr_init_quad_cache(void) {
     s32 i;
 
-    SpriteQuadCache = _heap_malloc(&heap_spriteHead, ARRAY_COUNT(SpriteQuadCacheInfo) * sizeof(*SpriteQuadCache));
+    SpriteQuadCache = _heap_malloc(&heap_spriteHead[0], ARRAY_COUNT(SpriteQuadCacheInfo) * sizeof(*SpriteQuadCache));
 
     for (i = 0; i < ARRAY_COUNT(SpriteQuadCacheInfo); i++) {
         SpriteQuadCacheInfo[i] = -1;
@@ -774,7 +774,7 @@ void spr_init_sprites(s32 playerSpriteSet) {
     s32 i;
 
     SpriteUseGeneralHeap = false;
-    _heap_create(&heap_spriteHead, SPRITE_HEAP_SIZE);
+    _heap_create(&heap_spriteHead[0], SPRITE_HEAP_SIZE);
     imgfx_init();
 
     for (i = 0; i < ARRAY_COUNT(PlayerSprites); i++) {
@@ -1203,13 +1203,13 @@ s32 spr_free_sprite(s32 spriteInstanceID) {
 
     if (NpcSpriteInstanceCount[spriteIndex] == 0) {
         NpcSpriteData[spriteIndex] = nullptr;
-        _heap_free(&heap_spriteHead, spriteData);
+        _heap_free(&heap_spriteHead[0], spriteData);
     }
 
     if (SpriteUseGeneralHeap) {
-        _heap_free(&heap_generalHead, compList);
+        _heap_free(&heap_generalHead[0], compList);
     } else {
-        _heap_free(&heap_spriteHead, compList);
+        _heap_free(&heap_spriteHead[0], compList);
     }
 
     SpriteInstances[spriteInstanceID].spriteIndex = 0;

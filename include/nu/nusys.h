@@ -15,6 +15,7 @@
 #define _NUSYS_H_
 
 #if defined(_LANGUAGE_C) || defined(_LANGUAGE_C_PLUS_PLUS)
+#include <SDL3/SDL_thread.h>
 
 #ifndef F3DEX_GBI
 #define	F3DEX_GBI
@@ -431,9 +432,9 @@ typedef struct st_Sched { /* Define the Scheduler structure. */
     /* 0x134 */ OSMesg	waitMsgBuf[NU_SC_MAX_MESGS];
 
     /* Define threads.*/
-    /* 0x154 */ OSThread	schedulerThread;	/* Main thread */
-    /* 0x304 */ OSThread	audioThread;		/* Audio */
-    /* 0x4B4 */ OSThread	graphicsThread;		/* Graphics */
+    /* 0x154 */ SDL_Thread	*schedulerThread;	/* Main thread */
+    /* 0x304 */ SDL_Thread	*audioThread;		/* Audio */
+    /* 0x4B4 */ SDL_Thread	*graphicsThread;		/* Graphics */
 
     /*  client list  */
     /* 0x664 */ NUScClient	*clientList;

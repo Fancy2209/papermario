@@ -101,7 +101,8 @@ extern OSMesgQueue __osPiAccessQueue;
 extern u32 __osPiAccessQueueEnabled;
 
 int __osPiDeviceBusy(void);
-void __osDevMgrMain(void *);
+//void __osDevMgrMain(void *);
+int __osDevMgrMain(void *);
 void __osPiCreateAccessQueue(void);
 void __osPiRelAccess(void);
 void __osPiGetAccess(void);

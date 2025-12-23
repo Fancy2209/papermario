@@ -42,7 +42,11 @@ BSS u32 nuGfxDisplay;
 BSS BGMPlayer* gBGMPlayerB;
 BSS s32 gEncounterState;
 BSS s16 gNpcCount;
+#ifdef PLATFORM_N64
 BSS u8 __osMaxControllers;
+#else
+BSS u8 __osMaxControllers = 6;
+#endif
 #if VERSION_IQUE || VERSION_PAL
 BSS OSMesg __osFlashMsgBuf;
 #endif

@@ -106,7 +106,7 @@ typedef struct ImgFXRenderMode {
 
 typedef ImgFXState ImgFXInstanceList[MAX_IMGFX_INSTANCES];
 
-extern HeapNode heap_spriteHead;
+extern HeapNode heap_spriteHead[0];
 
 BSS ImgFXWorkingTexture ImgFXCurrentTexture;
 BSS Vtx* ImgFXVtxBuffers[2];
@@ -245,10 +245,10 @@ void imgfx_init(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(ImgFXVtxBuffers); i++) {
-        ImgFXVtxBuffers[i] = _heap_malloc(&heap_spriteHead, ImgFXVtxBufferCapacity * sizeof(Vtx));
+        ImgFXVtxBuffers[i] = _heap_malloc(&heap_spriteHead[0], ImgFXVtxBufferCapacity * sizeof(Vtx));
     }
 
-    ImgFXInstances = (ImgFXInstanceList*)_heap_malloc(&heap_spriteHead, sizeof(ImgFXInstanceList));
+    ImgFXInstances = (ImgFXInstanceList*)_heap_malloc(&heap_spriteHead[0], sizeof(ImgFXInstanceList));
 
     for (i = 0; i < ARRAY_COUNT(*ImgFXInstances); i++) {
         imgfx_init_instance(&(*ImgFXInstances)[i]);

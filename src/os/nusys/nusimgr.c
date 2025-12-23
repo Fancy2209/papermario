@@ -1,14 +1,15 @@
 #include "common.h"
 #include "nu/nusys.h"
+#include <SDL3/SDL_thread.h>
 
 OSMesgQueue nuSiMesgQ;
 static OSMesg nuSiMesgBuf[8];
-static OSThread siMgrThread;
+static SDL_Thread *siMgrThread;
 static u64 siMgrStack[NU_SI_STACK_SIZE/sizeof(u64)];
 OSMesgQueue	nuSiMgrMesgQ;
 NUCallBackList* nuSiCallBackList = NULL;
 
-static void nuSiMgrThread(void* arg);
+static int nuSiMgrThread(void* arg);
 
 #if !VERSION_JP && !VERSION_IQUE
 u8 nuSiMgrInit(void) {
@@ -26,8 +27,9 @@ u8 nuSiMgrInit(void) {
         }
     }
 
-    osCreateThread(&siMgrThread, NU_SI_THREAD_ID, nuSiMgrThread, NULL, (siMgrStack + NU_SI_STACK_SIZE/sizeof(u64)), NU_SI_THREAD_PRI);
-    osStartThread(&siMgrThread);
+    //osCreateThread(&siMgrThread, NU_SI_THREAD_ID, nuSiMgrThread, NULL, (siMgrStack + NU_SI_STACK_SIZE/sizeof(u64)), NU_SI_THREAD_PRI);
+    //osStartThread(&siMgrThread);
+    //siMgrThread = SDL_CreateThread(nuSiMgrThread, "NU_SI_THREAD_ID", NULL);
     return pattern;
 }
 
@@ -53,11 +55,15 @@ void nuSiMgrStop(void) {
 }
 
 void nuSiMgrRestart(void) {
-    osStartThread(&siMgrThread);
+    //osStartThread(&siMgrThread);
 }
 #endif
 
+#ifdef PLATFORM_N64
 void nuSiMgrThread(void* arg) {
+#else
+int  nuSiMgrThread(void* arg) {
+#endif
     NUScClient siClient;
     OSMesg siMgrMesgBuf[NU_SI_MESG_MAX];
     NUSiCommonMesg* siMesg;
@@ -74,6 +80,7 @@ void nuSiMgrThread(void* arg) {
 
         siCallBackListPtr = &nuSiCallBackList;
 
+        if(siMesg != NULL)
         switch (siMesg->mesg) {
             case NU_SC_RETRACE_MSG:
                 while (*siCallBackListPtr) {
@@ -89,7 +96,7 @@ void nuSiMgrThread(void* arg) {
             case NU_SI_STOP_MGR_MSG:
                 osSendMesg(siMesg->rtnMesgQ, NULL, OS_MESG_BLOCK);
                 nuScResetClientMesgType(&siClient, 0);
-                osStopThread(NULL);
+                //osStopThread(NULL);
                 nuScResetClientMesgType(&siClient, NU_SC_RETRACE_MSG);
                 break;
             default:
@@ -111,6 +118,7 @@ void nuSiMgrThread(void* arg) {
                 break;
         }
     }
+    return 0;
 }
 
 #if VERSION_JP || VERSION_IQUE

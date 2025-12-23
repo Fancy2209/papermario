@@ -1,5 +1,6 @@
 #include "common.h"
 #include "nu/nusys.h"
+#include <SDL3/SDL_thread.h>
 
 u32 nuGfxCfbNum = 1;
 #if VERSION_PAL
@@ -13,7 +14,8 @@ u16 beforeFlag = 0;
 static NUScTask* nuGfxTask_ptr;
 static s16 taskDoneMsg;
 static s16 swapBufMsg;
-static OSThread GfxTaskMgrThread;
+//static OSThread GfxTaskMgrThread;
+static SDL_Thread *GfxTaskMgrThread;
 static u64 GfxTaskMgrStack[NU_GFX_TASKMGR_STACK_SIZE / sizeof(u64)] ALIGNED(16);
 static OSMesg D_8009E6D0[NU_GFX_TASKMGR_MESGS];
 
@@ -29,7 +31,7 @@ NUUcode* nuGfxUcode;
 volatile u32 nuGfxTaskSpool;
 OSMesgQueue D_800DAC90;
 
-void nuGfxTaskMgr(void* data) {
+int nuGfxTaskMgr(void* data) {
     NUScTask* task;
     s16* msg;
     OSIntMask mask;
@@ -63,6 +65,7 @@ void nuGfxTaskMgr(void* data) {
                 break;
         }
     }
+    return 0;
 }
 
 void nuGfxTaskMgrInit(void) {
@@ -72,8 +75,9 @@ void nuGfxTaskMgrInit(void) {
     swapBufMsg = NU_SC_SWAPBUFFER_MSG;
     nuGfxTaskSpool = 0;
     nuGfxDisplayOff();
-    osCreateThread(&GfxTaskMgrThread, NU_GFX_TASKMGR_THREAD_ID, nuGfxTaskMgr, NULL, &GfxTaskMgrStack[NU_GFX_TASKMGR_STACK_SIZE / sizeof(u64)], NU_GFX_TASKMGR_THREAD_PRI);
-    osStartThread(&GfxTaskMgrThread);
+    //osCreateThread(&GfxTaskMgrThread, NU_GFX_TASKMGR_THREAD_ID, nuGfxTaskMgr, NULL, &GfxTaskMgrStack[NU_GFX_TASKMGR_STACK_SIZE / sizeof(u64)], NU_GFX_TASKMGR_THREAD_PRI);
+    //osStartThread(&GfxTaskMgrThread);
+    //GfxTaskMgrThread = SDL_CreateThread(nuGfxTaskMgr, "nuGfxTaskMgr", NULL);
 
     for (i = 0; i < NU_GFX_TASK_NUM; i++) {
         nuGfxTask[i].next = &nuGfxTask[i + 1];

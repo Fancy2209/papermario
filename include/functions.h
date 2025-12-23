@@ -20,7 +20,7 @@ f64 fabs(f64 f);
 f32 cosine(s16 arg0);
 
 void nuBoot(void);
-void boot_idle(void* data);
+int boot_idle(void* data);
 void boot_main(void* data);
 
 void is_debug_init(void);

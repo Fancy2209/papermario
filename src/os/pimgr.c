@@ -3,8 +3,10 @@
 #include "PR/ultraerror.h"
 #include "PR/piint.h"
 #include "PR/rdb.h"
+#include <SDL3/SDL_thread.h>
 
-static OSThread piThread OSALIGNED(8);
+//static OSThread piThread OSALIGNED(8);
+static SDL_Thread *piThread OSALIGNED(8);
 static char piThreadStack[OS_PIM_STACKSIZE] OSALIGNED(16);
 
 static OSMesgQueue piEventQueue OSALIGNED(8);
@@ -51,13 +53,14 @@ void osCreatePiManager(OSPri pri, OSMesgQueue* cmdQ, OSMesg* cmdBuf, s32 cmdMsgC
 #ifdef BBPLAYER
     osCreateThread(&piThread, 0xCE5, __osDevMgrMain, &__osPiDevMgr, &piThreadStack[OS_PIM_STACKSIZE], pri);
 #else
-    osCreateThread(&piThread, 0, __osDevMgrMain, &__osPiDevMgr, &piThreadStack[OS_PIM_STACKSIZE], pri);
+    //osCreateThread(&piThread, 0, __osDevMgrMain, &__osPiDevMgr, &piThreadStack[OS_PIM_STACKSIZE], pri);
+    piThread = SDL_CreateThread(__osDevMgrMain, "osDevMgrMain", &__osPiDevMgr);
 #endif
-    osStartThread(&piThread);
+    //osStartThread(&piThread);
 
-    __osRestoreInt(savedMask);
+    //__osRestoreInt(savedMask);
 
-    if (oldPri != -1) {
-        osSetThreadPri(NULL, oldPri);
-    }
+    //if (oldPri != -1) {
+    //    osSetThreadPri(NULL, oldPri);
+    //}
 }

@@ -144,7 +144,12 @@ extern OSId		osGetThreadId(OSThread *);
 extern void		osSetThreadPri(OSThread *, OSPri);
 extern OSPri		osGetThreadPri(OSThread *);
 
-
+/*
+void osCreateThread(OSThread *t, OSId id, void (*entry)(void *), void *arg, void *sp, OSPri p)
+void osSetThreadPri(OSThread* thread, OSPri pri)
+void osStartThread(OSThread *t)
+void osStopThread(OSThread *t)
+*/
 #endif  /* defined(_LANGUAGE_C) || defined(_LANGUAGE_C_PLUS_PLUS) */
 
 #ifdef _LANGUAGE_C_PLUS_PLUS

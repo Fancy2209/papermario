@@ -205,6 +205,7 @@ extern NUScTask		nuAuTask;		/* Audio task buffer*/
 extern s16*		nuAuBuffer_ptr[];		/* Audio buffer */
 extern NUScClient	nuAuClient;
 //extern OSThread		nuAuMgrThread;
+extern SDL_Thread		*nuAuMgrThread;
 extern u32		nuAuFrameCounter;		/* Frame counter */
 extern ALHeap		nuAuHeap;		/* Heap structure */
 extern NUAuSeqPlayer	nuAuSeqPlayer[];

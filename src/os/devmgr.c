@@ -4,7 +4,7 @@
 
 extern u32 __osBbIsBb;
 
-void __osDevMgrMain(void* args) {
+int __osDevMgrMain(void* args) {
     OSIoMesg* mb;
     OSMesg em;
     OSMesg dummy;
@@ -132,4 +132,5 @@ void __osDevMgrMain(void* args) {
             }
         }
     }
+    return 0;
 }

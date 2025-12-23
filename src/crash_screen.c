@@ -4,9 +4,10 @@
 #include "libc/xstdio.h"
 #include "gcc/string.h"
 #include "include_asset.h"
+#include <SDL3/SDL_thread.h>
 
 typedef struct {
-    /* 0x000 */ OSThread thread;
+    /* 0x000 */ SDL_Thread *thread;
     /* 0x1B0 */ char stack[0x800];
     /* 0x9B0 */ OSMesgQueue queue;
     /* 0x9C8 */ OSMesg mesg;
@@ -296,7 +297,7 @@ OSThread* crash_screen_get_faulted_thread(void) {
     return nullptr;
 }
 
-void crash_screen_thread_entry(void* unused) {
+int crash_screen_thread_entry(void* unused) {
     OSMesg mesg;
     OSThread* faultedThread;
 
@@ -308,10 +309,11 @@ void crash_screen_thread_entry(void* unused) {
         faultedThread = crash_screen_get_faulted_thread();
     } while (faultedThread == nullptr);
 
-    osStopThread(faultedThread);
+    //osStopThread(faultedThread);
     crash_screen_draw(faultedThread);
 
     while (true) {}
+    return 0;
 }
 
 void crash_screen_set_draw_info(u16* frameBufPtr, s16 width, s16 height) {
@@ -325,9 +327,11 @@ void crash_screen_init(void) {
     gCrashScreen.height = 16;
     gCrashScreen.frameBuf = (u16*)((osMemSize | 0xA0000000) - ((SCREEN_WIDTH * SCREEN_HEIGHT) * 2));
     osCreateMesgQueue(&gCrashScreen.queue, &gCrashScreen.mesg, 1);
-    osCreateThread(&gCrashScreen.thread, THREAD_ID_CRASH, crash_screen_thread_entry, nullptr,
-                   gCrashScreen.stack + sizeof(gCrashScreen.stack), 0x80);
-    osStartThread(&gCrashScreen.thread);
+    //osCreateThread(&gCrashScreen.thread, THREAD_ID_CRASH, crash_screen_thread_entry, nullptr,
+    //               gCrashScreen.stack + sizeof(gCrashScreen.stack), 0x80);
+    //osStartThread(&gCrashScreen.thread);
+    //gCrashScreen.thread = SDL_CreateThread(crash_screen_thread_entry, "crash_screen_thread_entry", NULL);
+    gCrashScreen.thread = NULL;
 }
 
 // unused

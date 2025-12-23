@@ -8,11 +8,9 @@ set(CMAKE_C_FLAGS -m32)
 set(CMAKE_CXX_FLAGS -m32)
 set(CMAKE_EXE_LINKER_FLAGS -m32)
 set(CMAKE_SYSTEM_LIBRARY_PATH /usr/lib32) # doesn't work AAAAAA
-set(USE_LUS OFF)
+set(SDL_X11 OFF)
 
-if(USE_LUS)
-    add_subdirectory(port/libultraship ${CMAKE_BINARY_DIR}/libultraship)
-endif()
+add_subdirectory(port/SDL ${CMAKE_BINARY_DIR}/SDL)
 
 #add_library(libultra_dc STATIC
 #    port/os/alBnkfNew.c
@@ -3722,7 +3720,4 @@ add_compile_options(
 
 #target_link_libraries(papermario PRIVATE GL fast3d_dc libultra_dc nusys)
 target_link_libraries(papermario PRIVATE nusys m)
-
-if(USE_LUS)
-    target_link_libraries(papermario PRIVATE libultraship)
-endif()
+target_link_libraries(papermario PRIVATE SDL3::SDL3)

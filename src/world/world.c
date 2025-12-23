@@ -311,11 +311,13 @@ s32 get_asset_offset(char* assetName, s32* compressedSize) {
 #define AREA(area, jp_name) { ARRAY_COUNT(area##_maps), area##_maps, "area_" #area, jp_name }
 
 #ifdef PLATFORM_N64
+#define MAP(map) \
     .id = #map, \
     .settings = &map##_settings, \
     .dmaStart = map##_ROM_START, \
     .dmaEnd = map##_ROM_END, \
     .dmaDest = map##_VRAM \
+
 #else
 #define MAP(map) \
     .id = #map, \
@@ -323,6 +325,7 @@ s32 get_asset_offset(char* assetName, s32* compressedSize) {
     .dmaStart = 0, \
     .dmaEnd = 0, \
     .dmaDest = 0 \
+
 #endif
 
 #define MAP_WITH_INIT(map) \

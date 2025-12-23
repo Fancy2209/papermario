@@ -1,5 +1,6 @@
 #include "common.h"
 #include "nu/nusys.h"
+#include <SDL3/SDL_thread.h>
 
 NUSched nusched;
 NUScPreNMIFunc nuScPreNMIFunc = NULL;
@@ -13,9 +14,9 @@ char nusys_version[] = "NuSystem2.05";
 
 u32 nuScRetraceCounter = (u32) nusys_version;
 
-void nuScEventHandler(void);
-void nuScExecuteAudio(void);
-void nuScExecuteGraphics(void);
+int nuScEventHandler(void);
+int nuScExecuteAudio(void);
+int nuScExecuteGraphics(void);
 void nuScEventBroadcast(NUScMsg* msg);
 void nuScWaitTaskReady(NUScTask* task);
 
@@ -58,17 +59,21 @@ void nuScCreateScheduler(u8 videoMode, u8 numFields) {
     osSetEventMesg(OS_EVENT_DP,     &nusched.rdpMQ, (OSMesg) 0x29C);
     osSetEventMesg(OS_EVENT_PRENMI, &nusched.retraceMQ, (OSMesg) 0x29D);
 
-    osCreateThread(&nusched.schedulerThread, 19, (void(*)) nuScEventHandler,    &nusched,
-                   nuScStack + NU_SC_STACK_SIZE / sizeof(u64),         NU_SC_HANDLER_PRI);
-    osStartThread(&nusched.schedulerThread);
+    //osCreateThread(&nusched.schedulerThread, 19, (void(*)) nuScEventHandler,    &nusched,
+    //               nuScStack + NU_SC_STACK_SIZE / sizeof(u64),         NU_SC_HANDLER_PRI);
+    //osStartThread(&nusched.schedulerThread);
 
-    osCreateThread(&nusched.audioThread,     18, (void(*)) nuScExecuteAudio,    &nusched,
-                   nuScAudioStack + NU_SC_STACK_SIZE / sizeof(u64),    NU_SC_AUDIO_PRI);
-    osStartThread(&nusched.audioThread);
+    //osCreateThread(&nusched.audioThread,     18, (void(*)) nuScExecuteAudio,    &nusched,
+    //               nuScAudioStack + NU_SC_STACK_SIZE / sizeof(u64),    NU_SC_AUDIO_PRI);
+    //osStartThread(&nusched.audioThread);
 
-    osCreateThread(&nusched.graphicsThread,  17, (void(*)) nuScExecuteGraphics, &nusched,
-                   nuScGraphicsStack + NU_SC_STACK_SIZE / sizeof(u64), NU_SC_GRAPHICS_PRI);
-    osStartThread(&nusched.graphicsThread);
+    //osCreateThread(&nusched.graphicsThread,  17, (void(*)) nuScExecuteGraphics, &nusched,
+    //               nuScGraphicsStack + NU_SC_STACK_SIZE / sizeof(u64), NU_SC_GRAPHICS_PRI);
+    //osStartThread(&nusched.graphicsThread);
+
+    //nusched.schedulerThread = SDL_CreateThread((void(*)) nuScEventHandler, "nusched.schedulerThread", &nusched);
+    //nusched.audioThread = SDL_CreateThread((void(*)) nuScExecuteAudio, "nusched.audioThread", &nusched);
+    nusched.graphicsThread = SDL_CreateThread((void(*)) nuScExecuteGraphics, "nusched.graphicsThread", &nusched);
 }
 
 OSMesgQueue* nuScGetAudioMQ(void) {
@@ -79,7 +84,7 @@ OSMesgQueue* nuScGetGfxMQ(void) {
     return &nusched.graphicsRequestMQ;
 }
 
-void nuScEventHandler(void) {
+int nuScEventHandler(void) {
     OSMesg  msg;
     s32     beforeResetFrame;
 
@@ -119,6 +124,7 @@ void nuScEventHandler(void) {
                 break;
         }
     }
+    return 0;
 }
 
 void nuScAddClient(NUScClient* c, OSMesgQueue* mq, NUScMsg msgType) {
@@ -172,14 +178,14 @@ void nuScEventBroadcast(NUScMsg* msg) {
     NUScClient* clientList = nusched.clientList;
 
     while (clientList != NULL) {
-        if (clientList->msgType & *msg) {
+        if (msg && (clientList->msgType & *msg)) {
             osSendMesg(clientList->msgQ, msg, OS_MESG_NOBLOCK);
         }
         clientList = clientList->next;
     }
 }
 
-void nuScExecuteAudio(void) {
+int nuScExecuteAudio(void) {
     NUScTask* gfxTask;
     NUScTask* audioTask;
     OSMesg msg;
@@ -225,9 +231,10 @@ void nuScExecuteAudio(void) {
 
         osSendMesg(audioTask->msgQ, audioTask->msg, OS_MESG_BLOCK);
     }
+    return 0;
 }
 
-void nuScExecuteGraphics(void) {
+int nuScExecuteGraphics(void) {
     OSMesg msg;
     NUScTask* gfxTask;
     OSIntMask mask;
@@ -268,17 +275,19 @@ void nuScExecuteGraphics(void) {
         }
         osSendMesg(gfxTask->msgQ, (OSMesg*) gfxTask, OS_MESG_BLOCK);
     }
+    return 0;
 }
 
 void nuScWaitTaskReady(NUScTask* task) {
     NUScClient client;
-    void* fb = task->framebuffer;
+    //void* fb = task->framebuffer;
 
     if(nusched.frameBufferNum == 1) {
         return;
     }
 
-    while (osViGetCurrentFramebuffer() == fb || osViGetNextFramebuffer() == fb) {
+    //while (osViGetCurrentFramebuffer() == fb || osViGetNextFramebuffer() == fb) {
+    while (1) {
         nuScAddClient(&client, &nusched.waitMQ, NU_SC_RETRACE_MSG);
         osRecvMesg(&nusched.waitMQ, NULL, OS_MESG_BLOCK);
         nuScRemoveClient(&client);

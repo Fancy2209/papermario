@@ -3,7 +3,7 @@
 #ifndef PLATFORM_N64
 BSS HeapNode heap_generalHead[GENERAL_HEAP_SIZE];
 BSS HeapNode heap_spriteHead[SPRITE_HEAP_SIZE];
-BSS HeapNode heap_battleHead;
+BSS HeapNode heap_battleHead[BATTLE_HEAP_SIZE];
 #else
 BSS u8 heap_generalHead[GENERAL_HEAP_SIZE];
 BSS u8 heap_spriteHead[SPRITE_HEAP_SIZE];

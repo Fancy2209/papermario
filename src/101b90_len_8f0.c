@@ -19,8 +19,8 @@
 #endif
 
 extern bool SpriteUseGeneralHeap;
-extern HeapNode heap_generalHead;
-extern HeapNode heap_spriteHead;
+extern HeapNode heap_generalHead[];
+extern HeapNode heap_spriteHead[];
 
 BSS s32 spr_asset_entry[2];
 BSS s32 PlayerRasterLoadDescBuffer[101]; //NOTE: maximum rasters supported for a single player sprite is 101
@@ -97,14 +97,14 @@ SpriteAnimData* spr_load_sprite(s32 idx, s32 isPlayerSprite, s32 useTailAlloc) {
     data = general_heap_malloc(compressedSize);
     nuPiReadRom(base + spr_asset_entry[0], data, compressedSize);
 
-    ptr1 = (s32*)data;
+    ptr1 = (s32*)data; // TODO: Fix loading this
     // skip 4 bytes: 'YAY0' signature
     ptr1++;
 
     if (useTailAlloc) {
-        animData = _heap_malloc_tail(&heap_spriteHead, *ptr1);
+        animData = _heap_malloc_tail(&heap_spriteHead[0], *ptr1);
     } else {
-        animData = _heap_malloc(&heap_spriteHead, *ptr1);
+        animData = _heap_malloc(&heap_spriteHead[0], *ptr1);
     }
     decode_yay0(data, animData);
     general_heap_free(data);
@@ -169,7 +169,7 @@ void spr_init_player_raster_cache(s32 cacheSize, s32 maxRasterSize) {
     SpriteDataHeader[0] += SPRITE_ROM_START;
     SpriteDataHeader[1] += SPRITE_ROM_START;
     SpriteDataHeader[2] += SPRITE_ROM_START;
-    raster = _heap_malloc(&heap_spriteHead, maxRasterSize * cacheSize);
+    raster = _heap_malloc(&heap_spriteHead[0], maxRasterSize * cacheSize);
 
     for (i = 0; i < ARRAY_COUNT(PlayerRasterCache); i++) {
         PlayerRasterCache[i].raster = raster;
@@ -353,7 +353,7 @@ void spr_load_npc_extra_anims(SpriteAnimData* header, u32* extraAnimList) {
         }
     }
 
-    _heap_realloc(&heap_spriteHead, header, (s32)writePos - (s32)header);
+    _heap_realloc(&heap_spriteHead[0], header, (s32)writePos - (s32)header);
 }
 
 SpriteComponent** spr_allocate_components(s32 count) {
@@ -370,11 +370,11 @@ SpriteComponent** spr_allocate_components(s32 count) {
     totalSize = (count * sizeof(SpriteComponent)) + listSize;
 
     if (SpriteUseGeneralHeap) {
-        listStart = _heap_malloc(&heap_generalHead, totalSize);
+        listStart = _heap_malloc(&heap_generalHead[0], totalSize);
         listPos = listStart;
         component = (SpriteComponent*) listPos;
     } else {
-        listStart = _heap_malloc(&heap_spriteHead, totalSize);
+        listStart = _heap_malloc(&heap_spriteHead[0], totalSize);
         listPos = listStart;
         component = (SpriteComponent*) listPos;
     }
