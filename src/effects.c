@@ -15,11 +15,11 @@ extern Addr gEffectGlobals;
 
 #define FX_ENTRY(name, gfx_name) { \
     .entryPoint = name##_main, \
-    .dmaStart = NULL, \
-    .dmaEnd = NULL, \
-    .dmaDest = NULL, \
-    .graphicsDmaStart = NULL, \
-    .graphicsDmaEnd = NULL, \
+    .dmaStart = effect_##name##_ROM_START, \
+    .dmaEnd = effect_##name##_ROM_END, \
+    .dmaDest = effect_##name##_VRAM, \
+    .graphicsDmaStart = gfx_name##_ROM_START, \
+    .graphicsDmaEnd = gfx_name##_ROM_END, \
 }
 
 #include "effects/effect_table.c"
@@ -50,7 +50,7 @@ void clear_effect_data(void) {
     }
 
     osUnmapTLBAll();
-    osMapTLB(EFFECT_GLOBALS_TLB_IDX, OS_PM_4K, 0, (s32)&gEffectGlobals & 0xFFFFFF, -1, -1);
+    osMapTLB(EFFECT_GLOBALS_TLB_IDX, OS_PM_4K, effect_globals_VRAM, (s32)&gEffectGlobals & 0xFFFFFF, -1, -1);
     DMA_COPY_SEGMENT(effect_globals);
 }
 

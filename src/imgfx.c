@@ -106,7 +106,7 @@ typedef struct ImgFXRenderMode {
 
 typedef ImgFXState ImgFXInstanceList[MAX_IMGFX_INSTANCES];
 
-extern HeapNode heap_spriteHead[0];
+extern HeapNode heap_spriteHead[];
 
 BSS ImgFXWorkingTexture ImgFXCurrentTexture;
 BSS Vtx* ImgFXVtxBuffers[2];
@@ -1193,7 +1193,7 @@ void imgfx_mesh_make_grid(ImgFXState* state) {
 }
 
 ImgFXAnimHeader* imgfx_load_anim(ImgFXState* state) {
-    u8* romStart = (s32) ImgFXAnimOffsets[state->ints.anim.type] + NULL;
+    u8* romStart = (s32) ImgFXAnimOffsets[state->ints.anim.type] + imgfx_data_ROM_START;
     ImgFXAnimHeader* anim = &ImgFXAnimHeaders[state->arrayIdx];
 
     if (state->curAnimOffset != romStart) {
@@ -1227,7 +1227,7 @@ ImgFXAnimHeader* imgfx_load_anim(ImgFXState* state) {
         state->gfxBufs[0] = heap_malloc(anim->gfxCount * sizeof(Gfx));
         state->gfxBufs[1] = heap_malloc(anim->gfxCount * sizeof(Gfx));
 
-        romStart = NULL + (s32)anim->gfxOffset;
+        romStart = imgfx_data_ROM_START + (s32)anim->gfxOffset;
         romEnd = romStart + anim->gfxCount * sizeof(Gfx);
         dma_copy(romStart, romEnd, state->gfxBufs[0]);
         dma_copy(romStart, romEnd, state->gfxBufs[1]);
@@ -1309,11 +1309,11 @@ void imgfx_mesh_anim_update(ImgFXState* state) {
 
     // find the current + next keyframe vertex data
     curKeyframe = heap_malloc(header->vtxCount * sizeof(ImgFXVtx));
-    romStart = (u8*)((s32)NULL + (s32) header->keyframesOffset + curKeyIdx * header->vtxCount * sizeof(ImgFXVtx));
+    romStart = (u8*)((s32)imgfx_data_ROM_START + (s32) header->keyframesOffset + curKeyIdx * header->vtxCount * sizeof(ImgFXVtx));
     dma_copy(romStart, romStart + header->vtxCount * sizeof(ImgFXVtx), curKeyframe);
     if (keyframeInterval > 1) {
         nextKeyframe = heap_malloc(header->vtxCount * sizeof(*nextKeyframe));
-        romStart = (u8*)((s32)NULL + (s32) header->keyframesOffset + nextKeyIdx * header->vtxCount * sizeof(ImgFXVtx));
+        romStart = (u8*)((s32)imgfx_data_ROM_START + (s32) header->keyframesOffset + nextKeyIdx * header->vtxCount * sizeof(ImgFXVtx));
         dma_copy(romStart, romStart + header->vtxCount * sizeof(ImgFXVtx), nextKeyframe);
     }
 

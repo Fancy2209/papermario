@@ -16,15 +16,15 @@ u16* pause_frameBuffers[] = { gFrameBuf0, gFrameBuf1, gFrameBuf2 };
 extern ShapeFile gMapShapeData;
 
 NUPiOverlaySegment PauseOverlaySegment = {
-    .romStart = 0,
-    .romEnd = 0,
-    .ramStart = 0,
-    .textStart = 0,
-    .textEnd = 0,
-    .dataStart = 0,
-    .dataEnd = 0,
-    .bssStart = 0,
-    .bssEnd = 0,
+    .romStart = pause_ROM_START,
+    .romEnd = pause_ROM_END,
+    .ramStart = pause_VRAM,
+    .textStart = pause_TEXT_START,
+    .textEnd = pause_TEXT_END,
+    .dataStart = pause_DATA_START,
+    .dataEnd = pause_RODATA_END,
+    .bssStart = pause_BSS_START,
+    .bssEnd = pause_BSS_END,
 };
 
 #if VERSION_PAL

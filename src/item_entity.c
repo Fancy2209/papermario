@@ -325,7 +325,7 @@ void item_entity_load(ItemEntity* item) {
                         entry->data = &gHudElementCacheBuffer[*gHudElementCacheSize];
 
                         ASSERT(*gHudElementCacheSize + size < 0x11000);
-                        nuPiReadRom((s32)NULL + raster, entry->data, size);
+                        nuPiReadRom((s32)icon_ROM_START + raster, entry->data, size);
                         *gHudElementCacheSize += size;
                         if (gGameStatusPtr->context == CONTEXT_WORLD) {
                             *pos = i;
@@ -358,7 +358,7 @@ void item_entity_load(ItemEntity* item) {
                         entry->id = palette;
                         entry->data = &gHudElementCacheBuffer[*gHudElementCacheSize];
                         ASSERT(*gHudElementCacheSize + 0x20 < 0x11000);
-                        nuPiReadRom((s32)NULL + palette, entry->data, 0x20);
+                        nuPiReadRom((s32)icon_ROM_START + palette, entry->data, 0x20);
                         *gHudElementCacheSize += 0x20;
                         if (gGameStatusPtr->context == CONTEXT_WORLD) {
                             *pos = i;

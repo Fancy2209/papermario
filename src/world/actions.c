@@ -140,11 +140,7 @@ AnimID* PeachDisguiseExtraAnims[] = {
     [PEACH_DISGUISE_CLUBBA] ClubbaDisguiseExtraAnims
 };
 
-#ifdef PLATFORM_N64
 #define ACTION_FILE(name) world_action_##name##_ROM_START, world_action_##name##_ROM_END
-#else
-#define ACTION_FILE(name) 0, 0
-#endif
 
 Action PlayerActionsTable[] = {
     [ACTION_STATE_IDLE]                 { action_update_idle, ACTION_FILE(idle), true },
@@ -198,7 +194,7 @@ s32 use_consumable(s32 invSlot) {
 
     D_8010CD20 = invSlot;
     invSlot = gPlayerData.invItems[invSlot];
-    dma_copy(UseItemDmaArgs.dmaStart, UseItemDmaArgs.dmaEnd, NULL);
+    dma_copy(UseItemDmaArgs.dmaStart, UseItemDmaArgs.dmaEnd, world_use_item_VRAM);
     script = start_script(UseItemDmaArgs.main, EVT_PRIORITY_1, 0);
     script->varTable[10] = invSlot;
     return script->id;

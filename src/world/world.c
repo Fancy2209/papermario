@@ -34,11 +34,7 @@ Vec3f gEntityColliderNormals[] = {
 s32 pad_map_table[] = { 0, 0 };
 
 #ifdef SHIFT
-#ifdef PLATFORM_N64
 #define ASSET_TABLE_ROM_START (s32) mapfs_ROM_START
-#else
-#define ASSET_TABLE_ROM_START (s32) 0
-#endif
 #elif VERSION_JP
 #define ASSET_TABLE_ROM_START 0x1E00000
 #elif VERSION_PAL

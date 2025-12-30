@@ -113,17 +113,17 @@ typedef struct BattleMoveEntry {
 
 #define BTL_MOVE(name, script) \
 { \
-    .romStart   = NULL, \
-    .romEnd     = NULL, \
-    .vramStart  = NULL, \
+    .romStart   = battle_move_##name##_ROM_START, \
+    .romEnd     = battle_move_##name##_ROM_END, \
+    .vramStart  = battle_move_##name##_VRAM, \
     .mainScript = &battle_move_##name##_##script \
 }
 
 #define BTL_ITEM(name) \
 { \
-    .romStart   = NULL, \
-    .romEnd     = NULL, \
-    .vramStart  = NULL, \
+    .romStart   = name##_ROM_START, \
+    .romEnd     = name##_ROM_END, \
+    .vramStart  = name##_VRAM, \
     .mainScript = &battle_item_##name##_##EVS_UseItem \
 }
 

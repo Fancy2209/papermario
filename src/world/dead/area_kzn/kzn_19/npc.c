@@ -46,9 +46,9 @@ INCLUDE_PAL("world/lava_piranha/vine.pal", dead_kzn_19_lava_piranha_vine_pal);
 #endif
 
 #define PIRANHA_DMA_ENTRY(name) \
-    (s32) 0 + DEAD_ROM_OFFSET,\
-    (s32) 0 + DEAD_ROM_OFFSET,\
-    (s32) 0
+    (s32) world_model_anim_kzn_##name##_ROM_START + DEAD_ROM_OFFSET,\
+    (s32) world_model_anim_kzn_##name##_ROM_END + DEAD_ROM_OFFSET,\
+    (s32) world_model_anim_kzn_##name##_VRAM
 
 s32 N(VineAnimationsDmaTable)[] = {
     PIRANHA_DMA_ENTRY(00),

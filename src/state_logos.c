@@ -75,8 +75,8 @@ void state_init_logos(void) {
     startup_set_fade_screen_alpha(255);
     startup_set_fade_screen_color(0);
 
-    romEnd = NULL;
-    romStart = NULL;
+    romEnd = logos_ROM_END;
+    romStart = logos_ROM_START;
     gLogosImages = heap_malloc(romEnd - romStart);
     dma_copy(romStart, romEnd, gLogosImages);
 
