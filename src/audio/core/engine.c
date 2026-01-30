@@ -17,11 +17,7 @@ extern u8 EnvelopeReleaseDefault[];
 extern f32 AlTuneScaling[];
 
 #ifdef SHIFT
-#ifdef PLATFORM_N64
 #define SBN_ROM_OFFSET (s32) audio_ROM_START
-#else
-#define SBN_ROM_OFFSET (s32) 0
-#endif
 #elif VERSION_JP
 #define SBN_ROM_OFFSET 0xFC0000
 #elif VERSION_PAL

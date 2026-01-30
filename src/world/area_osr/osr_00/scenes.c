@@ -24,7 +24,7 @@ MAP_STATIC_PAD(2, letter);
 BSS MessageImageData N(MsgImage);
 
 API_CALLABLE(N(func_802406E0_AACF10)) {
-    s8* romStart = 0;
+    s8* romStart = charset_ROM_START;
     u8* rasterOffset = charset_peach_letter_OFFSET;
     u16* paletteOffset = charset_peach_letter_pal_OFFSET;
 
